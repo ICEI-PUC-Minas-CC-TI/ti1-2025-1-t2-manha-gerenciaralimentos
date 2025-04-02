@@ -2,9 +2,14 @@
 
 Informações básicas do projeto.
 
-* **Projeto:** [NOME DO PROJETO]
-* **Repositório GitHub:** [LINK PARA O REPOSITÓRIO NO GITHUB]
-* **Membros da equipe:**
+* **Projeto:** StockIT
+* **Repositório GitHub:** https://github.com/ICEI-PUC-Minas-CC-TI/ti1-2025-1-t2-manha-gerenciaralimentos/blob/master/docs/README.md
+* **Membros da equipe:** Arthur Henrique Tristão Pinto
+Davi Rafael de Oliveira Gurgel Martins
+Diego Cunha da Silva
+Gabriel Pereira Couto Rodrigues
+Guilherme Augusto Vieira Pinto
+Raphael Lucas Ribeiro de Paula
 
   * [Fulano](https://github.com/fulano) ⚠️ EXEMPLO ⚠️
   * [Beltrano](https://github.com/beltrano) ⚠️ EXEMPLO ⚠️
@@ -28,7 +33,7 @@ Detalhes sobre o espaço de problema, os objetivos do projeto, sua justificativa
 
 ## Problema
 
-**✳️✳️✳️ COLOQUE AQUI O SEU TEXTO ✳️✳️✳️**
+Dificuldade da gestão, organização e controle de validade dos alimentos tanto em empresas, pequenos comercios e nas residencias.
 
 > ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
 >
@@ -42,7 +47,7 @@ Detalhes sobre o espaço de problema, os objetivos do projeto, sua justificativa
 
 ## Objetivos
 
-**✳️✳️✳️ COLOQUE AQUI O SEU TEXTO ✳️✳️✳️**
+Desenvolver um software para solucionar o problema da dificuldade da gestão, organização e controle de validade dos alimentos. Auxiliando na gestão de alimentos, como controle da validade e quantidade no estoque, e uma forma de organizar os produtos.
 
 > ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
 >
@@ -54,7 +59,9 @@ Detalhes sobre o espaço de problema, os objetivos do projeto, sua justificativa
 
 ## Justificativa
 
-**✳️✳️✳️ COLOQUE AQUI O SEU TEXTO ✳️✳️✳️**
+Muitos alimentos são desperdiçados por causa da má gestão e consumo excessivo.
+Redução da perda de alimentos.
+Tendo como publico-alvo empresários do ramo alimenticio e donos de casa.
 
 > ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
 >
@@ -68,7 +75,11 @@ Detalhes sobre o espaço de problema, os objetivos do projeto, sua justificativa
 
 ## Público-Alvo
 
-**✳️✳️✳️ COLOQUE AQUI O SEU TEXTO ✳️✳️✳️**
+Empresarios: Evitar desperdicio e pragas.
+Donos de restaurantes: Não perder produtos por validade.
+Donos de casa: Criar lista de compras e evitar perder alimentos por vencimento.
+Moradores de republica: Identificar seus alimentos para nçao confundir com de outros moradores.
+Cozinheiro: Facilitar e agilizar a produção.
 
 > ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
 >
@@ -86,6 +97,8 @@ Detalhes sobre o espaço de problema, os objetivos do projeto, sua justificativa
 ## Etapa de Entendimento
 
 **✳️✳️✳️ APRESENTE OS ARTEFATOS DA ETAPA  ✳️✳️✳️**
+
+
 
 > ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
 >
