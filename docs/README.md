@@ -98,7 +98,7 @@ Cozinheiro: Facilitar e agilizar a produção.
 
 **✳️✳️✳️ APRESENTE OS ARTEFATOS DA ETAPA  ✳️✳️✳️**
 ✳️[Matriz CSD](files/matrizCSD.pdf)
-
+✳️[Mapa de Stakeholders](files/mapa.pdf)
 
 > ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
 >
