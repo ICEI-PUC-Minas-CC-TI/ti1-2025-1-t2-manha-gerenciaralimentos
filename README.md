@@ -10,14 +10,21 @@ e pensada para diferentes perfis, como casas, repúblicas e pequenos negócios.
 
 ## Alunos integrantes da equipe
 
-Arthur Henrique Tristão Pinto
+Arthur Henrique Tristão Pinto 
+
 Davi Rafael de Oliveira Gurgel Martins
+
 Diego Cunha da Silva
+
 Gabriel Pereira Couto Rodrigues
+
 Guilherme Augusto Vieira Pinto
+
 Raphael Lucas Ribeiro de Paula
 
 ## Professores responsáveis
 Luciana Mara Freitas Diniz
+
 Hayala Nepomuceno Curto
+
 Wesley Dias Maciel
