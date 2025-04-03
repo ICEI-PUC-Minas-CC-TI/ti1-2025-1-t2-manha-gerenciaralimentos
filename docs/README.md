@@ -116,7 +116,8 @@ Cozinheiro: Facilitar e agilizar a produção.
 
 ### Personas
 
-**✳️✳️✳️ APRESENTE OS DIAGRAMAS DE PERSONAS ✳️✳️✳️**
+✳️[Cliente empresa](files/cliente-empresa.pdf)
+✳️[Cliente empresa](files/cliente-pessoa.pdf)
 
 > ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
 >
