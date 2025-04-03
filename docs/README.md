@@ -3,17 +3,20 @@
 Informações básicas do projeto.
 
 * **Projeto:** StockIT
-* **Repositório GitHub:** https://github.com/ICEI-PUC-Minas-CC-TI/ti1-2025-1-t2-manha-gerenciaralimentos/blob/master/docs/README.md
-* **Membros da equipe:** Arthur Henrique Tristão Pinto
-Davi Rafael de Oliveira Gurgel Martins
-Diego Cunha da Silva
-Gabriel Pereira Couto Rodrigues
-Guilherme Augusto Vieira Pinto
-Raphael Lucas Ribeiro de Paula
+* **Repositório GitHub:** https://github.com/ICEI-PUC-Minas-CC-TI/ti1-2025-1-t2-manha-gerenciaralimentos
+* **Membros da equipe:**
+  
+[Arthur Henrique Tristão Pinto](https://github.com/arthurhtp)
 
-  * [Fulano](https://github.com/fulano) ⚠️ EXEMPLO ⚠️
-  * [Beltrano](https://github.com/beltrano) ⚠️ EXEMPLO ⚠️
-  * [Cicrano](https://github.com/cicrano) ⚠️ EXEMPLO ⚠️
+[Davi Rafael de Oliveira Gurgel Martins](https://github.com/davi080107)
+
+[Diego Cunha da Silva](https://github.com/Diego290406)
+
+[Gabriel Pereira Couto Rodrigues](https://github.com/GabrielPereira-PUC)
+
+[Guilherme Augusto Vieira Pinto](https://github.com/GuilhermeAugustoV)
+
+[Raphael Lucas Ribeiro de Paula](https://github.com/RaphaelLRPaula)
 
 A documentação do projeto é estruturada da seguinte forma:
 
@@ -98,13 +101,21 @@ Cozinheiro: Facilitar e agilizar a produção.
 
 **✳️✳️✳️ APRESENTE OS ARTEFATOS DA ETAPA  ✳️✳️✳️**
 ✳️[Matriz CSD](files/matrizCSD.pdf)
+
 ✳️[Mapa de Stakeholders](files/mapa.pdf)
+
 ✳️[Entrevistas qualitativas dona de bar](files/entrevista-qualitativa-bar.pdf)
+
 ✳️[Entrevistas qualitativas dona de cafeteria](files/entrevista-qualitativa-cafeteria.pdf)
+
 ✳️[Entrevistas qualitativas cozinheiro](files/entrevista-qualitativa-cozinheiro.pdf)
+
 ✳️[Entrevistas qualitativas dona de casa](files/entrevista-qualitativa-dona.pdf)
+
 ✳️[Entrevistas qualitativas enfermeira](files/entrevista-qualitativa-enfermeira.pdf)
+
 ✳️[Entrevistas qualitativas socia de restaurante](files/entrevista-qualitativa-socia.pdf)
+
 ✳️[Highlights de pesquisa](files/highlight.pdf)
 
 > ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
