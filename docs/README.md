@@ -99,13 +99,16 @@ Cozinheiro: Facilitar e agilizar a produção.
 **✳️✳️✳️ APRESENTE OS ARTEFATOS DA ETAPA  ✳️✳️✳️**
 ✳️[Matriz CSD](files/matrizCSD.pdf)
 ✳️[Mapa de Stakeholders](files/mapa.pdf)
+✳️[Entrevistas qualitativas dona de bar](files/entrevista-qualitativa-bar.pdf)
+✳️[Entrevistas qualitativas dona de cafeteria](files/entrevista-qualitativa-cafeteria.pdf)
+✳️[Entrevistas qualitativas cozinheiro](files/entrevista-qualitativa-cozinheiro.pdf)
+✳️[Entrevistas qualitativas dona de casa](files/entrevista-qualitativa-dona.pdf)
+✳️[Entrevistas qualitativas enfermeira](files/entrevista-qualitativa-enfermeira.pdf)
+✳️[Entrevistas qualitativas socia de restaurante](files/entrevista-qualitativa-socia.pdf)
 
 > ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
 >
 > Nessa etapa, vamos trabalhar com a metdologia de Design Thinking para compreender com maior profundidade o problema a ser tratado. Nesse processo, vamos elaborar:
->
-> * **Mapa de stakeholders**: ferramenta que nos permite compreender o grupo de pessoas e entidades que devemos estudar e conversar para entender mais sobre o problema
-> * **Entrevistas qualitativas**: série de entrevistas qualitativas para validar suposições e solucionar as dúvidas com as principais pessoas envolvidas;
 > * **Highlights de pesquisa**: um compilado do levantamento realizado por meio das entrevistas.
 
 ## Etapa de Definição
