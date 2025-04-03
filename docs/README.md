@@ -105,6 +105,7 @@ Cozinheiro: Facilitar e agilizar a produção.
 ✳️[Entrevistas qualitativas dona de casa](files/entrevista-qualitativa-dona.pdf)
 ✳️[Entrevistas qualitativas enfermeira](files/entrevista-qualitativa-enfermeira.pdf)
 ✳️[Entrevistas qualitativas socia de restaurante](files/entrevista-qualitativa-socia.pdf)
+✳️[Highlights de pesquisa](files/highlight.pdf)
 
 > ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
 >
