@@ -32,49 +32,20 @@ A documentação do projeto é estruturada da seguinte forma:
 
 # Contexto
 
-Detalhes sobre o espaço de problema, os objetivos do projeto, sua justificativa e público-alvo.
-
 ## Problema
 
 Dificuldade da gestão, organização e controle de validade dos alimentos tanto em empresas, pequenos comercios e nas residencias.
-
-> ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
->
-> Nesse momento você deve apresentar o problema que a sua aplicação deve resolver. No entanto, não é a hora de comentar sobre a aplicação. Descreva também o contexto em que essa aplicação será usada, se houver: empresa, tecnologias, etc. Novamente, descreva apenas o que de fato existir, pois ainda não é a hora de apresentar requisitos detalhados ou projetos.
->
-> **Orientações**:
->
-> - [Objetivos, Problema de pesquisa e Justificativa](https://medium.com/@versioparole/objetivos-problema-de-pesquisa-e-justificativa-c98c8233b9c3)
-> - [Matriz Certezas, Suposições e Dúvidas](https://medium.com/educa%C3%A7%C3%A3o-fora-da-caixa/matriz-certezas-suposi%C3%A7%C3%B5es-e-d%C3%BAvidas-fa2263633655)
-> - [Brainstorming](https://www.euax.com.br/2018/09/brainstorming/)
 
 ## Objetivos
 
 Desenvolver um software para solucionar o problema da dificuldade da gestão, organização e controle de validade dos alimentos. Auxiliando na gestão de alimentos, como controle da validade e quantidade no estoque, e uma forma de organizar os produtos.
 
-> ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
->
-> Aqui você deve descrever os objetivos do trabalho indicando que o objetivo geral é desenvolver um software para solucionar o problema apresentado acima. Apresente também alguns (pelo menos 2) objetivos específicos dependendo de onde você vai querer concentrar a sua prática investigativa, ou como você vai aprofundar no seu trabalho.
->
-> **Orientações**:
->
-> - [Objetivo geral e objetivo específico: como fazer e quais verbos utilizar](https://blog.mettzer.com/diferenca-entre-objetivo-geral-e-objetivo-especifico/)
-
 ## Justificativa
 
-Muitos alimentos são desperdiçados por causa da má gestão e consumo excessivo.
-Redução da perda de alimentos.
-Tendo como publico-alvo empresários do ramo alimenticio e donos de casa.
+Pelo fato de que muitos alimentos são desperdiçados por causa da má gestão e consumo excessivo estamos criando uma aplicação
+que visa reduzir a perda de alimentos, sendo o público-alvo, empresários do ramo alimenticio e donos de casa.
 
-> ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
->
-> Descreva a importância ou a motivação para trabalhar com esta aplicação que você escolheu. Indique as razões pelas quais você escolheu seus objetivos específicos ou as razões para aprofundar em certos aspectos do software.
->
-> O grupo de trabalho pode fazer uso de questionários, entrevistas e dados estatísticos, que podem ser apresentados, com o objetivo de esclarecer detalhes do problema que será abordado pelo grupo.
->
-> **Orientações**:
->
-> - [Como montar a justificativa](https://guiadamonografia.com.br/como-montar-justificativa-do-tcc/)
+Essas conclusões foram tiradas a partir de entrevistas qualitativas com possíveis usuários e pesquisas sobre tema semelhantes.
 
 ## Público-Alvo
 
@@ -84,62 +55,37 @@ Donos de casa: Criar lista de compras e evitar perder alimentos por vencimento.
 Moradores de republica: Identificar seus alimentos para nçao confundir com de outros moradores.
 Cozinheiro: Facilitar e agilizar a produção.
 
-> ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
->
-> Descreva quais são as pessoas que usarão a sua aplicação indicando os diferentes perfis. A ideia é, dentro do possível, conhecer um pouco mais sobre o perfil dos usuários: conhecimentos prévios, relação com a tecnologia, relações hierárquicas, etc.
->
-> Adicione informações sobre o público-alvo por meio de uma descrição textual, ou diagramas de personas, mapa de stakeholders, ou como o grupo achar mais conveniente.
->
-> **Orientações**:
->
-> - [Público-alvo: o que é, tipos, como definir seu público e exemplos](https://klickpages.com.br/blog/publico-alvo-o-que-e/)
-> - [Qual a diferença entre público-alvo e persona?](https://rockcontent.com/blog/diferenca-publico-alvo-e-persona/)
-
 # Product Discovery
 
 ## Etapa de Entendimento
 
-**✳️✳️✳️ APRESENTE OS ARTEFATOS DA ETAPA  ✳️✳️✳️**
 ✳️[Matriz CSD](files/matrizCSD.pdf)
 
 ✳️[Mapa de Stakeholders](files/mapa.pdf)
 
-✳️[Entrevistas qualitativas dona de bar](files/entrevista-qualitativa-bar.pdf)
+### Entrevistas Qualitativas
 
-✳️[Entrevistas qualitativas dona de cafeteria](files/entrevista-qualitativa-cafeteria.pdf)
+✳️[Dona de bar](files/entrevista-qualitativa-bar.pdf)
 
-✳️[Entrevistas qualitativas cozinheiro](files/entrevista-qualitativa-cozinheiro.pdf)
+✳️[Dona de cafeteria](files/entrevista-qualitativa-cafeteria.pdf)
 
-✳️[Entrevistas qualitativas dona de casa](files/entrevista-qualitativa-dona.pdf)
+✳️[Cozinheiro](files/entrevista-qualitativa-cozinheiro.pdf)
 
-✳️[Entrevistas qualitativas enfermeira](files/entrevista-qualitativa-enfermeira.pdf)
+✳️[Dona de casa](files/entrevista-qualitativa-dona.pdf)
 
-✳️[Entrevistas qualitativas socia de restaurante](files/entrevista-qualitativa-socia.pdf)
+✳️[Enfermeira](files/entrevista-qualitativa-enfermeira.pdf)
+
+✳️[Socia de restaurante](files/entrevista-qualitativa-socia.pdf)
 
 ✳️[Highlights de pesquisa](files/highlight.pdf)
 
-> ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
->
-> Nessa etapa, vamos trabalhar com a metdologia de Design Thinking para compreender com maior profundidade o problema a ser tratado. Nesse processo, vamos elaborar:
-> * **Highlights de pesquisa**: um compilado do levantamento realizado por meio das entrevistas.
-
 ## Etapa de Definição
 
-### Personas
+### Personas e Proposta de Valor
 
 ✳️[Cliente empresa](files/cliente-empresa.pdf)
-✳️[Cliente empresa](files/cliente-pessoa.pdf)
 
-> ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
->
-> Relacione as personas identificadas no seu projeto e os respectivos mapas de empatia. Lembre-se que você deve ser enumerar e descrever precisamente e de forma personalizada todos os principais envolvidos com a solução almeja.
->
-> **Orientações**:
->
-> - [Persona x Público-alvo](https://flammo.com.br/blog/persona-e-publico-alvo-qual-a-diferenca/)
-> - [O que é persona?](https://resultadosdigitais.com.br/blog/persona-o-que-e/)
-> - [Rock Content](https://rockcontent.com/blog/personas/)
-> - [Criar personas (Hotmart)](https://blog.hotmart.com/pt-br/como-criar-persona-negocio/)
+✳️[Cliente empresa](files/cliente-pessoa.pdf)
 
 # Product Design
 
@@ -150,16 +96,8 @@ Nesse momento, vamos transformar os insights e validações obtidos em soluçõe
 Com base na análise das personas foram identificadas as seguintes histórias de usuários:
 
 ✳️[Usuario empresa](files/usuario-empresa.pdf)
-✳️[Usuario pessoa](files/usuario-pessoa.pdf)
 
-> ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
->
-> Apresente aqui as histórias de usuário que são relevantes para o projeto de sua solução. As Histórias de Usuário consistem em uma ferramenta poderosa para a compreensão e elicitação dos requisitos funcionais e não funcionais da sua aplicação. Se possível, agrupe as histórias de usuário por contexto, para facilitar consultas recorrentes à essa parte do documento.
->
-> **Orientações**:
->
-> - [Histórias de usuários com exemplos e template](https://www.atlassian.com/br/agile/project-management/user-stories)
-> - [Como escrever boas histórias de usuário (User Stories)](https://medium.com/vertice/como-escrever-boas-users-stories-hist%C3%B3rias-de-usu%C3%A1rios-b29c75043fac)
+✳️[Usuario pessoa](files/usuario-pessoa.pdf)
 
 ## Proposta de Valor
 
@@ -179,33 +117,39 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 
 ### Requisitos Funcionais
 
-| ID     | Descrição do Requisito                                   | Prioridade |
-| ------ | ---------------------------------------------------------- | ---------- |
-| RF-001 | Permitir que o usuário cadastre tarefas ⚠️ EXEMPLO ⚠️ | ALTA       |
-| RF-002 | Emitir um relatório de tarefas no mês ⚠️ EXEMPLO ⚠️ | MÉDIA     |
+| ID     | Descrição do Requisito                                                                                              | Prioridade |
+|--------|----------------------------------------------------------------------------------------------------------------------|------------|
+| RF-01  | O sistema deve permitir a criação de ambientes em que os alimentos serão guardados. Ex: geladeira, dispensa etc     | ALTA       |
+| RF-02  | Permitir cadastro, leitura, atualização e exclusão de alimentos com nome, tipo, validade, dono.                     | ALTA       |
+| RF-03  | O sistema deve emitir notificações quando o produto estiver quase vencendo e quando tiver pouco no estoque.         | ALTA       |
+| RF-04  | O sistema deve permitir a busca de produtos específicos do estoque pelo usuário.                                    | ALTA       |
+| RF-05  | Deve haver uma opção para criar uma lista de compras com os produtos necessários.                                   | ALTA       |
+| RF-06  | O sistema deve mostrar receitas com os alimentos perto da data de validade.                                         | MÉDIA      |
+| RF-07  | O sistema deve demonstrar as maneiras corretas de armazenar os produtos seguindo padrões sanitários.                | MÉDIA      |
+| RF-08  | O sistema deve mostrar um tutorial simples (vídeo) sobre como operar o aplicativo.                                  | BAIXA      |
+| RF-09  | Permitir múltiplos usuários com acesso a um mesmo ambiente.                                                         | ALTA       |
+| RF-10  | Permitir o usuário criar uma conta com user e senha.                                                                | ALTA       |
+| RF-11  | O sistema deve autenticar o login do usuário conforme o cadastro.                                                   | ALTA       |
+| RF-12  | Definir permissões para administradores, editores e visualizadores nos ambientes.                                   | ALTA       |
+| RF-13  | O sistema deve permitir que o contato com os fornecedores seja facilitado ou automático, conforme o estoque.        | MÉDIA      |
+| RF-14  | Deve ser possível cadastrar um produto por meio da leitura do código de barras.                                     | ALTA       |
+| RF-15  | O sistema deverá permitir o uso offline com funções sincronizadas no último período de internet.                    | MÉDIA      |
+
 
 ### Requisitos não Funcionais
 
-| ID      | Descrição do Requisito                                                              | Prioridade |
-| ------- | ------------------------------------------------------------------------------------- | ---------- |
-| RNF-001 | O sistema deve ser responsivo para rodar em um dispositivos móvel ⚠️ EXEMPLO ⚠️ | MÉDIA     |
-| RNF-002 | Deve processar requisições do usuário em no máximo 3s ⚠️ EXEMPLO ⚠️          | BAIXA      |
-
-> ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
->
-> Os requisitos de um projeto são classificados em dois grupos:
->
-> - [Requisitos Funcionais (RF)](https://pt.wikipedia.org/wiki/Requisito_funcional):
->   correspondem a uma funcionalidade que deve estar presente na plataforma (ex: cadastro de usuário).
-> - [Requisitos Não Funcionais (RNF)](https://pt.wikipedia.org/wiki/Requisito_n%C3%A3o_funcional):
->   correspondem a uma característica técnica, seja de usabilidade, desempenho, confiabilidade, segurança ou outro (ex: suporte a dispositivos iOS e Android).
->
-> Lembre-se que cada requisito deve corresponder à uma e somente uma característica alvo da sua solução. Além disso, certifique-se de que todos os aspectos capturados nas Histórias de Usuário foram cobertos.
->
-> **Orientações**:
->
-> - [O que são Requisitos Funcionais e Requisitos Não Funcionais?](https://codificar.com.br/requisitos-funcionais-nao-funcionais/)
-> - [O que são requisitos funcionais e requisitos não funcionais?](https://analisederequisitos.com.br/requisitos-funcionais-e-requisitos-nao-funcionais-o-que-sao/)
+| ID      | Descrição do Requisito                                                                                              | Prioridade |
+|---------|----------------------------------------------------------------------------------------------------------------------|------------|
+| RNF-01  | O sistema deve funcionar corretamente em diferentes navegadores (Chrome, Firefox, Opera, etc).                      | ALTA       |
+| RNF-02  | O sistema deve estar de acordo com a regulamentação de órgãos de fiscalização sanitária.                            | ALTA       |
+| RNF-03  | Toda pesquisa e alteração no banco de dados deve retornar e atualizar em menos de 1 segundo.                        | ALTA       |
+| RNF-04  | O programa deve operar em conjunto com uma API para leitura de produtos por código de barras.                       | MÉDIA      |
+| RNF-05  | O sistema deve ter interface intuitiva e ser de fácil acesso, com aprendizado em até 30 minutos.                    | ALTA       |
+| RNF-06  | O sistema deve estar disponível 97% do tempo na semana.                                                             | MÉDIA      |
+| RNF-07  | O programa deve operar em conjunto com a OpenAI para dar sugestões de receitas.                                     | BAIXA      |
+| RNF-08  | O desenvolvimento deve ser feito na linguagem HTML.                                                                 | MÉDIA      |
+| RNF-09  | O sistema deve ser responsivo e funcionar corretamente em celulares.                                                | ALTA       |
+| RNF-10  | O sistema deve ter harmonização de cores e formas para melhorar a experiência do usuário.                           | MÉDIA      |
 
 ## Projeto de Interface
 
@@ -270,11 +214,11 @@ Relação de ferramentas empregadas pelo grupo durante o projeto.
 
 | Ambiente                    | Plataforma | Link de acesso                                     |
 | --------------------------- | ---------- | -------------------------------------------------- |
-| Processo de Design Thinking | Miro       | https://miro.com/XXXXXXX ⚠️ EXEMPLO ⚠️        |
-| Repositório de código     | GitHub     | https://github.com/XXXXXXX ⚠️ EXEMPLO ⚠️      |
+| Processo de Design Thinking | Miro       | https://miro.com/app/board/uXjVIR2DbNk=/|
+| Repositório de código     | GitHub     | https://github.com/ICEI-PUC-Minas-CC-TI/ti1-2025-1-t2-manha-gerenciaralimentos|
 | Hospedagem do site          | Render     | https://site.render.com/XXXXXXX ⚠️ EXEMPLO ⚠️ |
-| Protótipo Interativo       | MarvelApp  | https://marvelapp.com/XXXXXXX ⚠️ EXEMPLO ⚠️   |
-|                             |            |                                                    |
+| Protótipo Interativo       | Figma  | https://www.figma.com/design/KGYR6jkBXVf1r7llLhaWU0/Wireframes?node-id=0-1&p=f&t=Yz1McRHG52bb3BKm-0|
+| Reuniões Periódicas        |Discord            | https://discord.com |
 
 > ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
 >
