@@ -50,9 +50,13 @@ Essas conclusões foram tiradas a partir de entrevistas qualitativas com possív
 ## Público-Alvo
 
 Empresarios: Evitar desperdicio e pragas.
+
 Donos de restaurantes: Não perder produtos por validade.
+
 Donos de casa: Criar lista de compras e evitar perder alimentos por vencimento.
+
 Moradores de republica: Identificar seus alimentos para nçao confundir com de outros moradores.
+
 Cozinheiro: Facilitar e agilizar a produção.
 
 # Product Discovery
@@ -215,9 +219,13 @@ Relação de ferramentas empregadas pelo grupo durante o projeto.
 ## Gerenciamento do Projeto
 
 Designer: Davi e Arthur
+
 Desenvolvedor Back-End: Guilherme
+
 Desenvolvedor Front-End: Raphael
+
 Product Owner: Gabriel
+
 Scrum Master: Diego
 
 ![Kanban](images/kanban.jpg)
