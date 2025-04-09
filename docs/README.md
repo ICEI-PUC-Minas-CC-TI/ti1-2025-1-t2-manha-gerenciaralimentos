@@ -341,13 +341,12 @@ Esta seção apresenta os módulos e APIs utilizados na solução
 
 As referências utilizadas no trabalho foram:
 
-* SOBRENOME, Nome do autor. Título da obra. 8. ed. Cidade: Editora, 2000. 287 p ⚠️ EXEMPLO ⚠️
+FIGMA. Figma: Ferramenta de design de interface e prototipagem online. Disponível em: https://www.figma.com. Acesso em: 8 abr. 2025.
 
-> ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
->
-> Inclua todas as referências (livros, artigos, sites, etc) utilizados no desenvolvimento do trabalho.
->
-> **Orientações**:
->
-> - [Formato ABNT](https://www.normastecnicas.com/abnt/trabalhos-academicos/referencias/)
-> - [Referências Bibliográficas da ABNT](https://comunidade.rockcontent.com/referencia-bibliografica-abnt/)
+DISCORD. Discord: Plataforma de comunicação por voz, vídeo e texto. Disponível em: https://discord.com. Acesso em: 8 abr. 2025.
+
+GOOGLE. Google Docs: Editor de texto colaborativo online. Disponível em: https://docs.google.com. Acesso em: 8 abr. 2025.
+
+MIRO. Miro: Plataforma colaborativa para quadros visuais e brainstorming. Disponível em: https://miro.com. Acesso em: 8 abr. 2025.
+
+GITHUB. GitHub: Plataforma de hospedagem de código e controle de versão. Disponível em: https://github.com. Acesso em: 8 abr. 2025.
