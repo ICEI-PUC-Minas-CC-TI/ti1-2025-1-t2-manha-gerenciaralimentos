@@ -191,7 +191,7 @@ A tela de alimentos vencendo mostra todos os produtos que estão perto do vencim
 
 ### User Flow
 
-![Fluxo de telas](images/userflow.png)
+![Fluxo de telas](images/fluxo.pdf)
 
 ### Protótipo Interativo
 
