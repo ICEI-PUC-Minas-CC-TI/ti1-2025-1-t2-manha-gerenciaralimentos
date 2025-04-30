@@ -50,9 +50,13 @@ Essas conclusões foram tiradas a partir de entrevistas qualitativas com possív
 ## Público-Alvo
 
 Empresarios: Evitar desperdicio e pragas.
+
 Donos de restaurantes: Não perder produtos por validade.
+
 Donos de casa: Criar lista de compras e evitar perder alimentos por vencimento.
+
 Moradores de republica: Identificar seus alimentos para nçao confundir com de outros moradores.
+
 Cozinheiro: Facilitar e agilizar a produção.
 
 # Product Discovery
@@ -187,7 +191,7 @@ A tela de alimentos vencendo mostra todos os produtos que estão perto do vencim
 
 ### User Flow
 
-![Fluxo de telas](images/userflow.png)
+![Fluxo de telas](images/fluxo.png)
 
 ### Protótipo Interativo
 
@@ -215,9 +219,13 @@ Relação de ferramentas empregadas pelo grupo durante o projeto.
 ## Gerenciamento do Projeto
 
 Designer: Davi e Arthur
+
 Desenvolvedor Back-End: Guilherme
+
 Desenvolvedor Front-End: Raphael
+
 Product Owner: Gabriel
+
 Scrum Master: Diego
 
 ![Kanban](images/kanban.jpg)
@@ -333,13 +341,12 @@ Esta seção apresenta os módulos e APIs utilizados na solução
 
 As referências utilizadas no trabalho foram:
 
-* SOBRENOME, Nome do autor. Título da obra. 8. ed. Cidade: Editora, 2000. 287 p ⚠️ EXEMPLO ⚠️
+FIGMA. Figma: Ferramenta de design de interface e prototipagem online. Disponível em: https://www.figma.com. Acesso em: 8 abr. 2025.
 
-> ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
->
-> Inclua todas as referências (livros, artigos, sites, etc) utilizados no desenvolvimento do trabalho.
->
-> **Orientações**:
->
-> - [Formato ABNT](https://www.normastecnicas.com/abnt/trabalhos-academicos/referencias/)
-> - [Referências Bibliográficas da ABNT](https://comunidade.rockcontent.com/referencia-bibliografica-abnt/)
+DISCORD. Discord: Plataforma de comunicação por voz, vídeo e texto. Disponível em: https://discord.com. Acesso em: 8 abr. 2025.
+
+GOOGLE. Google Docs: Editor de texto colaborativo online. Disponível em: https://docs.google.com. Acesso em: 8 abr. 2025.
+
+MIRO. Miro: Plataforma colaborativa para quadros visuais e brainstorming. Disponível em: https://miro.com. Acesso em: 8 abr. 2025.
+
+GITHUB. GitHub: Plataforma de hospedagem de código e controle de versão. Disponível em: https://github.com. Acesso em: 8 abr. 2025.
