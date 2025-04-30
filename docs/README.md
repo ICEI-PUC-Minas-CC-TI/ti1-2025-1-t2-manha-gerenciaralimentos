@@ -28,7 +28,7 @@ A documentação do projeto é estruturada da seguinte forma:
 6. Solução
 7. Referências Bibliográficas
 
-✅ [Documentação de Design Thinking (MIRO)](files/processo-dt.pdf)
+✅ [Documentação de Design Thinking (MIRO)](files/document.pdf)
 
 # Contexto
 
@@ -99,18 +99,6 @@ Com base na análise das personas foram identificadas as seguintes histórias de
 
 ✳️[Usuario pessoa](files/usuario-pessoa.pdf)
 
-## Proposta de Valor
-
-**✳️✳️✳️ APRESENTE O DIAGRAMA DA PROPOSTA DE VALOR PARA CADA PERSONA ✳️✳️✳️**
-
-##### Proposta para Persona XPTO ⚠️ EXEMPLO ⚠️
-
-![Exemplo de proposta de valor](images/exemplo-proposta-valor.png)
-
-> ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
->
-> O mapa da proposta de valor é uma ferramenta que nos ajuda a definir qual tipo de produto ou serviço melhor atende às personas definidas anteriormente.
-
 ## Requisitos
 
 As tabelas que se seguem apresentam os requisitos funcionais e não funcionais que detalham o escopo do projeto.
@@ -159,50 +147,53 @@ Artefatos relacionados com a interface e a interacão do usuário na proposta de
 
 Estes são os protótipos de telas do sistema.
 
-**✳️✳️✳️ COLOQUE AQUI OS PROTÓTIPOS DE TELAS COM TÍTULO E DESCRIÇÃO ✳️✳️✳️**
+##### Home 
 
-##### TELA XPTO ⚠️ EXEMPLO ⚠️
+A página de home apresenta uma visão geral dos principais recursos do sistema, nela se encontram os ambientes cadastrados,alimentos próximos do vencimento, 
+sugestões de receitas. lista de compras e acesso ao perfil
 
-Descrição para a tela XPTO
+![Home-Page](images/home.png)
 
-![Exemplo de wireframe](images/exemplo-wireframe.png)
+##### Lista de Compras
 
-> ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
->
-> Wireframes são protótipos das telas da aplicação usados em design de interface para sugerir a estrutura de um site web e seu relacionamentos entre suas páginas. Um wireframe web é uma ilustração semelhante ao layout de elementos fundamentais na interface.
->
-> **Orientações**:
->
-> - [Ferramentas de Wireframes](https://rockcontent.com/blog/wireframes/)
-> - [Figma](https://www.figma.com/)
-> - [Adobe XD](https://www.adobe.com/br/products/xd.html#scroll)
-> - [MarvelApp](https://marvelapp.com/developers/documentation/tutorials/)
+Mostra todos os produtos adicionados à lista de compras, com imagem do produto, podendo alterar a quantidade e adicionar e/ou remover alimentos.
+
+![Lista-Page](images/lista.png)
+
+##### Receitas
+
+A parte de receitas mostrará receitas baseadas em alimentos próximos do vencimento, além uma barra de pesquisa para encontrar receitas para itens especificados pelo usuário
+
+![Receitas-Page](images/receitas.png)
+
+##### Login
+
+A aba de Login  consiste em um layout simples onde o usuário vai inserir o email e sua senha para entrar em sua conta na plataforma, essa aba tem botões que levam para a página home novamente, além dos botões de logar para entrar, o de esqueci minha senha para chegar a um passo a passo de como redefinir ela, e um botão cadastro, para situações onde o usúario não tem uma conta e precise de criar uma.
+
+![Login-Page](images/login.png)
+
+##### Cadastro
+
+A aba de Cadastros consiste em um layout simples onde o usuário vai inserir o email e uma senha para criar uma conta na plataforma,
+essa aba tem botões que levam para a página home novamente, além dos botões de logar para ir diretamente a pagina de login
+
+![Cadastro-Page](images/cadastro.png)
+
+##### Alimentos Vencendo
+
+A tela de alimentos vencendo mostra todos os produtos que estão perto do vencimento, com nome, tipo e data de vencimento
+
+![Vencimento-Page](images/alimentos.png)
 
 ### User Flow
 
-**✳️✳️✳️ COLOQUE AQUI O DIAGRAMA DE FLUXO DE TELAS ✳️✳️✳️**
-
-![Exemplo de fluxo de telas](images/exemplo-userflow.png)
-
-> ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
->
-> Fluxo de usuário (User Flow) é uma técnica que permite ao desenvolvedor mapear todo fluxo de telas do site ou app. Essa técnica funciona para alinhar os caminhos e as possíveis ações que o usuário pode fazer junto com os membros de sua equipe.
->
-> **Orientações**:
->
-> - [User Flow: O Quê É e Como Fazer?](https://medium.com/7bits/fluxo-de-usu%C3%A1rio-user-flow-o-que-%C3%A9-como-fazer-79d965872534)
-> - [User Flow vs Site Maps](http://designr.com.br/sitemap-e-user-flow-quais-as-diferencas-e-quando-usar-cada-um/)
-> - [Top 25 User Flow Tools &amp; Templates for Smooth](https://www.mockplus.com/blog/post/user-flow-tools)
+![Fluxo de telas](images/userflow.png)
 
 ### Protótipo Interativo
 
-**✳️✳️✳️ COLOQUE AQUI UM IFRAME COM SEU PROTÓTIPO INTERATIVO ✳️✳️✳️**
+✅ [Protótipo Interativo (Figma)](https://www.figma.com/proto/KGYR6jkBXVf1r7llLhaWU0/Wireframes?node-id=102-61&t=EpulYV26tEVLHRd3-1)  
 
-✅ [Protótipo Interativo (MarvelApp)](https://marvelapp.com/prototype/4hd6091?emb=1&iosapp=false&frameless=false)  ⚠️ EXEMPLO ⚠️
-
-> ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
->
-> Um protótipo interativo apresenta o projeto de interfaces e permite ao usuário navegar pelas funcionalidades como se estivesse lidando com o software pronto. Utilize as mesmas ferramentas de construção de wireframes para montagem do seu protótipo interativo. Inclua o link para o protótipo interativo do projeto.
+✅ [Embed (Figma)](https://embed.figma.com/design/KGYR6jkBXVf1r7llLhaWU0/Wireframes?node-id=0-1&embed-host=share) 
 
 # Metodologia
 
@@ -216,33 +207,20 @@ Relação de ferramentas empregadas pelo grupo durante o projeto.
 | --------------------------- | ---------- | -------------------------------------------------- |
 | Processo de Design Thinking | Miro       | https://miro.com/app/board/uXjVIR2DbNk=/|
 | Repositório de código     | GitHub     | https://github.com/ICEI-PUC-Minas-CC-TI/ti1-2025-1-t2-manha-gerenciaralimentos|
-| Hospedagem do site          | Render     | https://site.render.com/XXXXXXX ⚠️ EXEMPLO ⚠️ |
+| Hospedagem do site          | Infinite Free     |https://www.infinityfree.com|
 | Protótipo Interativo       | Figma  | https://www.figma.com/design/KGYR6jkBXVf1r7llLhaWU0/Wireframes?node-id=0-1&p=f&t=Yz1McRHG52bb3BKm-0|
 | Reuniões Periódicas        |Discord            | https://discord.com |
-
-> ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
->
-> Liste as ferramentas empregadas no desenvolvimento do projeto, justificando a escolha delas, sempre que possível. Inclua itens como: (1) Editor de código, (2) )ferramentas de comunicação, (3) )ferramentas de diagramação, (4) )plataformas de hospedagem, entre outras.
+| Editor de Código        |VsCode            |https://code.visualstudio.com|
 
 ## Gerenciamento do Projeto
 
-Divisão de papéis no grupo e apresentação da estrutura da ferramenta de controle de tarefas (Kanban).
+Designer: Davi e Arthur
+Desenvolvedor Back-End: Guilherme
+Desenvolvedor Front-End: Raphael
+Product Owner: Gabriel
+Scrum Master: Diego
 
-![Exemplo de Kanban](images/exemplo-kanban.png)
-
-> ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
->
-> Nesta parte do documento, você deve apresentar  o processo de trabalho baseado nas metodologias ágeis, a divisão de papéis e tarefas, as ferramentas empregadas e como foi realizada a gestão de configuração do projeto via GitHub.
->
-> Coloque detalhes sobre o processo de Design Thinking e a implementação do Framework Scrum seguido pelo grupo. O grupo poderá fazer uso de ferramentas on-line para acompanhar o andamento do projeto, a execução das tarefas e o status de desenvolvimento da solução.
->
-> **Orientações**:
->
-> - [Sobre Projects - GitHub Docs](https://docs.github.com/pt/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects)
-> - [Gestão de projetos com GitHub | balta.io](https://balta.io/blog/gestao-de-projetos-com-github)
-> - [(460) GitHub Projects - YouTube](https://www.youtube.com/playlist?list=PLiO7XHcmTsldZR93nkTFmmWbCEVF_8F5H)
-> - [11 Passos Essenciais para Implantar Scrum no seu Projeto](https://mindmaster.com.br/scrum-11-passos/)
-> - [Scrum em 9 minutos](https://www.youtube.com/watch?v=XfvQWnRgxG0)
+![Kanban](images/kanban.jpg)
 
 # Solução Implementada
 
