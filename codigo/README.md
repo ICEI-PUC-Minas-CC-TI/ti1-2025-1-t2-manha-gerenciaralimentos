@@ -1,3 +1,18 @@
+# Redirecionamento para Repositórios Pessoais
+
+[Arthur Henrique Tristão Pinto](https://github.com/ICEI-PUC-Minas-CC-TI/ti1-2025-1-t2-manha-gerenciaralimentos/tree/master/codigo/pastas%20pessoais/arthur)
+
+[Davi Rafael de Oliveira Gurgel Martins](https://github.com/ICEI-PUC-Minas-CC-TI/ti1-2025-1-t2-manha-gerenciaralimentos/tree/master/codigo/pastas%20pessoais/davi)
+
+[Diego Cunha da Silva](https://github.com/ICEI-PUC-Minas-CC-TI/ti1-2025-1-t2-manha-gerenciaralimentos/tree/master/codigo/pastas%20pessoais/diego)
+
+[Gabriel Pereira Couto Rodrigues](https://github.com/ICEI-PUC-Minas-CC-TI/ti1-2025-1-t2-manha-gerenciaralimentos/tree/master/codigo/pastas%20pessoais/gabriel)
+
+[Guilherme Augusto Vieira Pinto](https://github.com/ICEI-PUC-Minas-CC-TI/ti1-2025-1-t2-manha-gerenciaralimentos/tree/master/codigo/pastas%20pessoais/guilherme)
+
+[Raphael Lucas Ribeiro de Paula](https://github.com/ICEI-PUC-Minas-CC-TI/ti1-2025-1-t2-manha-gerenciaralimentos/tree/master/codigo/pastas%20pessoais/raphael)
+
+
 # Código Fonte
 
 Essa é a pasta para a manter o programa que vocês vão construir no contexto dessa disciplina. 
