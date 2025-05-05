@@ -1,5 +1,5 @@
-{
-    "alimentos": [
+const dados = {
+    alimentos: [
       {
         "id": 1,
         "nome": "banana",
@@ -120,6 +120,52 @@
         { "id": 2, "tipo": "Seco" },
         { "id": 3, "tipo": "Congelado" }
     ]
-  }
+}
   
+const container = document.getElementById('listadeCompras');
 
+dados.listasDeCompra.forEach(lista => {
+
+    const listaSection = document.createElement('section');
+    listaSection.classList.add('lista-compra');
+
+    const titulo = document.createElement('h2');
+    titulo.textContent = lista.nome;
+    listaSection.appendChild(titulo);
+
+    lista.itens.forEach(item => {
+        const alimento = dados.alimentos.find(a => a.id === item.alimentoId);
+
+        const itemDiv = document.createElement('div');
+        itemDiv.classList.add('item-lista');
+
+        const img = document.createElement('img');
+        img.src = alimento.imagem;
+        img.alt = alimento.nome;
+        img.classList.add('item-imagem');
+
+        const infoDiv = document.createElement('div');
+        infoDiv.classList.add('item-info');
+
+        const nome = document.createElement('h3');
+        nome.textContent = `Produto: ${alimento.nome} ${alimento.tipo}`;
+
+        const quantidade = document.createElement('p');
+        quantidade.textContent = `Quantidade: ${item.quantidade}`;
+
+        infoDiv.appendChild(nome);
+        infoDiv.appendChild(quantidade);
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.classList.add('item-checkbox');
+
+        itemDiv.appendChild(img);
+        itemDiv.appendChild(infoDiv);
+        itemDiv.appendChild(checkbox);
+
+        listaSection.appendChild(itemDiv);
+    });
+
+    container.appendChild(listaSection);
+});
