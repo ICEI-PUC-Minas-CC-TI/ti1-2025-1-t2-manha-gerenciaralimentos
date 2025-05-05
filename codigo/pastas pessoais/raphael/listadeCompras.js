@@ -1,11 +1,11 @@
 const dados = {
     alimentos: [
       {
-        id: 1,
-        nome: "banana",
-        tipo: "prata",
-        imagem: "banana-prata.png",
-        categoria: 1
+        "id": 1,
+        "nome": "banana",
+        "tipo": "prata",
+        "imagem": "banana-prata.png",
+        "categoria": 1
       },
       {
         "id": 2,
@@ -125,6 +125,14 @@ const dados = {
 const container = document.getElementById('listadeCompras');
 
 dados.listasDeCompra.forEach(lista => {
+
+    const listaSection = document.createElement('section');
+    listaSection.classList.add('lista-compra');
+
+    const titulo = document.createElement('h2');
+    titulo.textContent = lista.nome;
+    listaSection.appendChild(titulo);
+
     lista.itens.forEach(item => {
         const alimento = dados.alimentos.find(a => a.id === item.alimentoId);
 
@@ -140,16 +148,12 @@ dados.listasDeCompra.forEach(lista => {
         infoDiv.classList.add('item-info');
 
         const nome = document.createElement('h3');
-        nome.textContent = `Produto: ${alimento.tipo}`;
-
-        const tipo = document.createElement('p');
-        tipo.textContent = `Tipo: ${alimento.tipo}`;
+        nome.textContent = `Produto: ${alimento.nome} ${alimento.tipo}`;
 
         const quantidade = document.createElement('p');
         quantidade.textContent = `Quantidade: ${item.quantidade}`;
 
         infoDiv.appendChild(nome);
-        infoDiv.appendChild(tipo);
         infoDiv.appendChild(quantidade);
 
         const checkbox = document.createElement('input');
@@ -160,6 +164,8 @@ dados.listasDeCompra.forEach(lista => {
         itemDiv.appendChild(infoDiv);
         itemDiv.appendChild(checkbox);
 
-        container.appendChild(itemDiv);
+        listaSection.appendChild(itemDiv);
     });
+
+    container.appendChild(listaSection);
 });
