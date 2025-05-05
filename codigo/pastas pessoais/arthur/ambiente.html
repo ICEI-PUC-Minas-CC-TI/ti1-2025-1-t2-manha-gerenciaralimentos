@@ -3,9 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ambiente</title>
+    <title>StockIT - Gestão de Alimentos</title>
+    <link rel="stylesheet" href="/assets/css/ambiente.css">
 </head>
 <body>
-    
+    <header class="cabecalho">
+        <div class="cabecalho-conteudo">
+            <div class="logo-container">
+                <span class="logo-icone">🌿</span>
+                <h1>StockIT</h1>
+            </div>
+            <div class="cabecalho-direita">
+                <h2 id="nome-ambiente">Meu Ambiente</h2>
+                <button id="botao-adicionar-alimento" class="botao-primario">
+                    + Adicionar Alimento
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="conteudo-principal">
+        <div class="container-conteudo">
+            <div class="tabela-cabecalho">
+                <h2>Alimentos</h2>
+                <div class="container-busca">
+                    <input type="text" id="campo-busca" placeholder="Buscar alimento...">
+                </div>
+            </div>
+
+            <div class="container-tabela">
+                <table id="tabela-alimentos">
+                    <thead>
+                        <tr>
+                            <th data-ordenar="nome">Nome</th>
+                            <th data-ordenar="data-adicao">Data de Adição</th>
+                            <th data-ordenar="data-validade">Data de Validade</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpo-tabela-alimentos">
+                        <tr>
+                            <td>Banana</td>
+                            <td>05/04/2025</td>
+                            <td>12/04/2025</td>
+                            <td>
+                                <button class="botao-secundario">Editar</button>
+                                <button class="botao-perigo">Excluir</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Alface</td>
+                            <td>03/04/2025</td>
+                            <td>08/04/2025</td>
+                            <td>
+                                <button class="botao-secundario">Editar</button>
+                                <button class="botao-perigo">Excluir</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Batata</td>
+                            <td>01/04/2025</td>
+                            <td>15/04/2025</td>
+                            <td>
+                                <button class="botao-secundario">Editar</button>
+                                <button class="botao-perigo">Excluir</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer class="rodape">
+        <p>StockIT &copy; 2025 - Gerenciamento de Estoque de Alimentos</p>
+    </footer>
+
+    <script src="/assets/ambientes.js"></script>
 </body>
 </html>
