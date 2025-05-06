@@ -7,42 +7,63 @@
     <title>JANELA DE CADASTRO DE ALIMENTOS</title>
 </head>
 <body>
-    <header>
-
-    </header>
-<main>
-    <div class="container">
-        <div class="container-interno">
-            <div class="title">
-                <h2>Cadastro de Alimentos</h2>
+    <header class="cabecalho">
+        <div class="cabecalho-conteudo">
+            <div class="logo-container">
+                <span class="logo-icone">🌿</span>
+                <h1>StockIT</h1>
             </div>
-
-            <form action="" class="form">
-                <div class="campo-adicionar-imagem">
-                    <label for="imagem">Adicionar imagem</label>
-                    <input type="file" id="imagem-alimento" name="imagem" accept="image/*">
-                </div>
-                <input type="text" name="nome" placeholder="Nome do Alimento">
-                <input type="text" name="tipo" placeholder="Tipo do Alimento">
-                <div class="campo-select">
-                    <label for="categoria-alimento">Categoria do Alimento</label>
-                    <select id="categoria-alimento" name="categoria">
-                        <option value="" disabled selected></option>
-
-                    </select>
-                </div>
-
-                <div class="campo-select">
-                    <label for="ambiente-alimento">Ambiente do Alimento</label>
-                    <select id="ambiente-alimento" name="">
-                        <option value="" disabled selected></option>
-                    </select>
-                </div>
-                <button class="btn" type="submit">Cadastrar</button>
-            </form>
         </div>
-    </div>
-</main>
+    </header>
+    <main>
+        <div class="container">
+            <div class="container-interno">
+                <div class="title">
+                    <h2>Cadastro de Alimentos</h2>
+                </div>
 
+                <form class="form" id="formCadastro">
+                    <label id="label-imagem" for="imagem-alimento">
+                        <div class="campo-adicionar-imagem">
+                            <input type="file" id="imagem-alimento" name="imagem" accept="image/*">
+                            Adicionar imagem <br> +
+                        </div>
+                    </label>
+                    <input type="text" name="nome" placeholder="Nome do Alimento">
+                    <input type="text" name="tipo" placeholder="Tipo do Alimento">
+                    <div class="campo-select">
+                        <label for="categoria-alimento">Categoria do Alimento</label>
+                        <select class="label-CA" id="categoria-alimento" name="categoria">
+                            <option value="" disabled selected>Selecione uma Categoria</option>
+                            <option value="fruta">Fruta</option>
+                            <option value="verdura">Verdura</option>
+                            <option value="legume">Legume</option>
+                            <option value="carne">Carne</option>
+                            <option value="lacteo">Lácteo</option>
+                            <option value="grano">Grãos</option>
+                            <option value="industrializado">Industrializado</option>
+                            <option value="bebida">Bebida</option>
+                        </select>
+                    </div>
+                    
+
+                    <div class="campo-select">
+                        <label for="ambiente-alimento">Ambiente do Alimento</label>
+                        <select class="label-CA" id="ambiente-alimento" name="ambiente">
+                            <option value="" disabled selected></option>
+                        </select>
+                    </div>
+
+                    <!-- Botão para cadastrar -->
+                    <button class="btn" type="submit">Cadastrar</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer class="rodape">
+        <p>StockIT &copy; 2025 - Gerenciamento de Estoque de Alimentos</p>
+    </footer>
+    
+    <script src="cadastroalimento.js"></script>
 </body>
 </html>
