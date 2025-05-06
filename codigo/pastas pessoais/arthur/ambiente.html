@@ -1,29 +1,41 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta author="Arthur Henrique Tristão Pinto">
     <title>StockIT - Gestão de Alimentos</title>
+    <!--Icons Link-->
+    <script src="https://kit.fontawesome.com/f8292b8a4a.js" crossorigin="anonymous"></script>
+    <!--Icone da página -->
+    <link rel="icon" href="/assets/imgs/logo.ico" type="image/x-icon" >
+    <!--CSS Link-->
     <link rel="stylesheet" href="/assets/css/ambiente.css">
 </head>
+
 <body>
     <header class="cabecalho">
         <div class="cabecalho-conteudo">
             <div class="logo-container">
-                <span class="logo-icone">🌿</span>
+                <span class="logo-icone"><img src="logo-stockit.png" width="100px" alt=""></span>
                 <h1>StockIT</h1>
-            </div>
-            <div class="cabecalho-direita">
-                <h2 id="nome-ambiente">Meu Ambiente</h2>
-                <button id="botao-adicionar-alimento" class="botao-primario">
-                    + Adicionar Alimento
-                </button>
             </div>
         </div>
     </header>
 
     <main class="conteudo-principal">
         <div class="container-conteudo">
+            <div class="container-cabecalho">
+                <div class="container-cabecalho-direita"> 
+                    <a href="lista.html" id="botao-voltar" class="botao-voltar"><i class="fa-regular fa-circle-left"></i></a>
+                    <h2 id="nome-ambiente">Carregando ambiente...</h2>
+                </div>
+                <div class="container-cabecalho-esquerda"><button id="botao-adicionar-alimento" class="botao-primario">
+                        + Adicionar Alimento</button>
+                </div>
+            </div>
+
             <div class="tabela-cabecalho">
                 <h2>Alimentos</h2>
                 <div class="container-busca">
@@ -35,40 +47,14 @@
                 <table id="tabela-alimentos">
                     <thead>
                         <tr>
-                            <th data-ordenar="nome">Nome</th>
-                            <th data-ordenar="data-adicao">Data de Adição</th>
-                            <th data-ordenar="data-validade">Data de Validade</th>
+                            <th>Nome</th>
+                            <th>Data de Adição</th>
+                            <th>Data de Validade</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody id="corpo-tabela-alimentos">
-                        <tr>
-                            <td>Banana</td>
-                            <td>05/04/2025</td>
-                            <td>12/04/2025</td>
-                            <td>
-                                <button class="botao-secundario">Editar</button>
-                                <button class="botao-perigo">Excluir</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Alface</td>
-                            <td>03/04/2025</td>
-                            <td>08/04/2025</td>
-                            <td>
-                                <button class="botao-secundario">Editar</button>
-                                <button class="botao-perigo">Excluir</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Batata</td>
-                            <td>01/04/2025</td>
-                            <td>15/04/2025</td>
-                            <td>
-                                <button class="botao-secundario">Editar</button>
-                                <button class="botao-perigo">Excluir</button>
-                            </td>
-                        </tr>
+
                     </tbody>
                 </table>
             </div>
@@ -81,4 +67,5 @@
 
     <script src="/assets/ambientes.js"></script>
 </body>
+
 </html>

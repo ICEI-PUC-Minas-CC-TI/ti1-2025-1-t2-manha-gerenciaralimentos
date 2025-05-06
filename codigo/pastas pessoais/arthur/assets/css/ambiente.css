@@ -74,11 +74,38 @@ body {
     font-size: 2rem;
 }
 
-.cabecalho-direita {
-    text-align: right;
+/* 3. Conteúdo Principal */
+
+/*3.0. Cabeçaçho do Conteúdo */
+
+.container-cabecalho{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3em;
 }
 
-/* 3. Conteúdo Principal */
+.container-cabecalho-direita{
+    display: flex;
+    align-items: center;
+    gap: 1rem;;
+}
+
+.botao-voltar {
+    font-size: 1.8em;
+    color: var(--cor-primaria);
+    border-radius: 100%;
+    transition: ease all 0.2s
+}
+
+.botao-voltar:hover {
+    scale: 1.2;
+}
+
+#nome-ambiente{
+    font-size: 2.3rem;
+}
+
 /* 3.1. Área principal */
 .conteudo-principal {
     max-width: 1200px;
