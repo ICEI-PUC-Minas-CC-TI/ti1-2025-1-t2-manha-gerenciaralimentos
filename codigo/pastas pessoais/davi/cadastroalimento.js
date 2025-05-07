@@ -1,68 +1,57 @@
-document.querySelector(".form").addEventListener("submit", function(event) {
-    event.preventDefault(); // Impede o envio tradicional do formulário
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("formCadastro");
 
-    const nome = document.querySelector('input[name="nome"]').value;
-    const tipo = document.querySelector('input[name="tipo"]').value;
-    const categoria = document.querySelector('select[name="categoria"]').value;
-    const ambiente = document.querySelector('select[name="ambiente"]').value;
-    const imagemInput = document.querySelector('#imagem-alimento');
-    const imagemFile = imagemInput.files[0];
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
 
-    // Função para abrir nova aba com JSON
-    function abrirJSON(dados) {
-        const novaJanela = window.open();
-        const conteudo = `
-            <html>
-                <head><title>Dados Cadastrados</title></head>
-                <body>
-                    <pre>${JSON.stringify(dados, null, 4)}</pre>
-                </body>
-            </html>
-        `;
-        novaJanela.document.write(conteudo);
-        novaJanela.document.close();
-    }
+        const nome = form.elements["nome"].value;
+        const tipo = form.elements["tipo"].value;
+        const categoria = form.elements["categoria"].value;
+        const ambiente = form.elements["ambiente"].value;
+        const imagemInput = form.elements["imagem"];
+        let imagemURL = "";
 
-    // Gerar um ID único para o alimento
-    const idAlimento = Date.now(); // Usando o timestamp como ID único
+        // Lê o arquivo de imagem e converte para base64
+        if (imagemInput.files.length > 0) {
+            const file = imagemInput.files[0];
+            imagemURL = await toBase64(file);
+        }
 
-    // Obter os alimentos já armazenados no localStorage
-    let alimentos = JSON.parse(localStorage.getItem('alimentos')) || [];
-
-    // Se tiver imagem, converter para base64
-    if (imagemFile) {
-        const reader = new FileReader();
-        reader.onload = function(event) {
-            const imagemBase64 = event.target.result;
-
-            const novoAlimento = {
-                id: idAlimento,
-                nome: nome,
-                tipo: tipo,
-                categoria: categoria,
-                ambiente: ambiente,
-                imagem: imagemBase64
-            };
-
-            alimentos.push(novoAlimento); // Adicionar o novo alimento à lista
-            localStorage.setItem('alimentos', JSON.stringify(alimentos)); // Armazenar novamente no localStorage
-
-            abrirJSON(novoAlimento);
-        };
-        reader.readAsDataURL(imagemFile);
-    } else {
-        const novoAlimento = {
-            id: idAlimento,
-            nome: nome,
-            tipo: tipo,
-            categoria: categoria,
-            ambiente: ambiente,
-            imagem: null
+        const alimento = {
+            nome,
+            tipo,
+            categoria,
+            ambiente,
+            imagem: imagemURL
         };
 
-        alimentos.push(novoAlimento); // Adicionar o novo alimento à lista
-        localStorage.setItem('alimentos', JSON.stringify(alimentos)); // Armazenar novamente no localStorage
+        try {
+            const response = await fetch("http://localhost:3000/alimentos", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(alimento)
+            });
 
-        abrirJSON(novoAlimento);
-    }
+            if (!response.ok) throw new Error("Erro ao cadastrar alimento");
+
+            alert("Alimento cadastrado com sucesso!");
+            form.reset();
+        } catch (error) {
+            console.error("Erro ao enviar dados:", error);
+            alert("Erro ao cadastrar o alimento.");
+        }
+    });
 });
+
+// Função para converter arquivo em base64
+function toBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = (error) => reject(error);
+    });
+}
+
