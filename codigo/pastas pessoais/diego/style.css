@@ -128,3 +128,16 @@ section {
     height: 15px;
     margin: 0;
 }
+
+ #criar-lista {
+
+    background-color:var(--cor-secundaria);
+    color: var(--cor-branco);
+
+}
+
+#excluir-lista { 
+
+    background-color: var(--cor-perigo);
+    color: var(--cor-branco);
+}
