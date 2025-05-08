@@ -5,8 +5,8 @@ let alimentos = [];
 async function carregarDados() {
   try {
     const [resAmbientes, resAlimentos] = await Promise.all([
-      fetch('https://81a4968e-e572-4e80-8655-58bd8c8a637d-00-2aaeov88pbnk.kirk.replit.dev/ambientes'),
-      fetch('https://81a4968e-e572-4e80-8655-58bd8c8a637d-00-2aaeov88pbnk.kirk.replit.dev/alimentos')
+      fetch('https://json-server-stockit.onrender.com/ambientes'),
+      fetch('https://json-server-stockit.onrender.com/alimentos')
     ]);
 
     if (!resAmbientes.ok || !resAlimentos.ok) {
@@ -20,7 +20,7 @@ async function carregarDados() {
   } catch (error) {
     console.error('Erro ao carregar dados:', error);
     const container = document.getElementById('cartoes-container');
-    container.innerHTML = `<h4 style="color:red">Erro ao carregar dados do servidor.</h4>`;
+    container.innerHTML = `<h4 style="color:red">Conectando ao servidor, porfavor espere.</h4>`;
   }
 }
 
