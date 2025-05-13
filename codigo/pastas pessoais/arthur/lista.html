@@ -1,12 +1,14 @@
-<!--ESSA PÁGINA APENAS SIMULA A SELEÇÃO DE AMBIETNES DA HOME-->
+<!--ESSA PÁGINA APENAS SIMULA A SELEÇÃO DE AMBIENTES DA HOME-->
 
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Arthur Henrique Tristão Pinto">
+    <meta name="copyright" content="© 2025 Arthur Tristão">
     <!--Icone da página -->
-    <link rel="icon" href="/assets/imgs/logo.ico" type="image/x-icon" >
+    <link rel="icon" href="/assets/icons/logo_stockit.ico" type="image/x-icon">
     <title>Ambientes - StockIT</title>
     <style>
         :root {
@@ -63,25 +65,40 @@
     <h1>Selecione um Ambiente</h1>
 
     <div class="lista-ambientes" id="lista-ambientes">
+        <p>Carregando ambientes...</p>
     </div>
 
-    <script src="assets/ambientes.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const listaAmbientes = document.getElementById('lista-ambientes');
-
-        dados.ambientes.forEach(ambiente => {
-            // Em vez de <li>, vou criar um <div> com a classe 'ambiente'
-            const item = document.createElement('div');
-            item.classList.add('ambiente');  // aplica a classe do CSS
-
-            item.innerHTML = `<a href="ambiente.html?id=${ambiente.id}" style="text-decoration:none; color:inherit;">${ambiente.nome}</a>`;
-
-            listaAmbientes.appendChild(item);
+        document.addEventListener('DOMContentLoaded', async () => {
+            const listaAmbientes = document.getElementById('lista-ambientes');
+            listaAmbientes.innerHTML = ''; 
+        
+            try {
+                const resposta = await fetch('https://json-server-stockit.onrender.com/ambientes');
+                if (!resposta.ok) throw new Error('Erro ao buscar os ambientes');
+                
+                const ambientes = await resposta.json();
+        
+                ambientes.forEach(ambiente => {
+                    const item = document.createElement('div');
+                    item.classList.add('ambiente');
+        
+                    item.innerHTML = `<a href="ambiente.html?id=${ambiente.id}" style="text-decoration:none; color:inherit;">${ambiente.nome}</a>`;
+        
+                    listaAmbientes.appendChild(item);
+                });
+                
+                if (ambientes.length === 0) {
+                    listaAmbientes.innerHTML = '<p>Nenhum ambiente cadastrado.</p>';
+                }
+        
+            } catch (erro) {
+                console.error(erro);
+                listaAmbientes.innerHTML += '<h1>JSON Server ERROR!!!<br><br>Se estiver fazendo a avaliação por pares e o server cair,<br>   utilize o db.json na pasta db e hospede em seu replit. Troque o link no fetch! <br><br>Caso necessário: Contato: (31)999623317</h1>';
+            }
         });
-    });
-
-    </script>
+        </script>
+        
 
 </body>
 </html>
