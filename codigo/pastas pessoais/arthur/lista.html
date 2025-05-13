@@ -72,7 +72,7 @@
             listaAmbientes.innerHTML = ''; 
         
             try {
-                const resposta = await fetch('https://81a4968e-e572-4e80-8655-58bd8c8a637d-00-2aaeov88pbnk.kirk.replit.dev/ambientes');
+                const resposta = await fetch('https://json-server-stockit.onrender.com/ambientes');
                 if (!resposta.ok) throw new Error('Erro ao buscar os ambientes');
                 
                 const ambientes = await resposta.json();

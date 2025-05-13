@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Icone da página -->
+    <link rel="icon" href="/assets/icons/logo_stockit.ico" type="image/x-icon">
+    <!--Icons Link-->
+    <script src="https://kit.fontawesome.com/f8292b8a4a.js" crossorigin="anonymous"></script>
+    <title>Servidor iniciando...</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: #f5f5f5;
+    }
+
+    h1 {
+        color: #059669;
+        margin-top: 1rem;
+    }
+
+    .ampulheta {
+        color: #026848;
+        font-size: 60px;
+        display: inline-block;
+        animation: girar180 1.5s ease-in-out  infinite;
+    }
+
+    @keyframes girar180 {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .dots::after {
+        content: '';
+        animation: dots 1.5s steps(3, end) infinite;
+    }
+
+    @keyframes dots {
+
+        33% {
+            content: '.';
+        }
+
+        66% {
+            content: '..';
+        }
+
+        100% {
+            content: '...';
+        }
+    }
+</style>
+
+<body>
+    <div class="ampulheta"><i class="fa-regular fa-hourglass"></i></div>
+    <h1>Servidor iniciando <span class="dots"></span></h1>
+</body>
+
+<script>
+    const apiURL = 'https://json-server-stockit.onrender.com/ambientes'
+    async function verificarServidor(){
+        try{
+            const response = await fetch(apiURL)
+            if(response.ok){
+                window.location.href = 'lista.html'
+            }
+        }catch(error){
+            console.log('Servidor ainda dormindo')
+        }
+    }
+   
+    setInterval(verificarServidor,5000);
+</script>
+
+</html>

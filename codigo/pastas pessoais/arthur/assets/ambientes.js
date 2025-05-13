@@ -1,7 +1,7 @@
 // URL base do JSON Server
-const apiUrl = 'https://81a4968e-e572-4e80-8655-58bd8c8a637d-00-2aaeov88pbnk.kirk.replit.dev';
+const apiUrl = 'https://json-server-stockit.onrender.com';
 
-// Pega o ID do ambiente da URL Replt
+// Pega o ID do ambiente da URL 
 const params = new URLSearchParams(window.location.search);
 const ambienteId = parseInt(params.get('id'));
 
@@ -44,6 +44,7 @@ async function carregarAlimentos() {
         console.error('Erro ao carregar os alimentos: ou JSON SERVER Offline', error);
     }
 }
+
 
 document.addEventListener('DOMContentLoaded', () => {
     carregarAmbiente();
