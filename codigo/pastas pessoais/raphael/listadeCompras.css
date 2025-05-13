@@ -131,6 +131,12 @@ body {
     gap: 0.75rem;
 }
 
+.logo-container img {
+    height: 50px;
+    width: 50px;
+    border-radius: 30%;
+}
+
 .logo-icone {
     font-size: 2rem;
 }

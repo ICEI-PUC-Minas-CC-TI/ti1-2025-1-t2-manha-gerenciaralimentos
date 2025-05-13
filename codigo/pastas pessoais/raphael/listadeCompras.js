@@ -50,8 +50,15 @@ const dados = {
     ],
 }
 
+//Pegue o Id que foi aberto da URL
+const params = new URLSearchParams(window.location.search);
+const listadeCompras = parseInt(params.get('id'));
+const alimentoId = parseInt(params.get('id'));
+
+//Interliga com o HTML
 const container = document.getElementById('listadeCompras');
 
+//Código da criação das listas de compras
 dados.listasDeCompra.forEach(lista => {
 
     const listaSection = document.createElement('section');
