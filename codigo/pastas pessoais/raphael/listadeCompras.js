@@ -50,57 +50,78 @@ const dados = {
     ],
 }
 
-//Pegue o Id que foi aberto da URL
-const params = new URLSearchParams(window.location.search);
-const listadeCompras = parseInt(params.get('id'));
-const alimentoId = parseInt(params.get('id'));
+// URL base do JSON Server
+const apiUrl = 'https://json-server-stockit.onrender.com';
 
-//Interliga com o HTML
+const params = new URLSearchParams(window.location.search);
+const listaId = parseInt(params.get('id'));
+
+// Interliga com o HTML
 const container = document.getElementById('listadeCompras');
 
-//Código da criação das listas de compras
-dados.listasDeCompra.forEach(lista => {
+// Função para carregar os dados
+async function carregarDados() {
+    try {
+        // Carrega a lista específica
+        const listaResponse = await fetch(`${apiUrl}/listasDeCompra/${listaId}`);
+        const lista = await listaResponse.json();
+        
+        // Carrega todos os alimentos
+        const alimentosResponse = await fetch(`${apiUrl}/alimentos`);
+        const alimentos = await alimentosResponse.json();
 
-    const listaSection = document.createElement('section');
-    listaSection.classList.add('lista-compra');
+        // Cria a seção da lista de compras
+        const listaSection = document.createElement('section');
+        listaSection.classList.add('lista-compra');
 
-    const titulo = document.createElement('h2');
-    titulo.textContent = lista.nome;
-    listaSection.appendChild(titulo);
+        const titulo = document.createElement('h2');
+        titulo.textContent = lista.nome;
+        listaSection.appendChild(titulo);
 
-    lista.itens.forEach(item => {
-        const alimento = dados.alimentos.find(a => a.id === item.alimentoId);
+        // Processa cada item da lista
+        lista.itens.forEach(item => {
+            const alimento = alimentos.find(a => a.id === item.alimentoId);
 
-        const itemDiv = document.createElement('div');
-        itemDiv.classList.add('item-lista');
+            const itemDiv = document.createElement('div');
+            itemDiv.classList.add('item-lista');
 
-        const img = document.createElement('img');
-        img.src = alimento.imagem;
-        img.alt = alimento.nome;
-        img.classList.add('item-imagem');
+            const img = document.createElement('img');
+            img.src = alimento.imagem;
+            img.alt = alimento.nome;
+            img.classList.add('item-imagem');
 
-        const infoDiv = document.createElement('div');
-        infoDiv.classList.add('item-info');
+            const infoDiv = document.createElement('div');
+            infoDiv.classList.add('item-info');
 
-        const nome = document.createElement('h3');
-        nome.textContent = `Produto: ${alimento.nome} ${alimento.tipo}`;
+            const nome = document.createElement('h3');
+            nome.textContent = `Produto: ${alimento.nome} ${alimento.tipo || ''}`;
 
-        const quantidade = document.createElement('p');
-        quantidade.textContent = `Quantidade: ${item.quantidade}`;
+            const quantidade = document.createElement('p');
+            quantidade.textContent = `Quantidade: ${item.quantidade}`;
 
-        infoDiv.appendChild(nome);
-        infoDiv.appendChild(quantidade);
+            infoDiv.appendChild(nome);
+            infoDiv.appendChild(quantidade);
 
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.classList.add('item-checkbox');
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.classList.add('item-checkbox');
+            
+            // Se não houver propriedade 'comprado' no item, consideramos como false
+            checkbox.checked = item.comprado || false;
 
-        itemDiv.appendChild(img);
-        itemDiv.appendChild(infoDiv);
-        itemDiv.appendChild(checkbox);
+            itemDiv.appendChild(img);
+            itemDiv.appendChild(infoDiv);
+            itemDiv.appendChild(checkbox);
 
-        listaSection.appendChild(itemDiv);
-    });
+            listaSection.appendChild(itemDiv);
+        });
 
-    container.appendChild(listaSection);
-})
+        container.appendChild(listaSection);
+    } catch (error) {
+        console.error('Erro ao carregar dados:', error);
+        container.innerHTML = '<p>Erro ao carregar a lista de compras. Por favor, tente novamente mais tarde.</p>';
+    }
+}
+
+// Inicia o carregamento dos dados
+carregarDados();
