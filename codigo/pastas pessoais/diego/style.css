@@ -33,54 +33,55 @@
     --sombra-media: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-body { 
+body {
 
     margin: 0;
 }
 
 header {
 
-    display: flex; 
+    display: flex;
     background-color: var(--cor-primaria);
-    margin-bottom:var(--espaco-lg);
+    margin-bottom: var(--espaco-lg);
     width: 100%;
     justify-content: space-between;
-    color:var(--cor-branco);
+    color: var(--cor-branco);
 }
 
 .cabecario {
 
-    width:100%;
+    width: 100%;
     display: flex;
-    
+
 }
 
-.logo-container{
+.logo-container {
 
     display: flex;
     margin: 21.440px;
 }
 
-.logo-icone { 
+.logo-icone {
 
     height: 37.33px;
 }
 
-.logo-container h1 { 
+.logo-container h1 {
 
     margin: 0;
 
 }
-section { 
+
+section {
 
     display: flex;
-    color:var(--cor-fundo);
+    color: var(--cor-fundo);
     font-style: var(--fonte-principal);
     justify-content: center;
     align-items: center;
 }
 
-.criar_lista { 
+.criar_lista {
 
     display: flex;
     flex-wrap: wrap;
@@ -88,26 +89,26 @@ section {
     box-shadow: var(--sombra-media);
     width: 500px;
     height: 700px;
-    background-color:var(--cor-branco);
+    background-color: var(--cor-branco);
     border-radius: 10px;
 
 }
 
-.informacoes { 
+.informacoes {
 
     width: 370px;
     height: 65px;
     border-radius: 20px;
 }
 
-#titulo { 
+#titulo {
 
-    color:var(--cor-texto);
+    color: var(--cor-texto);
     height: 50px;
 
 }
 
-.criacao_exclusao { 
+.criacao_exclusao {
 
     width: 370px;
     display: flex;
@@ -115,29 +116,65 @@ section {
     justify-content: space-between;
 }
 
-.botao { 
+.botao {
 
     width: 165px;
     height: 65px;
     border-radius: 20px;
 }
 
-.criar_lista p { 
+.criar_lista p {
 
-    color:var(--cor-texto-secundario);
+    color: var(--cor-texto-secundario);
     height: 15px;
     margin: 0;
 }
 
- #criar-lista {
+#criar-lista {
 
-    background-color:var(--cor-secundaria);
+    background-color: var(--cor-secundaria);
     color: var(--cor-branco);
 
 }
 
-#excluir-lista { 
+#excluir-lista {
 
     background-color: var(--cor-perigo);
     color: var(--cor-branco);
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--cor-branco);
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    max-height: 80vh;
+    overflow-y: auto;
+    border-radius: 10px;
+}
+
+.alimento-container {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.btn-adicionar,
+.btn-fechar {
+    margin-top: 20px;
+    padding: 10px 15px;
+    background-color: var(--cor-secundaria);
+    color: var(--cor-branco);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-fechar {
+    background-color: var(--cor-perigo);
+    margin-left: 20px;
 }
