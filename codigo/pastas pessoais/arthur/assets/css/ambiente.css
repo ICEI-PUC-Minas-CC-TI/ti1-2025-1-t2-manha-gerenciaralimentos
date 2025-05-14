@@ -160,11 +160,11 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: var(--espaco-sm);
+    text-align: center;
 }
 
 th, td {
     padding: 0.75rem;
-    text-align: left;
     border-bottom: 1px solid var(--cor-borda);
 }
 
@@ -176,6 +176,15 @@ th {
 
 th:hover {
     background-color: var(--cor-cabecalho-tabela-hover);
+}
+
+#td-nome , #atributo-nome{
+    text-align: left;
+}
+
+#seta-atributo-nome{
+    color: var(--cor-secundaria);
+    margin-left: 5px;
 }
 
 /* 5. Botões */

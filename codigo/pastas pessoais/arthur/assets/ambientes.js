@@ -51,9 +51,10 @@ async function carregarAlimentos() {
 
             const linha = document.createElement('tr');
             linha.innerHTML = `
-                <td>${alimento.nome} ${alimento.tipo || ""}</td>
+                <td id="td-nome">${alimento.nome} ${alimento.tipo || ""}</td>
                 <td>${formatarData(item.cadastro)}</td>
                 <td>${formatarData(item.vencimento)}</td>
+                <td>${item.quantidade} </td>
                 <td>
                     <button class="botao-secundario">Editar</button>
                     <button class="botao-perigo">Excluir</button>
@@ -67,12 +68,14 @@ async function carregarAlimentos() {
     }
 }
 
+// Formata Data para o Padrão Brasileiro
 function formatarData(dataIso) {
   if (!dataIso) return '–';
   const [ano, mes, dia] = dataIso.split('-');
   return `${dia}/${mes}/${ano}`;
 }
 
+//Função que normaliza texto, sem acento, espaços extras e maiuculas
 function normalizarTexto(texto) {
     return texto
         .normalize('NFD')
@@ -81,6 +84,7 @@ function normalizarTexto(texto) {
         .trim();
 }
 
+//Função para Filtrar busca a apartir de 3 letras com texto normalizado
 function filtroBusca(){
     const textoBusca = normalizarTexto(campoBusca.value);
     const aviso = document.getElementById('mensagem-nenhum');
@@ -118,6 +122,32 @@ function filtroBusca(){
     }
 }
 
+
+//Funções para Ordenação por Nome
+let ordemNomeAsc = true;
+
+function ordenarPorNome() {
+  const corpo = document.getElementById('corpo-tabela-alimentos');
+  const seta = document.getElementById('seta-atributo-nome')
+
+  linhasTabela.sort((a, b) => {
+    const nomeA = normalizarTexto(a.cells[0].textContent.split(' ')[0]);
+    const nomeB = normalizarTexto(b.cells[0].textContent.split(' ')[0]);
+    return nomeA.localeCompare(nomeB) * (ordemNomeAsc ? 1 : -1);
+  });
+
+  corpo.innerHTML = '';
+  linhasTabela.forEach(linha => corpo.appendChild(linha));
+
+  // Atualiza a seta
+  seta.className = ordemNomeAsc ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down';
+
+  ordemNomeAsc = !ordemNomeAsc;
+}
+
+//Listener para chamada de ordenar nome
+document.getElementById('atributo-nome').addEventListener('click', ordenarPorNome);
+
 //Listener para input de busca com atraso para melhor UX
 let temporizador;
 campoBusca.addEventListener('input', () => {
@@ -125,7 +155,10 @@ campoBusca.addEventListener('input', () => {
     temporizador = setTimeout(filtroBusca, 300);
 });   
 
-document.addEventListener('DOMContentLoaded', () => {
-    carregarAmbiente();
-    carregarAlimentos();
+//Listener para Página Carregada
+document.addEventListener('DOMContentLoaded', async() => {
+    await carregarAmbiente();
+    await carregarAlimentos();
+
+    ordenarPorNome();
 });
