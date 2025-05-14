@@ -28,6 +28,7 @@ async function carregarAmbiente() {
         const response = await fetch(`${apiUrl}/ambientes/${ambienteId}`);
         const ambiente = await response.json();
         document.getElementById('nome-ambiente').textContent = ambiente.nome;
+        document.title = `StockIT - ${ambiente.nome}`;
 
         const tipoAmbiente = ambiente.tipo;
         const iconeAmbiente = await obterIconeAmbiente(tipoAmbiente);
