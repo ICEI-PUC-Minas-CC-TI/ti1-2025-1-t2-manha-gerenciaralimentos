@@ -52,8 +52,8 @@ async function carregarAlimentos() {
             const linha = document.createElement('tr');
             linha.innerHTML = `
                 <td>${alimento.nome} ${alimento.tipo || ""}</td>
-                <td>${item.cadastro}</td>
-                <td>${item.vencimento}</td>
+                <td>${formatarData(item.cadastro)}</td>
+                <td>${formatarData(item.vencimento)}</td>
                 <td>
                     <button class="botao-secundario">Editar</button>
                     <button class="botao-perigo">Excluir</button>
@@ -67,6 +67,12 @@ async function carregarAlimentos() {
     }
 }
 
+function formatarData(dataIso) {
+  if (!dataIso) return '–';
+  const [ano, mes, dia] = dataIso.split('-');
+  return `${dia}/${mes}/${ano}`;
+}
+
 function normalizarTexto(texto) {
     return texto
         .normalize('NFD')
@@ -74,7 +80,6 @@ function normalizarTexto(texto) {
         .toLowerCase()
         .trim();
 }
-
 
 function filtroBusca(){
     const textoBusca = normalizarTexto(campoBusca.value);
