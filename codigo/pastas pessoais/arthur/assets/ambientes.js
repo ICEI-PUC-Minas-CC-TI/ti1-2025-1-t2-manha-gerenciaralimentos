@@ -8,6 +8,7 @@ const ambienteId = parseInt(params.get('id'));
 const campoBusca = document.getElementById('campo-busca');
 let linhasTabela = [];
 
+//Função para pegar ícone conforme tipo do ambiente
 async function obterIconeAmbiente(tipoID){
     try{
         const response = await fetch(`${apiUrl}/tipoAmbiente`);
@@ -48,10 +49,10 @@ async function carregarAlimentos() {
         for (const item of ambiente.itens) {
             const alimentoResponse = await fetch(`${apiUrl}/alimentos/${item.alimentoId}`);
             const alimento = await alimentoResponse.json();
-
+            const validade = conferirValidade(formatarData(item.vencimento)) == true ? "" : "fa-solid fa-triangle-exclamation";
             const linha = document.createElement('tr');
             linha.innerHTML = `
-                <td id="td-nome">${alimento.nome} ${alimento.tipo || ""}</td>
+                <td id="td-nome">${alimento.nome} ${alimento.tipo || ""} <i  id = icone-vencimento class ="${validade}"><\i> </td>
                 <td>${formatarData(item.cadastro)}</td>
                 <td>${formatarData(item.vencimento)}</td>
                 <td>${item.quantidade} </td>
@@ -67,6 +68,17 @@ async function carregarAlimentos() {
         console.error('Erro ao carregar os alimentos: ou JSON SERVER Offline', error);
     }
 }
+
+
+//Função para conferir validade(false se vencido)
+function conferirValidade(data) {
+  const [dia, mes, ano] = data.split('/').map(Number);
+  const dataValidade = new Date(ano, mes - 1, dia); 
+  const hoje = new Date();
+  hoje.setHours(0, 0, 0, 0); 
+  return dataValidade >= hoje;
+}
+
 
 // Formata Data para o Padrão Brasileiro
 function formatarData(dataIso) {
@@ -159,6 +171,5 @@ campoBusca.addEventListener('input', () => {
 document.addEventListener('DOMContentLoaded', async() => {
     await carregarAmbiente();
     await carregarAlimentos();
-
     ordenarPorNome();
 });

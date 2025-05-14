@@ -187,6 +187,12 @@ th:hover {
     margin-left: 5px;
 }
 
+#icone-vencimento{
+    color: var(--cor-perigo);
+    font-size: 20px;
+    margin-left: 5px;
+}
+
 /* 5. Botões */
 /* 5.1. Botão Primário */
 .botao-primario {
