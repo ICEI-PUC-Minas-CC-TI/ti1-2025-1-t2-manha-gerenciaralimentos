@@ -1,127 +1,75 @@
-const dados = {
-    alimentos: [
-      {
-        "id": 1,
-        "nome": "banana",
-        "tipo": "prata",
-        "imagem": "assets/images/Banana_prata.png",
-        "categoria": 1
-      },
-      {
-        "id": 2,
-        "nome": "batata",
-        "tipo": "inglesa",
-        "imagem": "assets/images/batata_inglesa.jpg",
-        "categoria": 2
-      },
-      {
-        "id": 3,
-        "nome": "alface",
-        "tipo": "americana",
-        "imagem": "assets/images/Alface-Americana.png",
-        "categoria": 3
-      }
-    ],
-
-    "listasDeCompra": [
-      {
-        "id": 1,
-        "nome": "Lista Casa",
-        "itens": [
-          { "alimentoId": 1, "quantidade": 5 },
-          { "alimentoId": 2, "quantidade": 2 }
-        ]
-      },
-      {
-        "id": 2,
-        "nome": "Lista Restaurante",
-        "itens": [
-          { "alimentoId": 3, "quantidade": 4 }
-        ]
-      },
-      {
-        "id": 3,
-        "nome": "Lista Churrasco",
-        "itens": [
-          { "alimentoId": 1, "quantidade": 1 },
-          { "alimentoId": 3, "quantidade": 2 }
-        ]
-      }
-    ],
-}
-
 // URL base do JSON Server
-const apiUrl = 'https://json-server-stockit.onrender.com';
+const apiUrl = "https://json-server-stockit.onrender.com";
 
-const params = new URLSearchParams(window.location.search);
-const listaId = parseInt(params.get('id'));
-
-// Interliga com o HTML
+// Elemento HTML onde as listas serão inseridas
 const container = document.getElementById('listadeCompras');
 
-// Função para carregar os dados
+// Função principal
 async function carregarDados() {
     try {
-        // Carrega a lista específica
-        const listaResponse = await fetch(`${apiUrl}/listasDeCompra/${listaId}`);
-        const lista = await listaResponse.json();
-        
-        // Carrega todos os alimentos
+        // Busca todas as listas de compra
+        const listasResponse = await fetch(`${apiUrl}/listasDeCompra`);
+        const listas = await listasResponse.json();
+
+        // Busca todos os alimentos
         const alimentosResponse = await fetch(`${apiUrl}/alimentos`);
         const alimentos = await alimentosResponse.json();
 
-        // Cria a seção da lista de compras
-        const listaSection = document.createElement('section');
-        listaSection.classList.add('lista-compra');
+        // Monta a seção no HTML
+        listas.forEach(lista => {
+            const listaSection = document.createElement('section');
+            listaSection.classList.add('lista-compra');
 
-        const titulo = document.createElement('h2');
-        titulo.textContent = lista.nome;
-        listaSection.appendChild(titulo);
+            const titulo = document.createElement('h2');
+            titulo.textContent = lista.nome;
+            listaSection.appendChild(titulo);
 
-        // Processa cada item da lista
-        lista.itens.forEach(item => {
-            const alimento = alimentos.find(a => a.id === item.alimentoId);
+            // Cria os elementos visuais
+            lista.itens.forEach(item => {
+                const alimento = alimentos.find(a => a.id === item.alimentoId);
+                if (!alimento) return;
 
-            const itemDiv = document.createElement('div');
-            itemDiv.classList.add('item-lista');
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('item-lista');
 
-            const img = document.createElement('img');
-            img.src = alimento.imagem;
-            img.alt = alimento.nome;
-            img.classList.add('item-imagem');
+                const img = document.createElement('img');
+                img.src = alimento.images;
+                img.alt = alimento.nome;
+                img.classList.add('item-imagem');
 
-            const infoDiv = document.createElement('div');
-            infoDiv.classList.add('item-info');
+                const infoDiv = document.createElement('div');
+                infoDiv.classList.add('item-info');
 
-            const nome = document.createElement('h3');
-            nome.textContent = `Produto: ${alimento.nome} ${alimento.tipo || ''}`;
+                const nome = document.createElement('h3');
+                nome.textContent = `Produto: ${alimento.nome} ${alimento.tipo || ''}`;
 
-            const quantidade = document.createElement('p');
-            quantidade.textContent = `Quantidade: ${item.quantidade}`;
+                const quantidade = document.createElement('p');
+                quantidade.textContent = `Quantidade: ${item.quantidade}`;
 
-            infoDiv.appendChild(nome);
-            infoDiv.appendChild(quantidade);
+                infoDiv.appendChild(nome);
+                infoDiv.appendChild(quantidade);
 
-            const checkbox = document.createElement('input');
-            checkbox.type = 'checkbox';
-            checkbox.classList.add('item-checkbox');
-            
-            // Se não houver propriedade 'comprado' no item, consideramos como false
-            checkbox.checked = item.comprado || false;
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.classList.add('item-checkbox');
+                checkbox.checked = item.comprado || false;
 
-            itemDiv.appendChild(img);
-            itemDiv.appendChild(infoDiv);
-            itemDiv.appendChild(checkbox);
+                itemDiv.appendChild(img);
+                itemDiv.appendChild(infoDiv);
+                itemDiv.appendChild(checkbox);
 
-            listaSection.appendChild(itemDiv);
+                listaSection.appendChild(itemDiv);
+            });
+
+            // Adiciona a seção da lista ao container principal
+            container.appendChild(listaSection);
         });
 
-        container.appendChild(listaSection);
     } catch (error) {
         console.error('Erro ao carregar dados:', error);
-        container.innerHTML = '<p>Erro ao carregar a lista de compras. Por favor, tente novamente mais tarde.</p>';
+        container.innerHTML = '<p>Erro ao carregar as listas de compras. Tente novamente mais tarde.</p>';
     }
 }
 
-// Inicia o carregamento dos dados
+// Inicia o carregamento dos dados ao carregar o script
 carregarDados();
