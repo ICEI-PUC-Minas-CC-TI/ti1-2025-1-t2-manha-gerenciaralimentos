@@ -106,6 +106,11 @@ body {
     font-size: 2.3rem;
 }
 
+#icone-ambiente{
+    font-size: 30px;
+    color: var(--cor-primaria);
+}
+
 /* 3.1. Área principal */
 .conteudo-principal {
     max-width: 1200px;

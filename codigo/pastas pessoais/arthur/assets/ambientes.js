@@ -8,12 +8,29 @@ const ambienteId = parseInt(params.get('id'));
 const campoBusca = document.getElementById('campo-busca');
 let linhasTabela = [];
 
+async function obterIconeAmbiente(tipoID){
+    try{
+        const response = await fetch(`${apiUrl}/tipoAmbiente`);
+        const tipos = await response.json();
+        const tipo = tipos.find(t => t.id === tipoID);
+        return tipo ? tipo.icone: null;  
+
+    }catch(error){
+        console.error('Erro ao buscar tipoAmbiente:', error);
+        return null;
+    }
+}
+
 // Função para carregar o nome do ambiente
 async function carregarAmbiente() {
     try {
         const response = await fetch(`${apiUrl}/ambientes/${ambienteId}`);
         const ambiente = await response.json();
         document.getElementById('nome-ambiente').textContent = ambiente.nome;
+
+        const tipoAmbiente = ambiente.tipo;
+        const iconeAmbiente = await obterIconeAmbiente(tipoAmbiente);
+        document.getElementById('icone-ambiente').className =iconeAmbiente;
     } catch (error) {
         console.error('Erro ao carregar o ambiente:ou JSON SERVER Offline', error);
     }

@@ -131,7 +131,7 @@
   
     "tipoAmbiente": [
         { "id": 0, "tipo": "Outros" },
-        { "id": 1, "tipo": "Refrigeração" },
+        { "id": 1, "tipo": "Refrigeração"  },
         { "id": 2, "tipo": "Seco" },
         { "id": 3, "tipo": "Congelado" }
     ]
