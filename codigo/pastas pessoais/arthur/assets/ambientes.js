@@ -62,9 +62,15 @@ async function carregarAlimentos() {
                     <button class="botao-perigo">Excluir</button>
                 </td>
             `;
+            if(validade){
+                const nome = linha.querySelector('td');
+                nome.classList.add("alimento-vencido");
+            }
             corpoTabela.appendChild(linha);
             linhasTabela.push(linha);
+         
         }
+        
     } catch (error) {
         console.error('Erro ao carregar os alimentos: ou JSON SERVER Offline', error);
     }
