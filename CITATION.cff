@@ -18,7 +18,7 @@ authors:
     given-names: Guilherme
 
   - family-names: Ribeiro de Paula
-    given-names:Raphael Lucas
+    given-names: Raphael Lucas
 
   - name-suffix: Professor
     affiliation: PUC Minas
@@ -39,10 +39,10 @@ keywords:
   - comida
   - estoque
   - vencimento
-  -gerenciamento
-  -organização
+  - gerenciamento
+  - organização
 
 repository-code: 
 license: CC-BY-4.0
 version: 1.0.0
-date-released: 2022-07-14
+date-released: 2025-05-16
