@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         try {
-            const response = await fetch("http://localhost:3000/alimentos", {
+            const response = await fetch("https://json-server-stockit.onrender.com/alimentos", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

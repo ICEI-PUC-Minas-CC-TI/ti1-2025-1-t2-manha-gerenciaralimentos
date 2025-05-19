@@ -151,7 +151,8 @@
 
 .campo-select{
     margin: 20px;
-    
+    display: flex;
+    align-items: center;
 }
 #imagem-alimento{
     display: none;
