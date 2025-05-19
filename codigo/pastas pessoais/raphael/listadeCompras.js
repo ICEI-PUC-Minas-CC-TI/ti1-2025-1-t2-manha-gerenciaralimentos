@@ -33,10 +33,10 @@ async function carregarDados() {
                 itemDiv.classList.add('item-lista');
 
                 const img = document.createElement('img');
-                img.src = alimento.images;
+                img.src = `assets/images/${alimento.imagem}`;
                 img.alt = alimento.nome;
                 img.classList.add('item-imagem');
-
+                
                 const infoDiv = document.createElement('div');
                 infoDiv.classList.add('item-info');
 

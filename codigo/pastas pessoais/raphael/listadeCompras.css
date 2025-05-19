@@ -33,6 +33,11 @@
     --sombra-media: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+* {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: var(--fonte-principal);
     background-color:var(--cor-fundo);
