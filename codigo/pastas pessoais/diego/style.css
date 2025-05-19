@@ -178,3 +178,25 @@ section {
     background-color: var(--cor-perigo);
     margin-left: 20px;
 }
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--cor-branco);
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    text-align: center;
+}
+.popup input {
+    display: block;
+    margin: 10px auto;
+    padding: 8px;
+}
+.popup button {
+    margin: 10px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
