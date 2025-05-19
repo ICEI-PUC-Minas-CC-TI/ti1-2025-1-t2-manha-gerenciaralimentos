@@ -68,11 +68,18 @@ body {
     display: flex;
     align-items: center;
     gap: 0.75rem;
+
 }
 
 .logo-icone {
     font-size: 2rem;
 }
+
+#nome-projeto{
+    text-decoration: none;
+    color: var(--cor-branco);
+}
+
 
 /* 3. Conteúdo Principal */
 
@@ -192,6 +199,13 @@ th:hover {
     font-size: 20px;
     margin-left: 5px;
 }
+
+.alimento-vencido {
+  color: var(--cor-perigo);        
+  text-decoration: line-through; 
+  font-weight: 500;
+}
+
 
 /* 5. Botões */
 /* 5.1. Botão Primário */
