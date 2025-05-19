@@ -1,9 +1,22 @@
 let ambientes = [];
 let alimentos = [];
 
+function mostrarCarregando() {
+  const container = document.getElementById('cartoes-container');
+  container.innerHTML = `
+    <div style="text-align: center; padding: 40px;">
+      <div class="spinner-border text-primary" role="status" style="width: 4rem; height: 4rem;">
+        <span class="visually-hidden">Carregando...</span>
+      </div>
+      <p style="margin-top: 15px;">Carregando dados, por favor aguarde...</p>
+    </div>
+  `;
+}
 
 async function carregarDados() {
   try {
+    mostrarCarregando(); // Mostra tela de carregamento
+
     const [resAmbientes, resAlimentos] = await Promise.all([
       fetch('https://json-server-stockit.onrender.com/ambientes'),
       fetch('https://json-server-stockit.onrender.com/alimentos')
@@ -16,11 +29,13 @@ async function carregarDados() {
     ambientes = await resAmbientes.json();
     alimentos = await resAlimentos.json();
 
-    mostrarAlimentosVencendo();
+    mostrarAlimentosVencendo(); // Remove a tela de carregamento automaticamente
   } catch (error) {
     console.error('Erro ao carregar dados:', error);
     const container = document.getElementById('cartoes-container');
-    container.innerHTML = `<h4 style="color:red">Conectando ao servidor, porfavor espere.</h4>`;
+    container.innerHTML = `
+      <h4 style="color:red; text-align: center;">Erro ao conectar ao servidor. Tente novamente mais tarde.</h4>
+    `;
   }
 }
 
