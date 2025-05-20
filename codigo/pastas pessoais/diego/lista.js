@@ -202,12 +202,12 @@ function criarLista() {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(novaLista)
   })
-    .then(async response => {
-      const text = await response.text(); 
-      console.log("Resposta completa do servidor:", text);
-
-      return response.json(); 
-    })
+    .then(response => {
+    if (!response.ok) {
+        throw new Error(`Erro ${response.status}: ${response.statusText}`);
+    }
+    return response.json(); // Lê diretamente como JSON sem usar .text()
+})
     .then(data => {
       console.log("Lista criada com sucesso:", data);
       alert("Lista criada com sucesso!");
@@ -225,7 +225,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 //Usado para testes com a adição de lista e cadastro de alimentos no próprio JSON 
-/*
+
 function deletarLista(listaId) {
   fetch(`${apiUrl}/listasDeCompra/${listaId}`, {
     method: "DELETE"
@@ -254,4 +254,4 @@ function deletarAlimento(alimentoId) {
     })
     .catch(error => console.error("Erro:", error));
 }
-*/
+
