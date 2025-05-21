@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    
+
     <header>
 
         <div class="cabecario">
@@ -40,17 +40,34 @@
 
             <div class="criacao_exclusao">
 
-                <input class="botao" type="button" id="excluir-lista" value="Excluir">
+                <input class="botao" type="button" id="limpar-lista" value="Limpe a lista">
+
+                <input class="botao" type="button" id="atualizar-lista" value="Atualize uma lista">
 
                 <input class="botao" type="button" id="criar-lista" value="Criar Lista">
+
+                <input class="botao" type="button" id="excluir-lista" value="Excluir uma lista">
 
             </div>
 
         </div>
 
+        <div id="modal-atualizar" class="modal">
+            <div class="modal-content">
+                <span class="fechar-modal">&times;</span>
+                <h2>Atualizar Lista</h2>
+                <input type="text" id="nome-lista-atualizar" placeholder="Digite o nome da lista">
+                <div id="alimentos-container">
+                    <button id="adicionar-alimento">Adicionar Alimento</button>
+                    <button id="salvar-alteracoes">Salvar Alterações</button>
+                </div>
+            </div>
+        </div>
+
+
     </section>
 
-<script src="lista.js" defer> </script>
+    <script src="lista.js" defer> </script>
 
 </body>
 
