@@ -39,6 +39,40 @@ async function carregarDados() {
   }
 }
 
+async function deletarAlimentoCompletamente(alimentoId) {
+  if (!confirm("Tem certeza que deseja remover esse alimento de todos os ambientes?")) return;
+
+  try {
+    // 1. Deleta o alimento da lista de alimentos
+    await fetch(`https://json-server-stockit.onrender.com/alimentos/${alimentoId}`, {
+      method: 'DELETE'
+    });
+
+    // 2. Atualiza os ambientes, removendo itens que contenham esse alimento
+    const atualizacoes = ambientes.map(async ambiente => {
+      const novosItens = ambiente.itens.filter(item => item.alimentoId != alimentoId);
+
+      // Apenas atualiza se houve mudança
+      if (novosItens.length !== ambiente.itens.length) {
+        return fetch(`https://json-server-stockit.onrender.com/ambientes/${ambiente.id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ itens: novosItens })
+        });
+      }
+    });
+
+    await Promise.all(atualizacoes);
+
+    // Recarrega os dados após deletar
+    carregarDados();
+  } catch (error) {
+    console.error("Erro ao deletar alimento:", error);
+    alert("Erro ao deletar alimento. Tente novamente.");
+  }
+}
+
+
 
 function verificarStatusVencimento(dataVencimentoStr) {
   const hoje = new Date();
@@ -112,11 +146,14 @@ function mostrarAlimentosVencendo() {
                   <p class="card-text">Quantidade: ${item.quantidade}</p>
               </div>
               <div class="caixa-texto">
+                <div>
                   <p class="card-text">Vencimento: ${formatarData(item.vencimento)}</p>
                   ${statusTexto}
+                </div>
               </div>
-          </div>
-        `;
+              <button class="btn btn-sm btn-danger" onclick="deletarAlimentoCompletamente('${alimento.id}')">
+              🗑️ 
+              </button>`;
 
         container.appendChild(card);
       }
