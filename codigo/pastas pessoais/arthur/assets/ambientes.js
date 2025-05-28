@@ -47,7 +47,7 @@ async function carregarAlimentos() {
         corpoTabela.innerHTML = '';
         linhasTabela = [];
 
-        for (const item of ambiente.itens) {
+        ambiente.itens.forEach(async(item,index) => {
             const alimentoResponse = await fetch(`${apiUrl}/alimentos/${item.alimentoId}`);
             const alimento = await alimentoResponse.json();
             const validade = conferirValidade(formatarData(item.vencimento)) == true ? "" : "fa-solid fa-triangle-exclamation";
@@ -58,8 +58,8 @@ async function carregarAlimentos() {
                 <td>${formatarData(item.vencimento)}</td>
                 <td>${item.quantidade} </td>
                 <td>
-                    <button class="botao-secundario" onclick="openModal('modal-editar','form-editar')">Editar</button>
-                    <button class="botao-perigo" onclick = "openModal('modal-excluir')">Excluir</button>
+                    <button class="botao-secundario" onclick="openModal('modal-editar','form-editar', ${index})">Editar</button>
+                    <button class="botao-perigo" onclick = "openModal('modal-excluir', ${index})">Excluir</button>
                 </td>
             `;
             if (validade) {
@@ -69,7 +69,7 @@ async function carregarAlimentos() {
             corpoTabela.appendChild(linha);
             linhasTabela.push(linha);
 
-        }
+        });
 
     } catch (error) {
         console.error('Erro ao carregar os alimentos: ou JSON SERVER Offline', error);
@@ -175,7 +175,8 @@ campoBusca.addEventListener('input', () => {
 });
 
 //Listener para os Modais
-function openModal(id,form_nome) {
+function openModal(id, form_nome, index) {
+    console.log(index)
     const modal = new bootstrap.Modal(document.getElementById(id));
     modal.show();
 
@@ -186,6 +187,9 @@ function openModal(id,form_nome) {
         if (form) form.reset(); // limpa todos os campos do formulário
     });
 
+    //Listener para Editar
+    const editar = document.getElementById('btn-editar-salvar');
+    editar.addEventListener('click', editarAlimento(index))
 
 }
 
@@ -213,6 +217,10 @@ async function carregarTiposModal() {
     } catch (error) {
         console.error("Erro ao carregar categorias:", error);
     }
+}
+
+function editarAlimento(index) {
+    
 }
 
 
