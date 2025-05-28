@@ -11,16 +11,22 @@
     <!--Icons Link-->
     <script src="https://kit.fontawesome.com/f8292b8a4a.js" crossorigin="anonymous"></script>
     <!--Icone da página -->
-    <link rel="icon" href="/assets/icons/logo_stockit.ico" type="image/x-icon" >
+    <link rel="icon" href="/assets/icons/logo_stockit.ico" type="image/x-icon">
     <!--CSS Link-->
     <link rel="stylesheet" href="/assets/css/ambiente.css">
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css">
+    <!--Bootstrap JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"></script>
 </head>
 
 <body>
     <header class="cabecalho">
         <div class="cabecalho-conteudo">
             <div class="logo-container">
-                <a id="nome-projeto" href="lista.html"><h1 >StockIT</h1></a>
+                <a id="nome-projeto" href="lista.html">
+                    <h1>StockIT</h1>
+                </a>
             </div>
         </div>
     </header>
@@ -28,12 +34,14 @@
     <main class="conteudo-principal">
         <div class="container-conteudo">
             <div class="container-cabecalho">
-                <div class="container-cabecalho-direita"> 
-                    <a href="lista.html" id="botao-voltar" class="botao-voltar"><i class="fa-regular fa-circle-left"></i></a>
+                <div class="container-cabecalho-direita">
+                    <a href="lista.html" id="botao-voltar" class="botao-voltar"><i
+                            class="fa-regular fa-circle-left"></i></a>
                     <h2 id="nome-ambiente">Carregando ambiente...</h2>
                     <i id="icone-ambiente"></i>
                 </div>
-                <div class="container-cabecalho-esquerda"><button id="botao-adicionar-alimento" class="botao-primario">
+                <div class="container-cabecalho-esquerda"><button id="botao-adicionar-alimento"
+                        onclick="openModal('modal-cadastro' , 'form-cadastro')" class="botao-primario">
                         + Adicionar Alimento</button>
                 </div>
             </div>
@@ -49,12 +57,13 @@
                 <table id="tabela-alimentos">
                     <thead>
                         <tr>
-                            <th id="atributo-nome">Nome  <i id="seta-atributo-nome" class="fa-solid fa-caret-up"></i></th>
+                            <th id="atributo-nome">Nome <i id="seta-atributo-nome" class="fa-solid fa-caret-up"></i>
+                            </th>
                             <th id="atributo-cadastro">Data de Adição</th>
                             <th id="atributo-validade">Data de Validade</th>
                             <th id="atributo-quantidade">Quantidade</th>
                             <th>Ações</th>
-                            
+
                         </tr>
                     </thead>
                     <tbody id="corpo-tabela-alimentos">
@@ -64,6 +73,101 @@
             </div>
         </div>
     </main>
+
+    <!--MODAIS-->
+    <!--MODAIS-Cadastra-->
+    <div class="modal fade" id="modal-cadastro" tabindex="-1" aria-labelledby="cadastroModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="cadastroModalLabel">Cadastrar Alimento</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-cadastro">
+                        <div class="mb-3">
+                            <label for="cadastro-nome" class="form-label">Nome</label>
+                            <input type="text" class="form-control" id="cadastro-nome" placeholder="Ex: Banana Prata">
+                        </div>
+                        <div class="mb-3">
+                            <label for="cadastro-validade" class="form-label">Validade</label>
+                            <input type="date" class="form-control" id="cadastro-validade">
+                        </div>
+                        <div class="mb-3">
+                            <label for="cadastro-quantidade" class="form-label">Quantidade</label>
+                            <input type="number" class="form-control" id="cadastro-quantidade" min="1" value="1">
+                        </div>
+                        <div class="mb-3 text-dark">
+                            <label for="cadastro-categoria" class="form-label">Categoria</label>
+                            <select id="select-cadastro" class="form-select" id="cadastro-categoria">
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="cadastro-imagem" class="form-label">Imagem</label>
+                            <input type="file" class="form-control"  accept="image/*" id="cadastro-imagem">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" form="form-cadastro" class="btn btn-success">Adicionar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--MODAL-Editar-->
+    <div class="modal fade" id="modal-editar" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="editarModalLabel">Editar Alimento</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-editar">
+                        <input type="hidden" id="editar-id">
+                        <div class="mb-3">
+                            <label for="editar-validade" class="form-label">Validade</label>
+                            <input type="date" class="form-control" id="editar-validade">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editar-quantidade" class="form-label">Quantidade</label>
+                            <input type="number" class="form-control" id="editar-quantidade" min="1" value="1">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" form="form-editar" class="btn btn-success">Salvar
+                        Alterações</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--MODAL-Excluir-->
+    <div class="modal fade" id="modal-excluir" tabindex="-1" aria-labelledby="excluirModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content ">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="excluirModalLabel">Excluir Alimento</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Tem certeza que deseja excluir <strong id="excluir-nome"></strong>?</p>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button id="confirmar-exclusao" type="button" class="btn btn-danger">Excluir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <footer class="rodape">
         <p>StockIT &copy; 2025 - Gerenciamento de Estoque de Alimentos</p>

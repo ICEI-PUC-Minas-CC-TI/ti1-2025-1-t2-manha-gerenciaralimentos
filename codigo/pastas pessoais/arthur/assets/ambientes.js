@@ -9,14 +9,14 @@ const campoBusca = document.getElementById('campo-busca');
 let linhasTabela = [];
 
 //Função para pegar ícone conforme tipo do ambiente
-async function obterIconeAmbiente(tipoID){
-    try{
+async function obterIconeAmbiente(tipoID) {
+    try {
         const response = await fetch(`${apiUrl}/tipoAmbiente`);
         const tipos = await response.json();
         const tipo = tipos.find(t => t.id === tipoID);
-        return tipo ? tipo.icone: null;  
+        return tipo ? tipo.icone : null;
 
-    }catch(error){
+    } catch (error) {
         console.error('Erro ao buscar tipoAmbiente:', error);
         return null;
     }
@@ -32,7 +32,7 @@ async function carregarAmbiente() {
 
         const tipoAmbiente = ambiente.tipo;
         const iconeAmbiente = await obterIconeAmbiente(tipoAmbiente);
-        document.getElementById('icone-ambiente').className =iconeAmbiente;
+        document.getElementById('icone-ambiente').className = iconeAmbiente;
     } catch (error) {
         console.error('Erro ao carregar o ambiente:ou JSON SERVER Offline', error);
     }
@@ -58,19 +58,19 @@ async function carregarAlimentos() {
                 <td>${formatarData(item.vencimento)}</td>
                 <td>${item.quantidade} </td>
                 <td>
-                    <button class="botao-secundario">Editar</button>
-                    <button class="botao-perigo">Excluir</button>
+                    <button class="botao-secundario" onclick="openModal('modal-editar','form-editar')">Editar</button>
+                    <button class="botao-perigo" onclick = "openModal('modal-excluir')">Excluir</button>
                 </td>
             `;
-            if(validade){
+            if (validade) {
                 const nome = linha.querySelector('td');
                 nome.classList.add("alimento-vencido");
             }
             corpoTabela.appendChild(linha);
             linhasTabela.push(linha);
-         
+
         }
-        
+
     } catch (error) {
         console.error('Erro ao carregar os alimentos: ou JSON SERVER Offline', error);
     }
@@ -79,19 +79,19 @@ async function carregarAlimentos() {
 
 //Função para conferir validade(false se vencido)
 function conferirValidade(data) {
-  const [dia, mes, ano] = data.split('/').map(Number);
-  const dataValidade = new Date(ano, mes - 1, dia); 
-  const hoje = new Date();
-  hoje.setHours(0, 0, 0, 0); 
-  return dataValidade >= hoje;
+    const [dia, mes, ano] = data.split('/').map(Number);
+    const dataValidade = new Date(ano, mes - 1, dia);
+    const hoje = new Date();
+    hoje.setHours(0, 0, 0, 0);
+    return dataValidade >= hoje;
 }
 
 
 // Formata Data para o Padrão Brasileiro
 function formatarData(dataIso) {
-  if (!dataIso) return '–';
-  const [ano, mes, dia] = dataIso.split('-');
-  return `${dia}/${mes}/${ano}`;
+    if (!dataIso) return '–';
+    const [ano, mes, dia] = dataIso.split('-');
+    return `${dia}/${mes}/${ano}`;
 }
 
 //Função que normaliza texto, sem acento, espaços extras e maiuculas
@@ -104,12 +104,12 @@ function normalizarTexto(texto) {
 }
 
 //Função para Filtrar busca a apartir de 3 letras com texto normalizado
-function filtroBusca(){
+function filtroBusca() {
     const textoBusca = normalizarTexto(campoBusca.value);
     const aviso = document.getElementById('mensagem-nenhum');
     let algumVisivel = false;
 
-    if(textoBusca.length < 2){
+    if (textoBusca.length < 2) {
         linhasTabela.forEach(linha => linha.style.display = '');
         if (aviso) aviso.remove();
         return;
@@ -146,22 +146,22 @@ function filtroBusca(){
 let ordemNomeAsc = true;
 
 function ordenarPorNome() {
-  const corpo = document.getElementById('corpo-tabela-alimentos');
-  const seta = document.getElementById('seta-atributo-nome')
+    const corpo = document.getElementById('corpo-tabela-alimentos');
+    const seta = document.getElementById('seta-atributo-nome')
 
-  linhasTabela.sort((a, b) => {
-    const nomeA = normalizarTexto(a.cells[0].textContent.split(' ')[0]);
-    const nomeB = normalizarTexto(b.cells[0].textContent.split(' ')[0]);
-    return nomeA.localeCompare(nomeB) * (ordemNomeAsc ? 1 : -1);
-  });
+    linhasTabela.sort((a, b) => {
+        const nomeA = normalizarTexto(a.cells[0].textContent.split(' ')[0]);
+        const nomeB = normalizarTexto(b.cells[0].textContent.split(' ')[0]);
+        return nomeA.localeCompare(nomeB) * (ordemNomeAsc ? 1 : -1);
+    });
 
-  corpo.innerHTML = '';
-  linhasTabela.forEach(linha => corpo.appendChild(linha));
+    corpo.innerHTML = '';
+    linhasTabela.forEach(linha => corpo.appendChild(linha));
 
-  // Atualiza a seta
-  seta.className = ordemNomeAsc ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down';
+    // Atualiza a seta
+    seta.className = ordemNomeAsc ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down';
 
-  ordemNomeAsc = !ordemNomeAsc;
+    ordemNomeAsc = !ordemNomeAsc;
 }
 
 //Listener para chamada de ordenar nome
@@ -172,11 +172,56 @@ let temporizador;
 campoBusca.addEventListener('input', () => {
     clearTimeout(temporizador);
     temporizador = setTimeout(filtroBusca, 300);
-});   
+});
+
+//Listener para os Modais
+function openModal(id,form_nome) {
+    const modal = new bootstrap.Modal(document.getElementById(id));
+    modal.show();
+
+    //Limpar o form quando o modal é fechado
+    const modalCadastro = document.getElementById(id);
+    modalCadastro.addEventListener('hidden.bs.modal', () => {
+        const form = document.getElementById(form_nome);
+        if (form) form.reset(); // limpa todos os campos do formulário
+    });
+
+
+}
+
+async function carregarTiposModal() {
+    const select = document.getElementById('select-cadastro');
+
+    if (!select) {
+        console.error("Erro: elemento <select> não encontrado.");
+        return;
+    }
+
+    try {
+        const response = await fetch(`${apiUrl}/categoriaAlimento`);
+        const categorias = await response.json();
+
+        select.innerHTML = '<option selected disabled>Escolha uma categoria</option>';
+
+        categorias.forEach((categoria) => {
+            const option = document.createElement('option');
+            option.value = categoria.id;
+            option.textContent = categoria.categoria;
+            select.appendChild(option);
+        });
+
+    } catch (error) {
+        console.error("Erro ao carregar categorias:", error);
+    }
+}
+
+
+
 
 //Listener para Página Carregada
-document.addEventListener('DOMContentLoaded', async() => {
+document.addEventListener('DOMContentLoaded', async () => {
     await carregarAmbiente();
     await carregarAlimentos();
+    await carregarTiposModal();
     ordenarPorNome();
 });
