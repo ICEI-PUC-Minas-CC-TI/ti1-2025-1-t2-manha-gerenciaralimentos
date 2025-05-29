@@ -47,7 +47,7 @@ async function carregarAlimentos() {
         corpoTabela.innerHTML = '';
         linhasTabela = [];
 
-        ambiente.itens.forEach(async(item,index) => {
+        ambiente.itens.forEach(async (item, index) => {
             const alimentoResponse = await fetch(`${apiUrl}/alimentos/${item.alimentoId}`);
             const alimento = await alimentoResponse.json();
             const validade = conferirValidade(formatarData(item.vencimento)) == true ? "" : "fa-solid fa-triangle-exclamation";
@@ -58,8 +58,8 @@ async function carregarAlimentos() {
                 <td>${formatarData(item.vencimento)}</td>
                 <td>${item.quantidade} </td>
                 <td>
-                    <button class="botao-secundario" onclick="openModal('modal-editar','form-editar', ${index})">Editar</button>
-                    <button class="botao-perigo" onclick = "openModal('modal-excluir', ${index})">Excluir</button>
+                    <button class="botao-secundario" onclick="openModal('modal-editar','form-editar', ${index} , ${ambienteId})">Editar</button>
+                    <button class="botao-perigo" onclick = "openModal('modal-excluir', ${index}, ${ambienteId})">Excluir</button>
                 </td>
             `;
             if (validade) {
@@ -141,7 +141,6 @@ function filtroBusca() {
     }
 }
 
-
 //Funções para Ordenação por Nome
 let ordemNomeAsc = true;
 
@@ -175,8 +174,7 @@ campoBusca.addEventListener('input', () => {
 });
 
 //Listener para os Modais
-function openModal(id, form_nome, index) {
-    console.log(index)
+function openModal(id, form_nome, index, ambienteId) {
     const modal = new bootstrap.Modal(document.getElementById(id));
     modal.show();
 
@@ -189,8 +187,15 @@ function openModal(id, form_nome, index) {
 
     //Listener para Editar
     const editar = document.getElementById('btn-editar-salvar');
-    editar.addEventListener('click', editarAlimento(index))
+    editar.addEventListener('click', () => {
+        editarAlimento(index, ambienteId);
+    });
 
+    //Listener para Excluir
+    const excluir = document.getElementById('btn-confirmar-exclusao');
+    editar.addEventListener('click', () => {
+        deletarAlimento(index, ambienteId);
+    });
 }
 
 async function carregarTiposModal() {
@@ -219,11 +224,66 @@ async function carregarTiposModal() {
     }
 }
 
-function editarAlimento(index) {
-    
+async function editarAlimento(index, ambienteId) {
+    try {
+        const response = await fetch(`${apiUrl}/ambientes/${ambienteId}`);
+        const ambiente = await response.json();
+
+        const novaQuantidade = parseInt(document.getElementById('editar-quantidade').value);
+        let novaValidade = document.getElementById('editar-validade').value;
+
+        //Se campo quantidade não for preenchido
+        if (!novaQuantidade) {
+            alert("Preencha o campo de quantidade!");
+            return;
+        }
+
+        //Se não mudar a validade, manter a original
+        if (!novaValidade) {
+            novaValidade = ambiente.itens[index].vencimento;
+        }
+
+        ambiente.itens[index].quantidade = novaQuantidade;
+        ambiente.itens[index].vencimento = novaValidade;
+
+        // Envia o PUT com o ambiente inteiro atualizado
+        const atualizar = await fetch(`${apiUrl}/ambientes/${ambienteId}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ itens: ambiente.itens })
+        });
+
+        if (!atualizar.ok) {
+            throw new Error("Erro ao atualizar ambiente");
+        }
+
+        alert("Alimento atualizado com sucesso!");
+        carregarAlimentos();
+
+    } catch (error) {
+        console.error("Erro ao editar alimento:", error);
+        alert("Erro ao editar alimento");
+    }
 }
 
+async function deletarAlimento(index, ambienteId) {
+    try {
+        const response = await fetch(`${apiUrl}/ambientes/${ambienteId}`);
+        const ambiente = await response.json();
 
+        ambiente.itens.splice(index,1);
+        await fetch(`${apiUrl}/ambientes/${ambienteId}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ itens: ambiente.itens })
+        })
+
+
+    } catch (error) {
+        console.error("Erro ao editar alimento:", error);
+        alert("Erro ao editar alimento");
+    }
+}
 
 
 //Listener para Página Carregada
