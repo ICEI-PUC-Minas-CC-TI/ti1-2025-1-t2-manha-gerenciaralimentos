@@ -59,7 +59,7 @@ async function carregarAlimentos() {
                 <td>${item.quantidade} </td>
                 <td>
                     <button class="botao-secundario" onclick="openModal('modal-editar','form-editar', ${index} , ${ambienteId})">Editar</button>
-                    <button class="botao-perigo" onclick = "openModal('modal-excluir', ${index}, ${ambienteId})">Excluir</button>
+                    <button class="botao-perigo" onclick = "openModal('modal-excluir', '',${index}, ${ambienteId})">Excluir</button>
                 </td>
             `;
             if (validade) {
@@ -193,7 +193,7 @@ function openModal(id, form_nome, index, ambienteId) {
 
     //Listener para Excluir
     const excluir = document.getElementById('btn-confirmar-exclusao');
-    editar.addEventListener('click', () => {
+    excluir.addEventListener('click', () => {
         deletarAlimento(index, ambienteId);
     });
 }
@@ -246,7 +246,7 @@ async function editarAlimento(index, ambienteId) {
         ambiente.itens[index].quantidade = novaQuantidade;
         ambiente.itens[index].vencimento = novaValidade;
 
-        // Envia o PUT com o ambiente inteiro atualizado
+        // Envia o PATCH com o ambiente inteiro atualizado
         const atualizar = await fetch(`${apiUrl}/ambientes/${ambienteId}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
@@ -257,8 +257,8 @@ async function editarAlimento(index, ambienteId) {
             throw new Error("Erro ao atualizar ambiente");
         }
 
-        alert("Alimento atualizado com sucesso!");
         carregarAlimentos();
+        alert("Alimento atualizado com sucesso!");
 
     } catch (error) {
         console.error("Erro ao editar alimento:", error);
@@ -278,12 +278,16 @@ async function deletarAlimento(index, ambienteId) {
             body: JSON.stringify({ itens: ambiente.itens })
         })
 
+        carregarAlimentos();
+        alert("Alimento excluido com sucesso")
 
     } catch (error) {
-        console.error("Erro ao editar alimento:", error);
-        alert("Erro ao editar alimento");
+        console.error("Erro ao deletar alimento:", error);
+        alert("Erro ao deletar alimento");
     }
 }
+
+
 
 
 //Listener para Página Carregada
