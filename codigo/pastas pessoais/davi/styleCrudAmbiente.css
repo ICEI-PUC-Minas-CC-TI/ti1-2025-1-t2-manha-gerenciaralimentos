@@ -1,0 +1,95 @@
+body {
+      background-color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .header {
+      background: linear-gradient(to right, #009e60, #00b386);
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .logo-placeholder {
+      width: 200px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+    }
+
+    .form-box {
+      max-width: 400px;
+      margin: 2rem auto;
+      background-color: #f1f7fc;
+      border: 2px solid #000;
+      border-radius: 10px;
+      padding: 2rem;
+    }
+
+    .form-title {
+      background-color: #dbe7f4;
+      text-align: center;
+      font-size: 1.25rem;
+      font-weight: bold;
+      padding: 0.5rem;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-control,
+    .form-select {
+      border-radius: 30px;
+      background-color: #dee9f4;
+      font-weight: 500;
+    }
+
+    .btn-custom {
+      border-radius: 12px;
+      padding: 8px 20px;
+      font-weight: 600;
+    }
+
+    .btn-img {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 30px;
+      background-color: #dee9f4;
+      padding: 10px 16px;
+      border: 1px solid #ccc;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .extra-options {
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    .extra-options button {
+      margin: 0.25rem;
+    }
+
+    .form-label {
+      margin-bottom: 0.25rem;
+      font-weight: 500;
+    }
+    #log{
+      font-size: 30px;
+      color: #fff;
+    }
+    .logo-icone {
+    font-size: 2rem;
+    
+}
+.rodape {
+    
+    text-align: center;
+    padding: 1rem;
+    background-color: #fff;
+    border-top: 1px solid  #e2e8f0;
+    color:  #6b7280;
+    font-size: 0.875rem;
+}
