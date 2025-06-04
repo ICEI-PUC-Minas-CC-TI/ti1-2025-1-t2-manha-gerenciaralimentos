@@ -1,0 +1,51 @@
+:root {
+    --cor-primaria: #059669;
+    --cor-secundaria: #10b981;
+    --cor-caixas: white;
+    --cor-texto: #333;
+    --cor-logo: white;
+    --fonte-principal: 'Roboto', sans-serif;
+    --tamanho-fonte: 30px;
+    --tamanho-titulo: 60px;
+}
+
+/*Header*/
+header {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-texto);
+    font-family: var(--fonte-principal);
+    font-size: var(--tamanho-fonte);
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: var(--tamanho-titulo);
+    margin: 0;
+}
+
+/* 2-CSS Main */
+
+.grade-receitas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+#cartoes-container {
+  background: #e0f7ef; /* cor leve para ver a área */
+  min-height: 80px;    /* para manter altura mesmo vazio */
+}

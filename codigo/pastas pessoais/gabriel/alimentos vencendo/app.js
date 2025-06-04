@@ -132,7 +132,7 @@ function mostrarAlimentosVencendo() {
 
         card.innerHTML = `
           <div class="texto-geral">
-          <img src="images/${alimento.imagem}" class="card-img-top" style="width: 90px; height: 90px;" alt="${alimento.nome}">
+          <img src="../images/${alimento.imagem}" class="card-img-top" style="width: 90px; height: 90px;" alt="${alimento.nome}">
               <div class="info-box">
                   <h5 class="card-title">${alimento.nome}</h5>
               </div>
