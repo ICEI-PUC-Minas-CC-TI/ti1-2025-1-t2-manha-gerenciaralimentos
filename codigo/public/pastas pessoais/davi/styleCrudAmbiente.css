@@ -102,6 +102,30 @@ body {
     display: none;
 }
 
+#btnAtualizar:hover {
+  background-color: #cecb09; /* verde Bootstrap */
+  color: white;
+  border-color: #cecb09;
+}
+#btnConfirmar:hover {
+  background-color: #28a745; /* verde Bootstrap */
+  color: white;
+  border-color: #28a745;
+}
+
+#btnBuscarAmbiente:hover {
+  background-color: #28a745; /* verde Bootstrap */
+  color: white;
+  border-color: #28a745;
+}
+ 
+#btnExcluir:hover {
+  background-color: #b91c1c; /* verde Bootstrap */
+  color: white;
+  border-color: #b91c1c;
+}
+
+
 /* Estilos para o "botão" de adicionar imagem */
 .campo-adicionar-imagem {
     display: flex;

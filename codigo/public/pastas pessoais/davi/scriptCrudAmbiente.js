@@ -4,132 +4,162 @@ const apiUrl = 'https://json-server-stockit.onrender.com/ambientes';
 const nomeInput = document.getElementById('nomeAmbiente');
 const tipoInput = document.getElementById('tipoAmbiente');
 const imagemInput = document.getElementById('imagem-ambiente');
-
 const btnConfirmar = document.getElementById('btnConfirmar');
 const btnCancelar = document.getElementById('btnCancelar');
 const btnAtualizar = document.getElementById('btnAtualizar');
 const btnExcluir = document.getElementById('btnExcluir');
+const btnSalvarAlteracoes = document.getElementById('btnSalvarAlteracoes');
+const formAcao = document.getElementById('form-acao');
+const tituloFormAcao = document.getElementById('form-acao-titulo');
+const nomeBuscaInput = document.getElementById('nomeBusca');
+const btnBuscarAmbiente = document.getElementById('btnBuscarAmbiente');
+const inputImagem = document.getElementById("imagem-ambiente");
+const textoImagem = document.getElementById("texto-imagem");
 
-// Função para limpar os campos
+
+let modoAtual = ''; 
+
+// Funções auxiliares
 function limparFormulario() {
   nomeInput.value = '';
   tipoInput.selectedIndex = 0;
   imagemInput.value = '';
+  textoImagem.innerHTML = "Adicionar imagem <br> +";
 }
 
-// Buscar ambiente pelo nome
 async function buscarAmbientePorNome(nome) {
   const response = await fetch(`${apiUrl}?nome=${encodeURIComponent(nome)}`);
   const data = await response.json();
-  return data[0]; // Retorna o primeiro encontrado
+  return data[0]; 
 }
 
-// CONFIRMAR - Criar novo ambiente
-btnConfirmar.addEventListener('click', async () => {
+document.addEventListener("DOMContentLoaded", function () {
+
+  inputImagem.addEventListener("change", () => {
+    if (inputImagem.files.length > 0) {
+      textoImagem.textContent = "Imagem adicionada";
+    } else {
+      textoImagem.innerHTML = "Adicionar imagem <br> +";
+    }
+  });
+});
+
+
+// CONFIRMAR - Novo Cadastro
+const confirmarCadastro = async () => {
   const nome = nomeInput.value.trim();
   const tipo = tipoInput.value;
-  const imagem = imagemInput.files[0]?.name || ''; // Nome do arquivo de imagem
+  const imagem = imagemInput.files[0]?.name || '';
+
 
   if (!nome || tipo === 'Tipo de Ambiente') {
-    alert('Preencha todos os campos.');
+    Swal.fire('Erro', 'Preencha todos os campos.', 'warning');
     return;
   }
 
   const novoAmbiente = { nome, tipo, imagem };
 
-  try {
-    const response = await fetch(apiUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(novoAmbiente),
-    });
+  const response = await fetch(apiUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(novoAmbiente),
+  });
 
-    if (response.ok) {
-      alert('Ambiente cadastrado com sucesso!');
-      limparFormulario();
-    } else {
-      alert('Erro ao cadastrar ambiente.');
-    }
-  } catch (error) {
-    console.error('Erro na requisição:', error);
+  if (response.ok) {
+    Swal.fire('Sucesso', 'Ambiente cadastrado com sucesso!', 'success');
+    limparFormulario();
+  } else {
+    Swal.fire('Erro', 'Erro ao cadastrar ambiente.', 'error');
   }
-});
+};
+btnConfirmar.onclick = confirmarCadastro;
 
-// CANCELAR - Limpar o formulário
+// CANCELAR
 btnCancelar.addEventListener('click', limparFormulario);
 
-// ATUALIZAR - Editar ambiente pelo nome
-btnAtualizar.addEventListener('click', async () => {
-  const nome = nomeInput.value.trim();
-  const tipo = tipoInput.value;
-  const imagem = imagemInput.files[0]?.name || '';
+// Mostrar formulário de busca
+function mostrarFormularioBusca(tipo) {
+  modoAtual = tipo;
+  formAcao.style.display = 'block';
+  tituloFormAcao.textContent = tipo === 'atualizar' ? 'Atualizar Ambiente' : 'Excluir Ambiente';
+  nomeBuscaInput.value = '';
+}
 
-  if (!nome || tipo === 'Tipo de Ambiente') {
-    alert('Preencha os campos corretamente para atualizar.');
+// Ações dos botões Atualizar/Excluir
+btnAtualizar.addEventListener('click', () => mostrarFormularioBusca('atualizar'));
+btnExcluir.addEventListener('click', () => mostrarFormularioBusca('excluir'));
+
+// Buscar ambiente e realizar ação
+btnBuscarAmbiente.addEventListener('click', async () => {
+  const nomeBuscado = nomeBuscaInput.value.trim();
+  if (!nomeBuscado) {
+    Swal.fire('Aviso', 'Digite o nome do ambiente.', 'info');
     return;
   }
 
-  const ambienteExistente = await buscarAmbientePorNome(nome);
+  const ambiente = await buscarAmbientePorNome(nomeBuscado);
 
-  if (!ambienteExistente) {
-    alert('Ambiente não encontrado.');
+  if (!ambiente) {
+    Swal.fire('Não encontrado', 'Ambiente não localizado.', 'error');
     return;
   }
 
-  const ambienteAtualizado = {
-    ...ambienteExistente,
-    tipo,
-    imagem,
-  };
+  if (modoAtual === 'atualizar') {
+    nomeInput.value = ambiente.nome;
+    tipoInput.value = ambiente.tipo;
+    Swal.fire('Pronto!', 'Edite os dados e clique em "Salvar Alterações".', 'info');
 
-  try {
-    const response = await fetch(`${apiUrl}/${ambienteExistente.id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(ambienteAtualizado),
+    btnSalvarAlteracoes.style.display = 'block';
+    btnConfirmar.style.display = 'none';
+    formAcao.style.display = 'none';
+
+    btnSalvarAlteracoes.onclick = async () => {
+      const nome = nomeInput.value.trim();
+      const tipo = tipoInput.value;
+      const imagem = imagemInput.files[0]?.name || ambiente.imagem;
+
+      const atualizado = { ...ambiente, nome, tipo, imagem };
+
+      const response = await fetch(`${apiUrl}/${ambiente.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(atualizado),
+      });
+
+      if (response.ok) {
+        Swal.fire('Atualizado', 'Ambiente atualizado com sucesso!', 'success');
+        limparFormulario();
+        btnSalvarAlteracoes.style.display = 'none';
+        btnConfirmar.style.display = 'block';
+      } else {
+        Swal.fire('Erro', 'Falha ao atualizar ambiente.', 'error');
+      }
+    };
+  }
+
+  if (modoAtual === 'excluir') {
+    const confirmacao = await Swal.fire({
+      title: 'Confirmar exclusão?',
+      text: `Deseja mesmo excluir o ambiente "${ambiente.nome}"?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, excluir!',
+      cancelButtonText: 'Cancelar',
     });
 
-    if (response.ok) {
-      alert('Ambiente atualizado com sucesso!');
-      limparFormulario();
-    } else {
-      alert('Erro ao atualizar ambiente.');
+    if (confirmacao.isConfirmed) {
+      const response = await fetch(`${apiUrl}/${ambiente.id}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        Swal.fire('Excluído', 'Ambiente removido com sucesso.', 'success');
+        limparFormulario();
+      } else {
+        Swal.fire('Erro', 'Não foi possível excluir o ambiente.', 'error');
+      }
+
+      formAcao.style.display = 'none';
     }
-  } catch (error) {
-    console.error('Erro na requisição:', error);
-  }
-});
-
-// EXCLUIR - Apagar ambiente pelo nome
-btnExcluir.addEventListener('click', async () => {
-  const nome = nomeInput.value.trim();
-
-  if (!nome) {
-    alert('Digite o nome do ambiente para excluir.');
-    return;
-  }
-
-  const ambienteExistente = await buscarAmbientePorNome(nome);
-
-  if (!ambienteExistente) {
-    alert('Ambiente não encontrado.');
-    return;
-  }
-
-  if (!confirm(`Tem certeza que deseja excluir o ambiente "${nome}"?`)) return;
-
-  try {
-    const response = await fetch(`${apiUrl}/${ambienteExistente.id}`, {
-      method: 'DELETE',
-    });
-
-    if (response.ok) {
-      alert('Ambiente excluído com sucesso!');
-      limparFormulario();
-    } else {
-      alert('Erro ao excluir ambiente.');
-    }
-  } catch (error) {
-    console.error('Erro na requisição:', error);
   }
 });
