@@ -1,0 +1,144 @@
+body {
+    background-color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header {
+    background: linear-gradient(to right, #009e60, #00b386);
+    padding: 1rem;
+    text-align: center;
+}
+
+.logo-placeholder {
+    width: 200px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.form-box {
+    max-width: 400px;
+    margin: 2rem auto;
+    background-color: #f1f7fc;
+    border: 2px solid #000;
+    border-radius: 10px;
+    padding: 2rem;
+}
+
+.form-title {
+    background-color: #dbe7f4;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: bold;
+    padding: 0.5rem;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+}
+
+.form-control,
+.form-select {
+    border-radius: 30px;
+    background-color: #dee9f4;
+    font-weight: 500;
+}
+
+.btn-custom {
+    border-radius: 12px;
+    padding: 8px 20px;
+    font-weight: 600;
+}
+
+.btn-img { /* Este estilo parece não estar sendo usado com o novo botão de imagem */
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 30px;
+    background-color: #dee9f4;
+    padding: 10px 16px;
+    border: 1px solid #ccc;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.extra-options {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.extra-options button {
+    margin: 0.25rem;
+}
+
+.form-label {
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+}
+
+#log {
+    font-size: 30px;
+    color: #fff;
+}
+
+.logo-icone {
+    font-size: 2rem;
+}
+
+.rodape {
+    text-align: center;
+    padding: 1rem;
+    background-color: #fff;
+    border-top: 1px solid #e2e8f0;
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+/* --- Modificações para o botão de adicionar imagem --- */
+
+/* Esconde o input de arquivo padrão, **agora com o ID correto** */
+#imagem-ambiente {
+    display: none;
+}
+
+/* Estilos para o "botão" de adicionar imagem */
+.campo-adicionar-imagem {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 330px; /* ALTERADO: Agora ocupa 100% da largura do container */
+    height: 90px; /* ALTERADO: Altura reduzida para parecer mais com um campo */
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    color: #555;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 1rem; /* ADICIONADO: Espaçamento inferior para seguir o padrão do Bootstrap mb-3 */
+}
+
+.campo-adicionar-imagem:hover {
+    border-color: #007bff;
+    background-color: #e9f5ff;
+    color: #007bff;
+}
+
+/* Estilo para o sinal de "+" */
+.campo-adicionar-imagem br + * {
+    font-size: 36px;
+    line-height: 1;
+    margin-top: 5px;
+}
+
+/* Estilo quando o input de arquivo está focado (para acessibilidade), **agora com o ID correto** */
+#imagem-ambiente:focus + .campo-adicionar-imagem {
+    outline: 2px solid #007bff;
+    outline-offset: 2px;
+}

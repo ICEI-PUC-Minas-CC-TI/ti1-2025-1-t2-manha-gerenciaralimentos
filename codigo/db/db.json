@@ -21,7 +21,6 @@
       "imagem": "alface-americana.png",
       "categoria": 3
     }
-
   ],
   "ambientes": [
     {
@@ -71,6 +70,11 @@
           "cadastro": "2025-01-15"
         }
       ]
+    },
+    {
+      "nome": "tatu",
+      "tipo": "Despensa",
+      "id": "fL9emq9"
     }
   ],
   "listasDeCompra": [
