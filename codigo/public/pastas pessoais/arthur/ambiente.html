@@ -11,9 +11,9 @@
     <!--Icons Link-->
     <script src="https://kit.fontawesome.com/f8292b8a4a.js" crossorigin="anonymous"></script>
     <!--Icone da página -->
-    <link rel="icon" href="/assets/icons/logo_stockit.ico" type="image/x-icon">
+    <link rel="icon" href="assets/icons/logo_stockit.ico" type="image/x-icon">
     <!--CSS Link-->
-    <link rel="stylesheet" href="/assets/css/ambiente.css">
+    <link rel="stylesheet" href="assets/css/ambiente.css">
     <!--Bootstrap CSS-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css">
     <!--Bootstrap JS-->
@@ -40,9 +40,13 @@
                     <h2 id="nome-ambiente">Carregando ambiente...</h2>
                     <i id="icone-ambiente"></i>
                 </div>
-                <div class="container-cabecalho-esquerda"><button id="botao-adicionar-alimento"
-                        onclick="openModal('modal-cadastro' , 'form-cadastro')" class="botao-primario">
+                <div class="container-cabecalho-esquerda">
+                    <button id="botao-adicionar-alimento" onclick="openModal('modal-cadastro' , 'form-cadastro')"
+                        class="botao-primario">
                         + Adicionar Alimento</button>
+                    <button id="botao-remover-vencids" type="button" onclick=""
+                        class=" btn btn-danger">
+                        🗑️ Remover Vencidos</button>
                 </div>
             </div>
 
@@ -76,105 +80,107 @@
 
     <!--MODAIS-->
     <aside>
-            <!--MODAIS-Cadastra-->
-    <div class="modal fade" id="modal-cadastro" tabindex="-1" aria-labelledby="cadastroModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header border-0">
-                    <h5 class="modal-title" id="cadastroModalLabel">Cadastrar Alimento</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Fechar"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="form-cadastro">
-                        <div class="mb-3">
-                            <label for="cadastro-nome" class="form-label">Nome</label>
-                            <input type="text" class="form-control" id="cadastro-nome" placeholder="Ex: Banana Prata">
-                        </div>
-                        <div class="mb-3">
-                            <label for="cadastro-validade" class="form-label">Validade</label>
-                            <input type="date" class="form-control" id="cadastro-validade">
-                        </div>
-                        <div class="mb-3">
-                            <label for="cadastro-quantidade" class="form-label">Quantidade</label>
-                            <input type="number" class="form-control" id="cadastro-quantidade" min="1" value="1">
-                        </div>
-                        <div class="mb-3 text-dark">
-                            <label for="cadastro-categoria" class="form-label">Categoria</label>
-                            <select id="select-cadastro" class="form-select" id="cadastro-categoria">
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="cadastro-imagem" class="form-label">Imagem</label>
-                            <input type="file" class="form-control"  accept="image/*" id="cadastro-imagem">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer border-0">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" form="form-cadastro" class="btn btn-success">Adicionar</button>
+        <!--MODAIS-Cadastra-->
+        <div class="modal fade" id="modal-cadastro" tabindex="-1" aria-labelledby="cadastroModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header border-0">
+                        <h5 class="modal-title" id="cadastroModalLabel">Cadastrar Alimento</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Fechar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form-cadastro">
+                            <div class="mb-3">
+                                <label for="cadastro-nome" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="cadastro-nome"
+                                    placeholder="Ex: Banana Prata">
+                            </div>
+                            <div class="mb-3">
+                                <label for="cadastro-validade" class="form-label">Validade</label>
+                                <input type="date" class="form-control" id="cadastro-validade">
+                            </div>
+                            <div class="mb-3">
+                                <label for="cadastro-quantidade" class="form-label">Quantidade</label>
+                                <input type="number" class="form-control" id="cadastro-quantidade" min="1" value="1">
+                            </div>
+                            <div class="mb-3 text-dark">
+                                <label for="cadastro-categoria" class="form-label">Categoria</label>
+                                <select id="select-cadastro" class="form-select" id="cadastro-categoria">
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="cadastro-imagem" class="form-label">Imagem</label>
+                                <input type="file" class="form-control" accept="image/*" id="cadastro-imagem">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" form="form-cadastro" class="btn btn-success">Adicionar</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!--MODAL-Editar-->
-    <div class="modal fade" id="modal-editar" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header border-0">
-                    <h5 class="modal-title" id="editarModalLabel">Editar Alimento</h5>
-                    <button type="button" class="btn-close " data-bs-dismiss="modal"
-                        aria-label="Fechar"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="form-editar">
-                        <input type="hidden" id="editar-id">
-                        <div class="mb-3">
-                            <label for="editar-validade" class="form-label">Validade</label>
-                            <input type="date" class="form-control" id="editar-validade">
-                        </div>
-                        <div class="mb-3">
-                            <label for="editar-quantidade" class="form-label">Quantidade</label>
-                            <input type="number" class="form-control" id="editar-quantidade" min="1" value="1">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer border-0">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button id="btn-editar-salvar" type="button" form="form-editar" class="btn btn-success" data-bs-dismiss="modal">Salvar
-                        Alterações</button>
+        <!--MODAL-Editar-->
+        <div class="modal fade" id="modal-editar" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header border-0">
+                        <h5 class="modal-title" id="editarModalLabel">Editar Alimento</h5>
+                        <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Fechar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form-editar">
+                            <input type="hidden" id="editar-id">
+                            <div class="mb-3">
+                                <label for="editar-validade" class="form-label">Validade</label>
+                                <input type="date" class="form-control" id="editar-validade">
+                            </div>
+                            <div class="mb-3">
+                                <label for="editar-quantidade" class="form-label">Quantidade</label>
+                                <input type="number" class="form-control" id="editar-quantidade" min="1" value="1">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button id="btn-editar-salvar" type="button" form="form-editar" class="btn btn-success"
+                            data-bs-dismiss="modal">Salvar
+                            Alterações</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!--MODAL-Excluir-->
-    <div class="modal fade" id="modal-excluir" tabindex="-1" aria-labelledby="excluirModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content ">
-                <div class="modal-header border-0">
-                    <h5 class="modal-title" id="excluirModalLabel">Excluir Alimento</h5>
-                    <button type="button" class="btn-close  " data-bs-dismiss="modal"
-                        aria-label="Fechar"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Tem certeza que deseja excluir <strong id="excluir-nome"></strong>?</p>
-                </div>
-                <div class="modal-footer border-0">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button id="btn-confirmar-exclusao" type="button" class="btn btn-danger" data-bs-dismiss="modal">Excluir</button>
+        <!--MODAL-Excluir-->
+        <div class="modal fade" id="modal-excluir" tabindex="-1" aria-labelledby="excluirModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content ">
+                    <div class="modal-header border-0">
+                        <h5 class="modal-title" id="excluirModalLabel">Excluir Alimento</h5>
+                        <button type="button" class="btn-close  " data-bs-dismiss="modal" aria-label="Fechar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Tem certeza que deseja excluir <strong id="excluir-nome"></strong>?</p>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button id="btn-confirmar-exclusao" type="button" class="btn btn-danger"
+                            data-bs-dismiss="modal">Excluir</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </aside>
 
     <footer class="rodape">
         <p>StockIT &copy; 2025 - Gerenciamento de Estoque de Alimentos</p>
     </footer>
 
-    <script src="/assets/ambientes.js"></script>
+    <script src="assets/ambientes.js"></script>
 </body>
 
 </html>
