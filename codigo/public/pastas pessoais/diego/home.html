@@ -1,27 +1,58 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StockIt</title>
     <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
 </head>
+
 <body>
 
-    <header>
-        <div class="cabecario"></div>
-    </header>
+    <div class="content">
 
-    <section>
-        <div class="ambientes">
-        
-        </div>
-        <div class="vencimento"></div>
-        <div class="receitas"></div>
-        <div class="compras"></div>
-    </section>
+        <header class="cabecalho">
+            <div class="logo-container">
+                <span class="logo-icone"><img src="/codigo/pastas pessoais/raphael/assets/images/logo.ico"
+                        alt=""></span>
+                <h1>StockIT</h1>
+            </div>
+            <div class="caixa-pesquisa-usuario">
+                <input type="text" class="texto-pesquisa" placeholder="  Pesquise produtos, ambientes, receitas...">
+                <i class="fa-solid fa-circle-user fa-3x"></i>
+            </div>
+        </header>
 
-    <footer></footer>
-    
+        <section>
+            <div class="ambientes">
+
+            </div>
+            <div class="info">
+                <div class="vencimento" id="cards">
+                    <i class="fa-solid fa-circle-exclamation fa-3x"></i>
+                    <h2>Alimentos Vencendo</h2>
+                </div>
+                <div class="receitas" id="cards">
+                    <i class="fa-solid fa-book-open fa-3x"></i>
+                    <h2>Receitas</h2>
+                </div>
+                <div class="compras" id="cards">
+                    <i class="fa-solid fa-cart-shopping fa-3x"></i>
+                    <h2> Lista de Compras</h2>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>StockIT &copy; 2025 - Gerenciamento de Estoque de Alimentos</p>
+    </footer>
+    <script src="home.js"></script>
+
 </body>
+
 </html>
