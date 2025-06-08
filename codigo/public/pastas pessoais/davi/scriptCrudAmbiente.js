@@ -1,6 +1,5 @@
 const apiUrl = 'https://json-server-stockit.onrender.com/ambientes';
 
-// Elementos do DOM
 const nomeInput = document.getElementById('nomeAmbiente');
 const tipoInput = document.getElementById('tipoAmbiente');
 const imagemInput = document.getElementById('imagem-ambiente');
@@ -13,13 +12,11 @@ const formAcao = document.getElementById('form-acao');
 const tituloFormAcao = document.getElementById('form-acao-titulo');
 const nomeBuscaInput = document.getElementById('nomeBusca');
 const btnBuscarAmbiente = document.getElementById('btnBuscarAmbiente');
-const inputImagem = document.getElementById("imagem-ambiente");
+const btnCancelarBusca = document.getElementById('btnCancelarBusca');
 const textoImagem = document.getElementById("texto-imagem");
 
+let modoAtual = '';
 
-let modoAtual = ''; 
-
-// Funções auxiliares
 function limparFormulario() {
   nomeInput.value = '';
   tipoInput.selectedIndex = 0;
@@ -30,30 +27,29 @@ function limparFormulario() {
 async function buscarAmbientePorNome(nome) {
   const response = await fetch(`${apiUrl}?nome=${encodeURIComponent(nome)}`);
   const data = await response.json();
-  return data[0]; 
+  return data[0];
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-
-  inputImagem.addEventListener("change", () => {
-    if (inputImagem.files.length > 0) {
-      textoImagem.textContent = "Imagem adicionada";
-    } else {
-      textoImagem.innerHTML = "Adicionar imagem <br> +";
-    }
+  imagemInput.addEventListener("change", () => {
+    textoImagem.textContent = imagemInput.files.length > 0
+      ? "Imagem adicionada"
+      : "Adicionar imagem \n +";
   });
 });
 
-
-// CONFIRMAR - Novo Cadastro
-const confirmarCadastro = async () => {
+btnConfirmar.onclick = async () => {
   const nome = nomeInput.value.trim();
   const tipo = tipoInput.value;
   const imagem = imagemInput.files[0]?.name || '';
 
-
   if (!nome || tipo === 'Tipo de Ambiente') {
-    Swal.fire('Erro', 'Preencha todos os campos.', 'warning');
+    Swal.fire({
+      title: 'Erro',
+      text: 'Preencha todos os campos.',
+      icon: 'error',
+      confirmButtonColor: '#dc3545'
+    });
     return;
   }
 
@@ -66,18 +62,29 @@ const confirmarCadastro = async () => {
   });
 
   if (response.ok) {
-    Swal.fire('Sucesso', 'Ambiente cadastrado com sucesso!', 'success');
+    Swal.fire({
+      title: 'Sucesso',
+      text: 'Ambiente cadastrado com sucesso!',
+      icon: 'success',
+      confirmButtonColor: '#28a745'
+    });
     limparFormulario();
   } else {
-    Swal.fire('Erro', 'Erro ao cadastrar ambiente.', 'error');
+    Swal.fire({
+      title: 'Erro',
+      text: 'Erro ao cadastrar ambiente.',
+      icon: 'error',
+      confirmButtonColor: '#dc3545'
+    });
   }
 };
-btnConfirmar.onclick = confirmarCadastro;
 
-// CANCELAR
 btnCancelar.addEventListener('click', limparFormulario);
+btnCancelarBusca.addEventListener('click', () => {
+  formAcao.style.display = 'none';
+  limparFormulario();
+});
 
-// Mostrar formulário de busca
 function mostrarFormularioBusca(tipo) {
   modoAtual = tipo;
   formAcao.style.display = 'block';
@@ -85,29 +92,43 @@ function mostrarFormularioBusca(tipo) {
   nomeBuscaInput.value = '';
 }
 
-// Ações dos botões Atualizar/Excluir
 btnAtualizar.addEventListener('click', () => mostrarFormularioBusca('atualizar'));
 btnExcluir.addEventListener('click', () => mostrarFormularioBusca('excluir'));
 
-// Buscar ambiente e realizar ação
 btnBuscarAmbiente.addEventListener('click', async () => {
   const nomeBuscado = nomeBuscaInput.value.trim();
   if (!nomeBuscado) {
-    Swal.fire('Aviso', 'Digite o nome do ambiente.', 'info');
+    Swal.fire({
+      title: 'Aviso',
+      text: 'Digite o nome do ambiente.',
+      icon: 'info',
+      confirmButtonColor: '#dc3545'
+    });
     return;
   }
 
   const ambiente = await buscarAmbientePorNome(nomeBuscado);
 
   if (!ambiente) {
-    Swal.fire('Não encontrado', 'Ambiente não localizado.', 'error');
+    Swal.fire({
+      title: 'Não encontrado',
+      text: 'Ambiente não localizado.',
+      icon: 'error',
+      confirmButtonColor: '#dc3545'
+    });
     return;
   }
 
   if (modoAtual === 'atualizar') {
     nomeInput.value = ambiente.nome;
     tipoInput.value = ambiente.tipo;
-    Swal.fire('Pronto!', 'Edite os dados e clique em "Salvar Alterações".', 'info');
+
+    Swal.fire({
+      title: 'Pronto!',
+      text: 'Edite os dados e clique em "Salvar Alterações".',
+      icon: 'success',
+      confirmButtonColor: '#28a745'
+    });
 
     btnSalvarAlteracoes.style.display = 'block';
     btnConfirmar.style.display = 'none';
@@ -127,12 +148,22 @@ btnBuscarAmbiente.addEventListener('click', async () => {
       });
 
       if (response.ok) {
-        Swal.fire('Atualizado', 'Ambiente atualizado com sucesso!', 'success');
+        Swal.fire({
+          title: 'Atualizado',
+          text: 'Ambiente atualizado com sucesso!',
+          icon: 'success',
+          confirmButtonColor: '#28a745'
+        });
         limparFormulario();
         btnSalvarAlteracoes.style.display = 'none';
         btnConfirmar.style.display = 'block';
       } else {
-        Swal.fire('Erro', 'Falha ao atualizar ambiente.', 'error');
+        Swal.fire({
+          title: 'Erro',
+          text: 'Falha ao atualizar ambiente.',
+          icon: 'error',
+          confirmButtonColor: '#dc3545'
+        });
       }
     };
   }
@@ -145,6 +176,8 @@ btnBuscarAmbiente.addEventListener('click', async () => {
       showCancelButton: true,
       confirmButtonText: 'Sim, excluir!',
       cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#28a745',
+      cancelButtonColor: '#dc3545'
     });
 
     if (confirmacao.isConfirmed) {
@@ -153,10 +186,20 @@ btnBuscarAmbiente.addEventListener('click', async () => {
       });
 
       if (response.ok) {
-        Swal.fire('Excluído', 'Ambiente removido com sucesso.', 'success');
+        Swal.fire({
+          title: 'Excluído',
+          text: 'Ambiente removido com sucesso.',
+          icon: 'success',
+          confirmButtonColor: '#28a745'
+        });
         limparFormulario();
       } else {
-        Swal.fire('Erro', 'Não foi possível excluir o ambiente.', 'error');
+        Swal.fire({
+          title: 'Erro',
+          text: 'Não foi possível excluir o ambiente.',
+          icon: 'error',
+          confirmButtonColor: '#dc3545'
+        });
       }
 
       formAcao.style.display = 'none';

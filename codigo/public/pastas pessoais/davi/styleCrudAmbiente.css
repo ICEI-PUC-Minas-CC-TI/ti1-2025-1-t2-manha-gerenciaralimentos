@@ -1,3 +1,19 @@
+/* Garante que o footer fique no fim da tela */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+/* Layout e estilos gerais */
 body {
     background-color: #ffffff;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -50,7 +66,7 @@ body {
     font-weight: 600;
 }
 
-.btn-img { /* Este estilo parece não estar sendo usado com o novo botão de imagem */
+.btn-img { 
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -95,45 +111,61 @@ body {
     font-size: 0.875rem;
 }
 
-/* --- Modificações para o botão de adicionar imagem --- */
-
-/* Esconde o input de arquivo padrão, **agora com o ID correto** */
 #imagem-ambiente {
     display: none;
 }
 
 #btnAtualizar:hover {
-  background-color: #cecb09; /* verde Bootstrap */
+  background-color: #cecb09; 
   color: white;
   border-color: #cecb09;
 }
+
 #btnConfirmar:hover {
-  background-color: #28a745; /* verde Bootstrap */
+  background-color: #28a745; 
   color: white;
   border-color: #28a745;
 }
 
 #btnBuscarAmbiente:hover {
-  background-color: #28a745; /* verde Bootstrap */
+  background-color: #28a745; 
   color: white;
   border-color: #28a745;
 }
  
 #btnExcluir:hover {
-  background-color: #b91c1c; /* verde Bootstrap */
+  background-color: #b91c1c; 
   color: white;
   border-color: #b91c1c;
 }
 
+#btnBuscarAmbiente{
+    width: 49%;
 
-/* Estilos para o "botão" de adicionar imagem */
+}
+#btnCancelarBusca{
+    width: 49%;
+
+}
+#btnCancelarBusca:hover{
+    background-color: #b91c1c; 
+    color: white;
+    border-color: #b91c1c;
+}
+#btnCancelar:hover{
+    background-color: #b91c1c; 
+    color: white;
+    border-color: #b91c1c;
+}
+
+
 .campo-adicionar-imagem {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 330px; /* ALTERADO: Agora ocupa 100% da largura do container */
-    height: 90px; /* ALTERADO: Altura reduzida para parecer mais com um campo */
+    width: 330px; 
+    height: 90px; 
     border: 2px dashed #ccc;
     border-radius: 10px;
     background-color: #f9f9f9;
@@ -145,7 +177,7 @@ body {
     transition: all 0.3s ease;
     padding: 10px;
     box-sizing: border-box;
-    margin-bottom: 1rem; /* ADICIONADO: Espaçamento inferior para seguir o padrão do Bootstrap mb-3 */
+    margin-bottom: 1rem; 
 }
 
 .campo-adicionar-imagem:hover {
@@ -154,14 +186,12 @@ body {
     color: #007bff;
 }
 
-/* Estilo para o sinal de "+" */
 .campo-adicionar-imagem br + * {
     font-size: 36px;
     line-height: 1;
     margin-top: 5px;
 }
 
-/* Estilo quando o input de arquivo está focado (para acessibilidade), **agora com o ID correto** */
 #imagem-ambiente:focus + .campo-adicionar-imagem {
     outline: 2px solid #007bff;
     outline-offset: 2px;
