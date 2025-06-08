@@ -39,6 +39,7 @@ html, body{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: var(--cor-fundo);
 } 
 .content { 
 
@@ -81,12 +82,37 @@ img {
     padding-right: var(--espaco-sm);
 }
 
+nav { 
+
+    margin: var(--espaco-xs)
+
+}
+
 section {
 
     display: flex;
     margin: var(--espaco-xs);
     justify-content: center;
-    flex: 1;
+    height: 300px;
+}
+
+#ambientes {
+
+    width: 100%;
+    display: flex;
+
+}
+
+.blocoAmbiente {
+
+    width: 15%; 
+    height: 180px;
+    box-shadow: var(--sombra-media);
+    margin: var(--espaco-xs);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
 }
 
 .info {
@@ -95,13 +121,14 @@ section {
     width: 80%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 #cards {
 
     box-shadow: var(--sombra-media);
     width: 25%; 
-    height: auto; 
+    height: 30%; 
     display: flex;
     align-items: center;
     justify-content: center;
