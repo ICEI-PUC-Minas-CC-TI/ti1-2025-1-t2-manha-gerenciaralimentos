@@ -34,19 +34,25 @@
     <main class="conteudo-principal">
         <div class="container-conteudo">
             <div class="container-cabecalho">
-                <div class="container-cabecalho-direita">
+                <div class="container-cabecalho-esquerda">
                     <a href="lista.html" id="botao-voltar" class="botao-voltar"><i
                             class="fa-regular fa-circle-left"></i></a>
                     <h2 id="nome-ambiente">Carregando ambiente...</h2>
                     <i id="icone-ambiente"></i>
                 </div>
-                <div class="container-cabecalho-esquerda">
-                    <button id="botao-adicionar-alimento" onclick="openModal('modal-cadastro' , 'form-cadastro')"
-                        class="botao-primario">
-                        + Adicionar Alimento</button>
-                    <button id="botao-remover-vencids" onclick="openModal('modal-excluir-vencidos')" type="button"
-                        onclick="" class=" btn btn-danger">
-                        🗑️ Remover Vencidos</button>
+                <div class="container-cabecalho-direita">
+                    <div class="container-cabecalho-esquerda-superior"> <button id="botao-adicionar-alimento" onclick="openModal('modal-cadastro' , 'form-cadastro')"
+                            class="btn tn btn-success">
+                           ➕ Adicionar Alimento</button>
+                        <button id="botao-remover-vencido" onclick="openModal('modal-excluir-vencidos')" type="button"
+                            class=" btn btn-danger">
+                            🗑️ Remover Vencidos</button>
+                    </div>
+                    <div class="container-cabecalho-esquerda-inferior">
+                        <button id="botao-mover" onclick="openModal('modal-mover-alimentos')" type="button"
+                             class=" botao-primario btn btn-primary">
+                            ➡️ Mover Alimentos</button>
+                    </div>
                 </div>
             </div>
 
@@ -199,6 +205,33 @@
                 </div>
             </div>
         </div>
+
+        <!--MODAL Mover Alimentos-->
+        <div class="modal fade" id="modal-mover-alimentos" tabindex="-1" aria-labelledby="excluirModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content ">
+                    <div class="modal-header border-0">
+                        <h5 class="modal-title" id="excluirModalLabel">Mover Alimentos</h5>
+                        <button type="button" class="btn-close  " data-bs-dismiss="modal" aria-label="Fechar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Quais Alimentos Deseja Mover?</p> <br>
+                        
+                        <p>Para onde deseja mover os alimentos?</p>
+                        <select class="form-select" name="" id="select-mover-alimentos">
+                            <option value="0" disabled selected>Selecione o Ambiente de Destino</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button id="btn-confirmar-exclusao-vencidos" onclick="" type="button"
+                            class="btn btn-success" data-bs-dismiss="modal">Mover</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
     </aside>
 

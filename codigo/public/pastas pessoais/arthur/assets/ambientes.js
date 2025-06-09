@@ -416,6 +416,19 @@ async function deletarAlimento(index, carregar) {
   }
 }
 
+async function preencherSelectMover(){
+    const response = await fetch(`${apiUrl}/ambientes`)
+    const ambientes = await response.json();
+    const selectMover = document.getElementById("select-mover-alimentos");
+    let i=1;
+    ambientes.forEach(ambiente => {
+        selectMover.innerHTML += `
+        <option value="${i++}">${ambiente.nome}</option>
+        `
+
+    });
+}
+
 
 
 //Listener para Página Carregada
@@ -423,6 +436,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     await carregarAmbiente();
     await carregarAlimentos();
     await ordenarPorNome();
-    await carregarTiposModal();
-
+    carregarTiposModal();
+    preencherSelectMover()
 });

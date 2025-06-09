@@ -92,10 +92,21 @@ body {
     margin-bottom: 3em;
 }
 
-.container-cabecalho-direita{
+.container-cabecalho-esquerda{
     display: flex;
     align-items: center;
-    gap: 1rem;;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.container-cabecalho-esquerda-inferior{
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+#botao-mover{
+    width: 80%;
 }
 
 .botao-voltar {
@@ -208,21 +219,6 @@ th:hover {
 
 
 /* 5. Botões */
-/* 5.1. Botão Primário */
-.botao-primario {
-    background-color: var(--cor-primaria);
-    color: var(--cor-branco);
-    border: none;
-    padding: var(--espaco-xs) var(--espaco-sm);
-    border-radius: var(--borda-raio);
-    cursor: pointer;
-    font-weight: var(--peso-normal);
-    transition: background-color 0.2s;
-}
-
-.botao-primario:hover {
-    background-color: var(--cor-primaria-hover);
-}
 
 /* 5.2. Botão Secundário */
 .botao-secundario {
