@@ -416,13 +416,45 @@ async function deletarAlimento(index, carregar) {
   }
 }
 
+async function preencherSelectMover(){
+    const response = await fetch(`${apiUrl}/ambientes`)
+    const ambientes = await response.json();
+    const selectMover = document.getElementById("select-mover-alimentos");
+    let i=1;
+    ambientes.forEach(ambiente => {
+        selectMover.innerHTML += `
+        <option value="${i++}">${ambiente.nome}</option>
+        `
 
+    });
+}
+
+async function preencherCheckMover(){
+    const response = await fetch(`${apiUrl}/ambientes/${ambienteId}`)
+    const ambienteAtual = await response.json();
+
+    let alimentos = await fetch(`${apiUrl}/alimentos`)
+    alimentos = await alimentos.json();
+
+    const checkMover = document.getElementById("check-mover-alimentos");
+    let i =0;
+    ambienteAtual.itens.forEach((item,index) => {
+        let alimento = alimentos.find(alimento => alimento.id ==item.alimentoId);
+        checkMover.innerHTML += `
+        <div class="form-check">
+        <input class="form-check-input" id="mover-check${i}" type="checkbox"  value="${i}" >
+        <label class="form-check-label" for=mover-check${i++}">${alimento.nome} ${alimento.tipo}</label>
+        </div>
+        `
+    });
+}
 
 //Listener para Página Carregada
 document.addEventListener('DOMContentLoaded', async () => {
     await carregarAmbiente();
     await carregarAlimentos();
     await ordenarPorNome();
-    await carregarTiposModal();
-
+    carregarTiposModal();
+    preencherSelectMover()
+    preencherCheckMover()
 });
