@@ -41,16 +41,16 @@
                     <i id="icone-ambiente"></i>
                 </div>
                 <div class="container-cabecalho-direita">
-                    <div class="container-cabecalho-esquerda-superior"> <button id="botao-adicionar-alimento" onclick="openModal('modal-cadastro' , 'form-cadastro')"
-                            class="btn tn btn-success">
-                           ➕ Adicionar Alimento</button>
+                    <div class="container-cabecalho-esquerda-superior"> <button id="botao-adicionar-alimento"
+                            onclick="openModal('modal-cadastro' , 'form-cadastro')" class="btn tn btn-success">
+                            ➕ Adicionar Alimento</button>
                         <button id="botao-remover-vencido" onclick="openModal('modal-excluir-vencidos')" type="button"
                             class=" btn btn-danger">
                             🗑️ Remover Vencidos</button>
                     </div>
                     <div class="container-cabecalho-esquerda-inferior">
                         <button id="botao-mover" onclick="openModal('modal-mover-alimentos')" type="button"
-                             class=" botao-primario btn btn-primary">
+                            class=" botao-primario btn btn-primary">
                             ➡️ Mover Alimentos</button>
                     </div>
                 </div>
@@ -217,7 +217,9 @@
                     </div>
                     <div class="modal-body">
                         <p>Quais Alimentos Deseja Mover?</p> <br>
-                        
+                        <div id="check-mover-alimentos" class="d-flex flex-wrap gap-3">
+                        </div>
+                        <br>
                         <p>Para onde deseja mover os alimentos?</p>
                         <select class="form-select" name="" id="select-mover-alimentos">
                             <option value="0" disabled selected>Selecione o Ambiente de Destino</option>
@@ -225,8 +227,8 @@
                     </div>
                     <div class="modal-footer border-0">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button id="btn-confirmar-exclusao-vencidos" onclick="" type="button"
-                            class="btn btn-success" data-bs-dismiss="modal">Mover</button>
+                        <button id="btn-confirmar-exclusao-vencidos" onclick="" type="button" class="btn btn-success"
+                            data-bs-dismiss="modal">Mover</button>
                     </div>
                 </div>
             </div>
