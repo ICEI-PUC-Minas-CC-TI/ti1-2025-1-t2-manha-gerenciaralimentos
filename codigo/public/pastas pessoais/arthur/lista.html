@@ -2,13 +2,14 @@
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Arthur Henrique Tristão Pinto">
     <meta name="copyright" content="© 2025 Arthur Tristão">
     <!--Icone da página -->
-    <link rel="icon" href="/assets/icons/logo_stockit.ico" type="image/x-icon">
+    <link rel="icon" href="assets/imgs/logo_stockit.ico" type="image/x-icon">
     <title>Ambientes - StockIT</title>
     <style>
         :root {
@@ -50,20 +51,21 @@
             width: 200px;
             text-align: center;
             cursor: pointer;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             transition: transform 0.2s;
         }
 
         .ambiente:hover {
             transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
+
 <body>
 
     <h1>Selecione um Ambiente</h1>
-</svg>
+    </svg>
     <div class="lista-ambientes" id="lista-ambientes">
         <p>Carregando ambientes...</p>
     </div>
@@ -71,34 +73,41 @@
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
             const listaAmbientes = document.getElementById('lista-ambientes');
-            listaAmbientes.innerHTML = ''; 
-        
+            listaAmbientes.innerHTML = '';
+
             try {
                 const resposta = await fetch('https://json-server-stockit.onrender.com/ambientes');
                 if (!resposta.ok) throw new Error('Erro ao buscar os ambientes');
-                
+
                 const ambientes = await resposta.json();
-        
+
                 ambientes.forEach(ambiente => {
+                    const link = document.createElement('a');
+                    link.href = `ambiente.html?id=${ambiente.id}`;
+                    link.style.textDecoration = 'none';
+                    link.style.color = 'inherit';
+
                     const item = document.createElement('div');
                     item.classList.add('ambiente');
-        
-                    item.innerHTML = `<a href="ambiente.html?id=${ambiente.id}" style="text-decoration:none; color:inherit;">${ambiente.nome}</a>`;
-        
-                    listaAmbientes.appendChild(item);
+                    item.textContent = ambiente.nome;
+
+                    link.appendChild(item);
+                    listaAmbientes.appendChild(link);
+
                 });
-                
+
                 if (ambientes.length === 0) {
                     listaAmbientes.innerHTML = '<p>Nenhum ambiente cadastrado.</p>';
                 }
-        
+
             } catch (erro) {
                 console.error(erro);
                 listaAmbientes.innerHTML += '<h1>JSON Server ERROR!!!<br><br>Se estiver fazendo a avaliação por pares e o server cair,<br>   utilize o db.json na pasta db e hospede em seu replit. Troque o link no fetch! <br><br>Caso necessário: Contato: (31)999623317</h1>';
             }
         });
-        </script>
-        
+    </script>
+
 
 </body>
+
 </html>

@@ -11,7 +11,7 @@
     <!--Icons Link-->
     <script src="https://kit.fontawesome.com/f8292b8a4a.js" crossorigin="anonymous"></script>
     <!--Icone da página -->
-    <link rel="icon" href="assets/icons/logo_stockit.ico" type="image/x-icon">
+    <link rel="icon" href="assets/imgs/logo_stockit.ico" type="image/x-icon">
     <!--CSS Link-->
     <link rel="stylesheet" href="assets/css/ambiente.css">
     <!--Bootstrap CSS-->
@@ -44,8 +44,8 @@
                     <button id="botao-adicionar-alimento" onclick="openModal('modal-cadastro' , 'form-cadastro')"
                         class="botao-primario">
                         + Adicionar Alimento</button>
-                    <button id="botao-remover-vencids" type="button" onclick=""
-                        class=" btn btn-danger">
+                    <button id="botao-remover-vencids" onclick="openModal('modal-excluir-vencidos')" type="button"
+                        onclick="" class=" btn btn-danger">
                         🗑️ Remover Vencidos</button>
                 </div>
             </div>
@@ -94,8 +94,11 @@
                         <form id="form-cadastro">
                             <div class="mb-3">
                                 <label for="cadastro-nome" class="form-label">Nome</label>
-                                <input type="text" class="form-control" id="cadastro-nome"
-                                    placeholder="Ex: Banana Prata">
+                                <input type="text" class="form-control" id="cadastro-nome" placeholder="Ex: Banana">
+                            </div>
+                            <div class="mb-3">
+                                <label for="cadastro-tipo" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="cadastro-tipo" placeholder="Ex: Prata">
                             </div>
                             <div class="mb-3">
                                 <label for="cadastro-validade" class="form-label">Validade</label>
@@ -118,7 +121,8 @@
                     </div>
                     <div class="modal-footer border-0">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" form="form-cadastro" class="btn btn-success">Adicionar</button>
+                        <button id="btn-adicionar-alimento" type="button" form="form-cadastro" data-bs-dismiss="modal"
+                            class="btn btn-success">Adicionar</button>
                     </div>
                 </div>
             </div>
@@ -174,6 +178,28 @@
                 </div>
             </div>
         </div>
+
+        <!--MODAL-Excluir Vencidos-->
+        <div class="modal fade" id="modal-excluir-vencidos" tabindex="-1" aria-labelledby="excluirModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content ">
+                    <div class="modal-header border-0">
+                        <h5 class="modal-title" id="excluirModalLabel">Excluir Alimentos Vencidos</h5>
+                        <button type="button" class="btn-close  " data-bs-dismiss="modal" aria-label="Fechar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Tem certeza que deseja excluir todos alimentos vencidos?</p>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button id="btn-confirmar-exclusao-vencidos" onclick="removerVencidos()" type="button"
+                            class="btn btn-danger" data-bs-dismiss="modal">Excluir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </aside>
 
     <footer class="rodape">

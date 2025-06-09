@@ -8,6 +8,25 @@ const ambienteId = parseInt(params.get('id'));
 const campoBusca = document.getElementById('campo-busca');
 let linhasTabela = [];
 
+async function removerVencidos() {
+  try {
+    const response = await fetch(`${apiUrl}/ambientes/${ambienteId}`);
+    const ambiente = await response.json();
+
+    // Percorrer de trás para frente para evitar problemas com splice
+    for (let i = ambiente.itens.length - 1; i >= 0; i--) {
+      const item = ambiente.itens[i];
+     if (!conferirValidade(formatarData(item.vencimento))) {
+        await deletarAlimento(i, ambienteId); // passando índice e ID
+      }
+    }
+  } catch (error) {
+    console.error("Erro ao remover vencidos:", error);
+    alert("Erro ao remover vencidos.");
+  }
+}
+
+
 //Função para pegar ícone conforme tipo do ambiente
 async function obterIconeAmbiente(tipoID) {
     try {
@@ -173,29 +192,31 @@ campoBusca.addEventListener('input', () => {
     temporizador = setTimeout(filtroBusca, 300);
 });
 
-//Listener para os Modais
-function openModal(id, form_nome, index, ambienteId) {
-    const modal = new bootstrap.Modal(document.getElementById(id));
+//Listener para os modais
+function openModal(id, form_nome, index) {
+    const modalElement = document.getElementById(id);
+    const modal = new bootstrap.Modal(modalElement);
     modal.show();
 
-    //Limpar o form quando o modal é fechado
-    const modalCadastro = document.getElementById(id);
-    modalCadastro.addEventListener('hidden.bs.modal', () => {
+    // Limpar o form quando o modal é fechado
+    modalElement.addEventListener('hidden.bs.modal', () => {
         const form = document.getElementById(form_nome);
-        if (form) form.reset(); // limpa todos os campos do formulário
-    });
+        if (form) form.reset();
+    }, { once: true }); // garante que o listener será adicionado uma única vez
 
-    //Listener para Editar
-    const editar = document.getElementById('btn-editar-salvar');
-    editar.addEventListener('click', () => {
-        editarAlimento(index, ambienteId);
-    });
+    const ambienteId = parseInt(new URLSearchParams(window.location.search).get('id'));
 
-    //Listener para Excluir
-    const excluir = document.getElementById('btn-confirmar-exclusao');
-    excluir.addEventListener('click', () => {
-        deletarAlimento(index, ambienteId);
-    });
+    // Cadastrar
+    const btnCadastrar = document.getElementById('btn-adicionar-alimento');
+    btnCadastrar.onclick = () => cadastrarAlimento(ambienteId);
+
+    // Editar
+    const btnEditar = document.getElementById('btn-editar-salvar');
+    btnEditar.onclick = () => editarAlimento(index, ambienteId);
+
+    // Excluir
+    const btnExcluir = document.getElementById('btn-confirmar-exclusao');
+    btnExcluir.onclick = () => deletarAlimento(index, ambienteId);
 }
 
 async function carregarTiposModal() {
@@ -224,7 +245,105 @@ async function carregarTiposModal() {
     }
 }
 
-async function editarAlimento(index, ambienteId) {
+function obterDadosCadastro() {
+    const nome = document.getElementById('cadastro-nome').value.trim();
+    const tipo = document.getElementById('cadastro-tipo').value.trim();
+    const vencimento = document.getElementById('cadastro-validade').value;
+    const quantidade = parseInt(document.getElementById('cadastro-quantidade').value);
+    const categoria = parseInt(document.getElementById('select-cadastro').value);
+    const imagemInput = document.getElementById('cadastro-imagem');
+    const imagem = imagemInput?.files?.[0]?.name || "default.png";
+    const cadastro = new Date().toISOString().split('T')[0];
+
+    if (!nome || !vencimento || !quantidade || isNaN(categoria)) {
+        alert("Preencha todos os campos obrigatórios.");
+        return null;
+    }
+
+    return {
+        nome,
+        tipo,
+        categoria,
+        imagem,
+        quantidade,
+        vencimento,
+        cadastro
+    };
+}
+
+async function verificarOuCriarAlimento({ nome, tipo, categoria, imagem }) {
+    try {
+        const response = await fetch(`${apiUrl}/alimentos`);
+        const alimentos = await response.json();
+
+        // Normaliza para comparação 
+        const nomeNormalizado = nome.trim().toLowerCase();
+        const tipoNormalizado = tipo.trim().toLowerCase();
+
+        const alimentoExistente = alimentos.find(a => {
+            const aNome = (a.nome || "").trim().toLowerCase();
+            const aTipo = (a.tipo || "").trim().toLowerCase();
+            return aNome === nomeNormalizado && aTipo === tipoNormalizado;
+        });
+
+        if (alimentoExistente) {
+            console.log("Existe")
+            return alimentoExistente.id; // Retorna o ID se já existir
+        } else {
+            return await criarAlimento(nome, tipo, imagem, categoria);
+        }
+
+    } catch (error) {
+        console.error("Erro ao verificar alimento existente:", error);
+        throw error;
+    }
+}
+
+async function criarAlimento(nome, tipo, categoria, imagem) {
+    try {
+        const response = await fetch(`${apiUrl}/alimentos`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nome, tipo, imagem, categoria })
+        });
+
+        const novoAlimento = await response.json();
+        return novoAlimento.id;
+    } catch (error) {
+        console.error("Erro ao criar alimento")
+    }
+}
+
+async function cadastrarAlimento() {
+    const { nome, tipo, categoria, imagem, quantidade, vencimento, cadastro } = obterDadosCadastro();
+
+    const id = await verificarOuCriarAlimento({ nome, tipo, categoria, imagem });
+    const novoItem = { alimentoId: id, quantidade: quantidade, vencimento: vencimento, cadastro: cadastro }
+    try {
+        const response = await fetch(`${apiUrl}/ambientes/${ambienteId}`);
+        const ambiente = await response.json();
+
+        ambiente.itens.push(novoItem);
+        const cadastrar = await fetch(`${apiUrl}/ambientes/${ambienteId}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ itens: ambiente.itens })
+        })
+
+        if (!cadastrar.ok) {
+            throw new Error("Erro ao Cadastrar Alimento")
+        }
+
+        alert("Alimento Cadastrado com Sucesso");
+        carregarAlimentos();
+
+    } catch (error) {
+        console.error("Erro ao cadastrar alimento")
+    }
+}
+
+
+async function editarAlimento(index) {
     try {
         const response = await fetch(`${apiUrl}/ambientes/${ambienteId}`);
         const ambiente = await response.json();
@@ -266,7 +385,7 @@ async function editarAlimento(index, ambienteId) {
     }
 }
 
-async function deletarAlimento(index, ambienteId) {
+async function deletarAlimento(index) {
     try {
         const response = await fetch(`${apiUrl}/ambientes/${ambienteId}`);
         const ambiente = await response.json();
@@ -277,10 +396,7 @@ async function deletarAlimento(index, ambienteId) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ itens: ambiente.itens })
         })
-
-        carregarAlimentos();
-        alert("Alimento excluido com sucesso")
-
+    carregarAlimentos();
     } catch (error) {
         console.error("Erro ao deletar alimento:", error);
         alert("Erro ao deletar alimento");
@@ -288,12 +404,11 @@ async function deletarAlimento(index, ambienteId) {
 }
 
 
-
-
 //Listener para Página Carregada
 document.addEventListener('DOMContentLoaded', async () => {
     await carregarAmbiente();
     await carregarAlimentos();
+    await ordenarPorNome();
     await carregarTiposModal();
-    ordenarPorNome();
+
 });
