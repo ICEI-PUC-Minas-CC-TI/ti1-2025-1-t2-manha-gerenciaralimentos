@@ -9,31 +9,43 @@ const campoBusca = document.getElementById('campo-busca');
 let linhasTabela = [];
 
 async function removerVencidos() {
-  try {
-    const response = await fetch(`${apiUrl}/ambientes/${ambienteId}`);
-    const ambiente = await response.json();
+    try {
+        const response = await fetch(`${apiUrl}/ambientes/${ambienteId}`);
+        const ambiente = await response.json();
 
-    let algumRemovido = false;
+        let algumRemovido = false;
 
-    for (let i = ambiente.itens.length - 1; i >= 0; i--) {
-      const item = ambiente.itens[i];
-      if (!conferirValidade(formatarData(item.vencimento))) {
-        await deletarAlimento(i, false); 
-        algumRemovido = true;
-      }
+        for (let i = ambiente.itens.length - 1; i >= 0; i--) {
+            const item = ambiente.itens[i];
+            if (!conferirValidade(formatarData(item.vencimento))) {
+                await deletarAlimento(i, false);
+                algumRemovido = true;
+            }
+        }
+
+        if (algumRemovido) {
+            Swal.fire({
+                title: "Tudo Certo!",
+                text: "Alimentos vencidos foram removidos com sucesso!",
+                icon: "success"
+            });
+            carregarAlimentos();
+        } else {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Nenhum Alimento Vencido Encontrado!",
+            });
+        }
+
+    } catch (error) {
+        console.error("Erro ao remover vencidos:", error);
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Erro ao remover alimentos vencidos!",
+        });
     }
-
-    if (algumRemovido) {
-      alert("Alimentos vencidos foram removidos com sucesso!");
-      carregarAlimentos(); 
-    } else {
-      alert("Nenhum alimento vencido encontrado.");
-    }
-
-  } catch (error) {
-    console.error("Erro ao remover vencidos:", error);
-    alert("Erro ao remover vencidos.");
-  }
 }
 
 
@@ -227,7 +239,7 @@ function openModal(id, form_nome, index) {
 
     // Excluir
     const btnExcluir = document.getElementById('btn-confirmar-exclusao');
-    btnExcluir.onclick = () => deletarAlimento(index,true);
+    btnExcluir.onclick = () => deletarAlimento(index, true);
 }
 
 async function carregarTiposModal() {
@@ -397,39 +409,41 @@ async function editarAlimento(index) {
 }
 
 async function deletarAlimento(index, carregar) {
-  try {
-    const response = await fetch(`${apiUrl}/ambientes/${ambienteId}`);
-    const ambiente = await response.json();
+    try {
+        const response = await fetch(`${apiUrl}/ambientes/${ambienteId}`);
+        const ambiente = await response.json();
 
-    ambiente.itens.splice(index, 1);
-    await fetch(`${apiUrl}/ambientes/${ambienteId}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ itens: ambiente.itens })
-    });
+        ambiente.itens.splice(index, 1);
+        await fetch(`${apiUrl}/ambientes/${ambienteId}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ itens: ambiente.itens })
+        });
 
-    if (carregar) carregarAlimentos();
+        if (carregar) carregarAlimentos();
 
-  } catch (error) {
-    console.error("Erro ao deletar alimento:", error);
-    alert("Erro ao deletar alimento");
-  }
+    } catch (error) {
+        console.error("Erro ao deletar alimento:", error);
+        alert("Erro ao deletar alimento");
+    }
 }
 
-async function preencherSelectMover(){
+async function preencherSelectMover() {
     const response = await fetch(`${apiUrl}/ambientes`)
     const ambientes = await response.json();
     const selectMover = document.getElementById("select-mover-alimentos");
-    let i=1;
+    let i = 1;
     ambientes.forEach(ambiente => {
-        selectMover.innerHTML += `
-        <option value="${i++}">${ambiente.nome}</option>
-        `
-
+        if (i != ambienteId) {
+            selectMover.innerHTML += `
+            <option value="${i}">${ambiente.nome}</option>
+            `
+        }
+        i++;
     });
 }
 
-async function preencherCheckMover(){
+async function preencherCheckMover() {
     const response = await fetch(`${apiUrl}/ambientes/${ambienteId}`)
     const ambienteAtual = await response.json();
 
@@ -437,9 +451,9 @@ async function preencherCheckMover(){
     alimentos = await alimentos.json();
 
     const checkMover = document.getElementById("check-mover-alimentos");
-    let i =0;
-    ambienteAtual.itens.forEach((item,index) => {
-        let alimento = alimentos.find(alimento => alimento.id ==item.alimentoId);
+    let i = 0;
+    ambienteAtual.itens.forEach((item, index) => {
+        let alimento = alimentos.find(alimento => alimento.id == item.alimentoId);
         checkMover.innerHTML += `
         <div class="form-check">
         <input class="form-check-input" id="mover-check${i}" type="checkbox"  value="${i}" >
