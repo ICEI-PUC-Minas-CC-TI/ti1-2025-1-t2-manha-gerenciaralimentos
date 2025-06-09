@@ -12,7 +12,6 @@ Abaixo estão os repositórios das pastas pessoais dos integrantes da equipe:
 - [Davi Rafael de Oliveira Gurgel Martins](https://github.com/ICEI-PUC-Minas-CC-TI/ti1-2025-1-t2-manha-gerenciaralimentos/tree/master/codigo/pastas%20pessoais/davi)
 - [Diego Cunha da Silva](https://github.com/ICEI-PUC-Minas-CC-TI/ti1-2025-1-t2-manha-gerenciaralimentos/tree/master/codigo/pastas%20pessoais/diego)
 - [Gabriel Pereira Couto Rodrigues](https://github.com/ICEI-PUC-Minas-CC-TI/ti1-2025-1-t2-manha-gerenciaralimentos/tree/master/codigo/pastas%20pessoais/gabriel)
-- [Guilherme Augusto Vieira Pinto](https://github.com/ICEI-PUC-Minas-CC-TI/ti1-2025-1-t2-manha-gerenciaralimentos/tree/master/codigo/pastas%20pessoais/guilherme)
 - [Raphael Lucas Ribeiro de Paula](https://github.com/ICEI-PUC-Minas-CC-TI/ti1-2025-1-t2-manha-gerenciaralimentos/tree/master/codigo/pastas%20pessoais/raphael)
 
 ---
@@ -30,8 +29,8 @@ codigo/
 │   ├── davi
 │   ├── diego
 │   ├── gabriel
-│   ├── guilherme
 │   └── raphael
+│  
 │
 ├── public/                   # Front-end do projeto
 │   ├── assets/
