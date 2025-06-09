@@ -46,6 +46,7 @@ html, body{
     flex: 1;
 }
 
+/* Cabeçalho da home */
 .cabecalho {
     background-color: var(--cor-primaria);
     color: var(--cor-branco);
@@ -140,9 +141,13 @@ img {
     padding-right: var(--espaco-sm);
 }
 
+/* Carrosel */
 nav { 
 
-    margin: var(--espaco-xs)
+    margin: var(--espaco-xs);
+    display: flex;
+    justify-content: center;
+    
 
 }
 
@@ -154,24 +159,20 @@ section {
     height: 300px;
 }
 
-#ambientes {
-
+.swiper-container {
     width: 100%;
-    display: flex;
+    height: 200px;
 
 }
 
-.blocoAmbiente {
-
-    width: 15%; 
-    height: 180px;
+.swiper-slide {
+    width: 100%;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 18px;
     box-shadow: var(--sombra-media);
-    margin: var(--espaco-xs);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    
 }
+
 
 .info {
 

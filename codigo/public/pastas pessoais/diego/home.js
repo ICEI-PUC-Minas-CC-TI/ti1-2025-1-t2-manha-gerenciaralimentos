@@ -7,6 +7,7 @@ async function carregarAmbientes() {
     try {
         const resposta = await fetch(`${apiUrl}/ambientes`)
         const dados = await resposta.json();
+        const wrapper = document.querySelector(".swiper-wrapper");
 
         if (!Array.isArray(dados)) {
             throw new Error("Dados recebidos não são um array");
@@ -14,12 +15,21 @@ async function carregarAmbientes() {
 
         dados.forEach(ambiente => {
             const bloco = document.createElement("div");
-            bloco.textContent = ambiente.nome;
-            bloco.classList.add("blocoAmbiente");
 
-            container.appendChild(bloco);
+            bloco.textContent = ambiente.nome; 
+            bloco.classList.add("swiper-slide");
+            wrapper.appendChild(bloco);
+
         });
-    } catch (erro) {
+
+        new Swiper (".swiper-container", {
+            slidesPerView: 3,
+            spaceBetween: 10, 
+            navigation: true,
+        });
+
+    } catch (erro) { 
+
         console.error("Erro ao carregar ambientes", erro);
     }
 }
