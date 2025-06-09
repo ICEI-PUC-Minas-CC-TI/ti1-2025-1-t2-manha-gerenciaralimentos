@@ -12,8 +12,6 @@
 
 [Gabriel Pereira Couto Rodrigues](https://github.com/GabrielPereira-PUC)
 
-[Guilherme Augusto Vieira Pinto](https://github.com/GuilhermeAugustoV)
-
 [Raphael Lucas Ribeiro de Paula](https://github.com/RaphaelLRPaula)
 
 A documentação do projeto é estruturada da seguinte forma:
@@ -225,8 +223,6 @@ Relação de ferramentas empregadas pelo grupo durante o projeto.
 ## Gerenciamento do Projeto
 
 Designer: Davi e Arthur
-
-Desenvolvedor Back-End: Guilherme
 
 Desenvolvedor Front-End: Raphael
 
