@@ -17,8 +17,6 @@ Diego Cunha da Silva
 
 Gabriel Pereira Couto Rodrigues
 
-Guilherme Augusto Vieira Pinto
-
 Raphael Lucas Ribeiro de Paula
 
 ## Professores responsáveis
