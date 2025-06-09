@@ -13,18 +13,29 @@ async function removerVencidos() {
     const response = await fetch(`${apiUrl}/ambientes/${ambienteId}`);
     const ambiente = await response.json();
 
-    // Percorrer de trás para frente para evitar problemas com splice
+    let algumRemovido = false;
+
     for (let i = ambiente.itens.length - 1; i >= 0; i--) {
       const item = ambiente.itens[i];
-     if (!conferirValidade(formatarData(item.vencimento))) {
-        await deletarAlimento(i, ambienteId); // passando índice e ID
+      if (!conferirValidade(formatarData(item.vencimento))) {
+        await deletarAlimento(i, false); 
+        algumRemovido = true;
       }
     }
+
+    if (algumRemovido) {
+      alert("Alimentos vencidos foram removidos com sucesso!");
+      carregarAlimentos(); 
+    } else {
+      alert("Nenhum alimento vencido encontrado.");
+    }
+
   } catch (error) {
     console.error("Erro ao remover vencidos:", error);
     alert("Erro ao remover vencidos.");
   }
 }
+
 
 
 //Função para pegar ícone conforme tipo do ambiente
@@ -208,15 +219,15 @@ function openModal(id, form_nome, index) {
 
     // Cadastrar
     const btnCadastrar = document.getElementById('btn-adicionar-alimento');
-    btnCadastrar.onclick = () => cadastrarAlimento(ambienteId);
+    btnCadastrar.onclick = () => cadastrarAlimento();
 
     // Editar
     const btnEditar = document.getElementById('btn-editar-salvar');
-    btnEditar.onclick = () => editarAlimento(index, ambienteId);
+    btnEditar.onclick = () => editarAlimento(index);
 
     // Excluir
     const btnExcluir = document.getElementById('btn-confirmar-exclusao');
-    btnExcluir.onclick = () => deletarAlimento(index, ambienteId);
+    btnExcluir.onclick = () => deletarAlimento(index,true);
 }
 
 async function carregarTiposModal() {
@@ -385,23 +396,26 @@ async function editarAlimento(index) {
     }
 }
 
-async function deletarAlimento(index) {
-    try {
-        const response = await fetch(`${apiUrl}/ambientes/${ambienteId}`);
-        const ambiente = await response.json();
+async function deletarAlimento(index, carregar) {
+  try {
+    const response = await fetch(`${apiUrl}/ambientes/${ambienteId}`);
+    const ambiente = await response.json();
 
-        ambiente.itens.splice(index,1);
-        await fetch(`${apiUrl}/ambientes/${ambienteId}`, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ itens: ambiente.itens })
-        })
-    carregarAlimentos();
-    } catch (error) {
-        console.error("Erro ao deletar alimento:", error);
-        alert("Erro ao deletar alimento");
-    }
+    ambiente.itens.splice(index, 1);
+    await fetch(`${apiUrl}/ambientes/${ambienteId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ itens: ambiente.itens })
+    });
+
+    if (carregar) carregarAlimentos();
+
+  } catch (error) {
+    console.error("Erro ao deletar alimento:", error);
+    alert("Erro ao deletar alimento");
+  }
 }
+
 
 
 //Listener para Página Carregada
