@@ -207,6 +207,29 @@
     </footer>
 
     <script src="assets/ambientes.js"></script>
+    <script>
+
+        //Parte das notificações da HOME, feita por Raphael Lucas
+        
+        document.addEventListener("DOMContentLoaded", () => {
+            const params = new URLSearchParams(window.location.search);
+            const ambienteId = params.get("id");
+
+            if (ambienteId) {
+                const tentarRolar = () => {
+                    const bloco = document.querySelector(`.blocoAmbiente[data-id='${ambienteId}']`);
+                    if (bloco) {
+                        bloco.scrollIntoView({ behavior: "smooth", block: "center" });
+                        bloco.classList.add("destaque");
+                    } else {
+                        setTimeout(tentarRolar, 200);
+                    }
+                };
+
+                tentarRolar();
+            }
+        });
+    </script>
 </body>
 
 </html>

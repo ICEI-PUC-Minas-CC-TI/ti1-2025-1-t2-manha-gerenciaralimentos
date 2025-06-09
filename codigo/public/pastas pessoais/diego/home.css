@@ -76,6 +76,64 @@ html, body{
     border-color: var(--cor-borda);
 }
 
+/* Início da parte das notificações - Feita por Raphael Lucas */
+
+.notificacao-container {
+    position: relative;
+    margin-left: 1rem;
+}
+
+#btnNotificacao {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--cor-branco);
+    position: relative;
+    font-size: 2rem;
+}
+
+.badge {
+    background-color: var(--cor-perigo);
+    color: var(--cor-branco);
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.75rem;
+    position: absolute;
+    top: -8px;
+    right: -8px;
+}
+
+.dropdown {
+    position: absolute;
+    right: 0;
+    background-color: var(--cor-branco);
+    box-shadow: var(--sombra-media);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--borda-raio);
+    padding: var(--espaco-sm);
+    z-index: 10;
+    width: 250px;
+    top: 40px;
+}
+
+.dropdown.hidden {
+    display: none;
+}
+
+.dropdown-item {
+    font-family: var(--fonte-principal);
+    padding: 5px 0;
+    border-bottom: 1px solid var(--cor-borda);
+    font-size: 0.875rem;
+    color: var(--cor-texto);
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+/* Fim da parte das notificações - Feito por Raphael Lucas */
+
 img {
 
     width: 100px;
