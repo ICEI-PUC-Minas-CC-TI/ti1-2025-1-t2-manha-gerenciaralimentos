@@ -1,5 +1,4 @@
 const apiUrl = 'https://json-server-stockit.onrender.com'
-const container = document.getElementById("ambientes")
 
 //criação dos blocos de cada ambiente
 
@@ -29,6 +28,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         });
 
+        //botões para o carrosel
+
         let scrollAmount = 0;
         const itemWidth = document.querySelector('.carousel-item').offsetWidth + 20;
 
@@ -50,6 +51,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error(erro);
         listaAmbientes.innerHTML += '<h1>JSON Server ERROR!!!<br><br>Se estiver fazendo a avaliação por pares e o server cair,<br>   utilize o db.json na pasta db e hospede em seu replit. Troque o link no fetch! <br><br>Caso necessário: Contato: (31)999623317</h1>';
     }
+});
+
+//link para as outras partes do site 
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".cards").forEach(card => {
+        card.addEventListener("click", () => {
+            const url = card.getAttribute("data-url");
+            if (url) window.location.href = url;
+        });
+    });
 });
 
 //Funcionamento das Notificações, feito por Raphael Lucas

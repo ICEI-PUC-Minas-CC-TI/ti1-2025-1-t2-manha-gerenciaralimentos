@@ -79,6 +79,12 @@ body {
     border-color: var(--cor-borda);
 }
 
+img {
+
+    width: 100px;
+    padding-right: var(--espaco-sm);
+}
+
 /* Início da parte das notificações - Feita por Raphael Lucas */
 
 .notificacao-container {
@@ -137,13 +143,7 @@ body {
 
 /* Fim da parte das notificações - Feito por Raphael Lucas */
 
-img {
-
-    width: 100px;
-    padding-right: var(--espaco-sm);
-}
-
-/* Carrosel */
+/* Carrosel de ambientes */
 nav {
     margin: var(--espaco-xs);
     display: flex;
@@ -183,6 +183,8 @@ h2 {
     text-align: center;
 }
 
+/*outras funcionalidades */
+
 section {
 
     display: flex;
@@ -190,21 +192,6 @@ section {
     justify-content: center;
     height: 300px;
 }
-
-.swiper-container {
-    width: 100%;
-    height: 200px;
-
-}
-
-.swiper-slide {
-    width: 100%;
-    border-radius: 5px;
-    text-align: center;
-    font-size: 18px;
-    box-shadow: var(--sombra-media);
-}
-
 
 .info {
 
@@ -215,7 +202,7 @@ section {
     align-items: center;
 }
 
-#cards {
+.cards {
 
     box-shadow: var(--sombra-media);
     width: 25%;
@@ -230,6 +217,8 @@ i {
     margin-right: var(--espaco-xs);
 
 }
+
+/*footer*/
 
 footer {
     text-align: center;
