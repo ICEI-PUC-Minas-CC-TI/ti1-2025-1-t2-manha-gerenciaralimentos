@@ -116,6 +116,7 @@ btnBuscarAmbiente.addEventListener('click', async () => {
       icon: 'error',
       confirmButtonColor: '#dc3545'
     });
+    
     return;
   }
 
