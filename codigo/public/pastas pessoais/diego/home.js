@@ -4,39 +4,53 @@ const container = document.getElementById("ambientes")
 //criação dos blocos de cada ambiente
 
 document.addEventListener('DOMContentLoaded', async () => {
-            const listaAmbientes = document.getElementById('lista-ambientes');
-            listaAmbientes.innerHTML = '';
+    const carousel = document.getElementById('carousel');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
 
-            try {
-                const resposta = await fetch('https://json-server-stockit.onrender.com/ambientes');
-                if (!resposta.ok) throw new Error('Erro ao buscar os ambientes');
+    try {
+        const resposta = await fetch('https://json-server-stockit.onrender.com/ambientes');
+        if (!resposta.ok) throw new Error('Erro ao buscar os ambientes');
 
-                const ambientes = await resposta.json();
+        const ambientes = await resposta.json();
 
-                ambientes.forEach(ambiente => {
-                    const link = document.createElement('a');
-                    link.href = `../arthur/ambiente.html?id=${ambiente.id}`;
-                    link.style.textDecoration = 'none';
-                    link.style.color = 'inherit';
+        ambientes.forEach(ambiente => {
+            const link = document.createElement('a');
+            link.href = `../arthur/ambiente.html?id=${ambiente.id}`;
+            link.style.textDecoration = 'none';
+            link.style.color = 'inherit';
 
-                    const item = document.createElement('div');
-                    item.classList.add('ambiente');
-                    item.textContent = ambiente.nome;
+            const item = document.createElement('div');
+            item.classList.add('carousel-item');
+            item.textContent = ambiente.nome;
 
-                    link.appendChild(item);
-                    listaAmbientes.appendChild(link);
+            link.appendChild(item);
+            carousel.appendChild(link);
 
-                });
+        });
 
-                if (ambientes.length === 0) {
-                    listaAmbientes.innerHTML = '<p>Nenhum ambiente cadastrado.</p>';
-                }
+        let scrollAmount = 0;
+        const itemWidth = document.querySelector('.carousel-item').offsetWidth + 20;
 
-            } catch (erro) {
-                console.error(erro);
-                listaAmbientes.innerHTML += '<h1>JSON Server ERROR!!!<br><br>Se estiver fazendo a avaliação por pares e o server cair,<br>   utilize o db.json na pasta db e hospede em seu replit. Troque o link no fetch! <br><br>Caso necessário: Contato: (31)999623317</h1>';
+        nextBtn.addEventListener('click', () => {
+            if (scrollAmount < (itemWidth * ambientes.length) - (itemWidth * 3)) {
+                scrollAmount += itemWidth;
+                carousel.style.transform = `translateX(-${scrollAmount}px)`;
             }
         });
+
+        prevBtn.addEventListener('click', () => {
+            if (scrollAmount > 0) {
+                scrollAmount -= itemWidth;
+                carousel.style.transform = `translateX(-${scrollAmount}px)`;
+            }
+        });
+
+    } catch (erro) {
+        console.error(erro);
+        listaAmbientes.innerHTML += '<h1>JSON Server ERROR!!!<br><br>Se estiver fazendo a avaliação por pares e o server cair,<br>   utilize o db.json na pasta db e hospede em seu replit. Troque o link no fetch! <br><br>Caso necessário: Contato: (31)999623317</h1>';
+    }
+});
 
 //Funcionamento das Notificações, feito por Raphael Lucas
 
