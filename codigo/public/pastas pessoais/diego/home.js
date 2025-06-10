@@ -3,38 +3,40 @@ const container = document.getElementById("ambientes")
 
 //criação dos blocos de cada ambiente
 
-async function carregarAmbientes() {
-    try {
-        const resposta = await fetch(`${apiUrl}/ambientes`)
-        const dados = await resposta.json();
-        const wrapper = document.querySelector(".swiper-wrapper");
+document.addEventListener('DOMContentLoaded', async () => {
+            const listaAmbientes = document.getElementById('lista-ambientes');
+            listaAmbientes.innerHTML = '';
 
-        if (!Array.isArray(dados)) {
-            throw new Error("Dados recebidos não são um array");
-        }
+            try {
+                const resposta = await fetch('https://json-server-stockit.onrender.com/ambientes');
+                if (!resposta.ok) throw new Error('Erro ao buscar os ambientes');
 
-        dados.forEach(ambiente => {
-            const bloco = document.createElement("div");
+                const ambientes = await resposta.json();
 
-            bloco.textContent = ambiente.nome; 
-            bloco.classList.add("swiper-slide");
-            wrapper.appendChild(bloco);
+                ambientes.forEach(ambiente => {
+                    const link = document.createElement('a');
+                    link.href = `../arthur/ambiente.html?id=${ambiente.id}`;
+                    link.style.textDecoration = 'none';
+                    link.style.color = 'inherit';
 
+                    const item = document.createElement('div');
+                    item.classList.add('ambiente');
+                    item.textContent = ambiente.nome;
+
+                    link.appendChild(item);
+                    listaAmbientes.appendChild(link);
+
+                });
+
+                if (ambientes.length === 0) {
+                    listaAmbientes.innerHTML = '<p>Nenhum ambiente cadastrado.</p>';
+                }
+
+            } catch (erro) {
+                console.error(erro);
+                listaAmbientes.innerHTML += '<h1>JSON Server ERROR!!!<br><br>Se estiver fazendo a avaliação por pares e o server cair,<br>   utilize o db.json na pasta db e hospede em seu replit. Troque o link no fetch! <br><br>Caso necessário: Contato: (31)999623317</h1>';
+            }
         });
-
-        new Swiper (".swiper-container", {
-            slidesPerView: 3,
-            spaceBetween: 10, 
-            navigation: true,
-        });
-
-    } catch (erro) { 
-
-        console.error("Erro ao carregar ambientes", erro);
-    }
-}
-
-carregarAmbientes();
 
 //Funcionamento das Notificações, feito por Raphael Lucas
 

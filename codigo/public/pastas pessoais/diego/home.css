@@ -143,13 +143,41 @@ img {
 
 /* Carrosel */
 nav { 
-
     margin: var(--espaco-xs);
     display: flex;
     justify-content: center;
-    
-
 }
+
+h1 {
+            color: var(--cor-primaria);
+            text-align: center;
+        }
+
+        .lista-ambientes {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: var(--espaco-md);
+            margin-top: var(--espaco-lg);
+        }
+
+        .ambiente {
+            background-color: white;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--borda-raio);
+            padding: var(--espaco-md);
+            width: 200px;
+            height: 180px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .ambiente:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
 
 section {
 
