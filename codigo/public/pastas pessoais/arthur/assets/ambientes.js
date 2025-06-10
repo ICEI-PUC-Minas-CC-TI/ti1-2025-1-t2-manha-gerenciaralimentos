@@ -48,8 +48,6 @@ async function removerVencidos() {
     }
 }
 
-
-
 //Função para pegar ícone conforme tipo do ambiente
 async function obterIconeAmbiente(tipoID) {
     try {
@@ -75,6 +73,7 @@ async function carregarAmbiente() {
         const tipoAmbiente = ambiente.tipo;
         const iconeAmbiente = await obterIconeAmbiente(tipoAmbiente);
         document.getElementById('icone-ambiente').className = iconeAmbiente;
+        preencherSelectMover()
     } catch (error) {
         console.error('Erro ao carregar o ambiente:ou JSON SERVER Offline', error);
     }
@@ -112,12 +111,11 @@ async function carregarAlimentos() {
             linhasTabela.push(linha);
 
         });
-
+        preencherCheckMover()
     } catch (error) {
         console.error('Erro ao carregar os alimentos: ou JSON SERVER Offline', error);
     }
 }
-
 
 //Função para conferir validade(false se vencido)
 function conferirValidade(data) {
@@ -127,7 +125,6 @@ function conferirValidade(data) {
     hoje.setHours(0, 0, 0, 0);
     return dataValidade >= hoje;
 }
-
 
 // Formata Data para o Padrão Brasileiro
 function formatarData(dataIso) {
@@ -239,9 +236,13 @@ function openModal(id, form_nome, index) {
 
     // Excluir
     const btnExcluir = document.getElementById('btn-confirmar-exclusao');
-    btnExcluir.onclick = () => deletarAlimento(index, true);
+    btnExcluir.onclick = () => deletarAlimento(index, true, true);
+
+
+
 }
 
+// Carrega as categorias de alimentos e preenche o <select> do modal de cadastro
 async function carregarTiposModal() {
     const select = document.getElementById('select-cadastro');
 
@@ -268,6 +269,7 @@ async function carregarTiposModal() {
     }
 }
 
+// Obtém e valida os dados do formulário de cadastro de alimento
 function obterDadosCadastro() {
     const nome = document.getElementById('cadastro-nome').value.trim();
     const tipo = document.getElementById('cadastro-tipo').value.trim();
@@ -294,6 +296,7 @@ function obterDadosCadastro() {
     };
 }
 
+// Verifica se o alimento já existe no JSON; se não, cria um novo e retorna o ID
 async function verificarOuCriarAlimento({ nome, tipo, categoria, imagem }) {
     try {
         const response = await fetch(`${apiUrl}/alimentos`);
@@ -322,6 +325,7 @@ async function verificarOuCriarAlimento({ nome, tipo, categoria, imagem }) {
     }
 }
 
+// Cria um novo alimento no JSON e retorna o ID gerado
 async function criarAlimento(nome, tipo, categoria, imagem) {
     try {
         const response = await fetch(`${apiUrl}/alimentos`, {
@@ -337,6 +341,7 @@ async function criarAlimento(nome, tipo, categoria, imagem) {
     }
 }
 
+// Realiza o cadastro de um alimento no ambiente atual (vinculando a um ID existente ou novo)
 async function cadastrarAlimento() {
     const { nome, tipo, categoria, imagem, quantidade, vencimento, cadastro } = obterDadosCadastro();
 
@@ -369,7 +374,7 @@ async function cadastrarAlimento() {
     }
 }
 
-
+// Edita a quantidade e validade de um alimento em um ambiente
 async function editarAlimento(index) {
     try {
         const response = await fetch(`${apiUrl}/ambientes/${ambienteId}`);
@@ -420,7 +425,8 @@ async function editarAlimento(index) {
     }
 }
 
-async function deletarAlimento(index, carregar) {
+// Deleta um alimento do ambiente pelo índice,
+async function deletarAlimento(index, carregar, deletar) {
     try {
         const response = await fetch(`${apiUrl}/ambientes/${ambienteId}`);
         const ambiente = await response.json();
@@ -432,7 +438,16 @@ async function deletarAlimento(index, carregar) {
             body: JSON.stringify({ itens: ambiente.itens })
         });
 
-        if (carregar) carregarAlimentos();
+        if (carregar) {
+            carregarAlimentos();
+        }
+        if (deletar) {
+            Swal.fire({
+                icon: "success",
+                title: "Tudo Certo!",
+                text: "Alimento foi removido!",
+            });
+        }
 
     } catch (error) {
         console.error("Erro ao deletar alimento:", error);
@@ -444,6 +459,7 @@ async function deletarAlimento(index, carregar) {
     }
 }
 
+// Preenche o select com os ambientes disponíveis, exceto o atual, para mover alimentos
 async function preencherSelectMover() {
     const response = await fetch(`${apiUrl}/ambientes`)
     const ambientes = await response.json();
@@ -459,6 +475,7 @@ async function preencherSelectMover() {
     });
 }
 
+// Preenche os checkboxes com os alimentos do ambiente atual, para selecionar os que serão movidos
 async function preencherCheckMover() {
     const response = await fetch(`${apiUrl}/ambientes/${ambienteId}`)
     const ambienteAtual = await response.json();
@@ -467,6 +484,7 @@ async function preencherCheckMover() {
     alimentos = await alimentos.json();
 
     const checkMover = document.getElementById("check-mover-alimentos");
+    checkMover.innerHTML = ` `
     let i = 0;
     ambienteAtual.itens.forEach((item, index) => {
         let alimento = alimentos.find(alimento => alimento.id == item.alimentoId);
@@ -479,12 +497,62 @@ async function preencherCheckMover() {
     });
 }
 
+async function moverAlimentos() {
+    const selecionados = Array.from(
+        document.querySelectorAll('#check-mover-alimentos input[type="checkbox"]:checked')
+    ).map(checkbox => parseInt(checkbox.value));
+
+    const novoAmbienteId = parseInt(document.getElementById('select-mover-alimentos').value);
+
+    try {
+        const responseAtual = await fetch(`${apiUrl}/ambientes/${ambienteId}`);
+        const ambienteAtual = await responseAtual.json();
+
+        const responseNovo = await fetch(`${apiUrl}/ambientes/${novoAmbienteId}`);
+        const novoAmbiente = await responseNovo.json();
+
+        const itensSelecionados = selecionados.map(index => ambienteAtual.itens[index]);
+
+        novoAmbiente.itens.push(...itensSelecionados);
+
+        selecionados.sort((a, b) => b - a).forEach(index => {
+            ambienteAtual.itens.splice(index, 1);
+        });
+
+        await fetch(`${apiUrl}/ambientes/${ambienteId}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ itens: ambienteAtual.itens })
+        });
+
+        await fetch(`${apiUrl}/ambientes/${novoAmbienteId}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ itens: novoAmbiente.itens })
+        });
+
+        Swal.fire({
+                title: "Tudo Certo!",
+                text: "Alimentos foram movidos com sucesso!",
+                icon: "success"
+            });
+        carregarAlimentos();
+
+    } catch (error) {
+        console.error("Erro ao mover alimentos:", error);
+                Swal.fire({
+                title: "Opss..!",
+                text: "Erro ao mover alimentos!",
+                icon: "error"
+            });
+    }
+}
+
 //Listener para Página Carregada
 document.addEventListener('DOMContentLoaded', async () => {
     await carregarAmbiente();
     await carregarAlimentos();
     await ordenarPorNome();
     carregarTiposModal();
-    preencherSelectMover()
-    preencherCheckMover()
+
 });
