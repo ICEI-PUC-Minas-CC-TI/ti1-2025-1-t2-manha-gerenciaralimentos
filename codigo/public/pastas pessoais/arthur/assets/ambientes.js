@@ -357,7 +357,11 @@ async function cadastrarAlimento() {
             throw new Error("Erro ao Cadastrar Alimento")
         }
 
-        alert("Alimento Cadastrado com Sucesso");
+        Swal.fire({
+            icon: "success",
+            title: "Tudo Certo!",
+            text: "Alimento Cadastrado com Sucesso!",
+        });
         carregarAlimentos();
 
     } catch (error) {
@@ -400,11 +404,19 @@ async function editarAlimento(index) {
         }
 
         carregarAlimentos();
-        alert("Alimento atualizado com sucesso!");
+        Swal.fire({
+            icon: "success",
+            title: "Tudo Certo!",
+            text: "Alimento Atualizado com Sucesso!",
+        });
 
     } catch (error) {
         console.error("Erro ao editar alimento:", error);
-        alert("Erro ao editar alimento");
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Erro ao editar alimento!",
+        });
     }
 }
 
@@ -424,7 +436,11 @@ async function deletarAlimento(index, carregar) {
 
     } catch (error) {
         console.error("Erro ao deletar alimento:", error);
-        alert("Erro ao deletar alimento");
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Erro ao deletar alimento!",
+        });
     }
 }
 
