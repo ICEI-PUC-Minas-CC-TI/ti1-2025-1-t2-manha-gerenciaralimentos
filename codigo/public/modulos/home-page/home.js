@@ -201,7 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
             dropdown.querySelectorAll(".btn-ver").forEach(btn => {
                 btn.addEventListener("click", () => {
                     const ambienteId = btn.dataset.ambiente;
-                    window.location.href = `../arthur/ambiente.html?id=${ambienteId}`;
+                    window.location.href = `../ambientes/ambiente.html?id=${ambienteId}`;
                 });
             });
 
