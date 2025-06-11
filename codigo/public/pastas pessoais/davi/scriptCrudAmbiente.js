@@ -53,7 +53,8 @@ btnConfirmar.onclick = async () => {
     return;
   }
 
-  const novoAmbiente = { nome, tipo, imagem };
+  let itens = "itens[]";
+  const novoAmbiente = { nome, tipo, imagem,itens };
 
   const response = await fetch(apiUrl, {
     method: 'POST',
