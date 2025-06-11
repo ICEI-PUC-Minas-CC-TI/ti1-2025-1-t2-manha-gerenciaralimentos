@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockIt</title>
+    <!--link para conseguir os ícones-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="home.css">
+    <link rel="icon" href="../../assets/images/logo_stockit.ico">
+
+</head>
+
+<body>
+
+    <div class="content">
+        <!--Cabeçalho da home-->
+        <header class="cabecalho">
+            <div class="logo-container">
+                <span class="logo-icone"><img src="/codigo/public/pastas pessoais/raphael/assets/images/logo.ico"
+                        alt=""></span>
+                <h1>StockIT</h1>
+            </div>
+            <div class="caixa-pesquisa-usuario">
+                <div class="pesquisa">
+                    <input type="text" id="texto-pesquisa" placeholder="  Pesquisar...">
+                    <button id="pesquisar"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <select name="" id="dropdown-resultados" size="5"></select>
+                </div>
+                <div class="notificacao-container">
+                    <button id="btnNotificacao">
+                        <i class="fa-solid fa-bell"></i>
+                        <span id="badgeNotificacao" class="badge">0</span>
+                    </button>
+                    <div id="dropdownNotificacao" class="dropdown hidden">
+                        <!-- Conteúdo dinâmico será inserido aqui -->
+                    </div>
+                </div>
+                <i class="fa-solid fa-circle-user fa-3x"></i>
+            </div>
+        </header>
+
+        <h2>Meus Ambientes</h2>
+
+        <!--local para os ambientes criados-->
+        <nav>
+            <div class="carousel-container">
+                <button id="prevBtn"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="carousel" id="carousel">
+                    <!-- Os itens serão adicionados pelo JavaScript -->
+                </div>
+                <button id="nextBtn"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+
+        </nav>
+
+        <section>
+
+            <!--Outras funcionalidades (páginas)-->
+            <div class="info">
+                <div class="cards" id="vencimento" data-url="../gabriel/alimentos vencendo/alimentosVencendo.html">
+                    <i class="fa-solid fa-circle-exclamation fa-3x"></i>
+                    <h2>Alimentos Vencendo</h2>
+                </div>
+                <div class="cards" id="receitas" data-url="../gabriel/receitas/receitas.html">
+                    <i class="fa-solid fa-book-open fa-3x"></i>
+                    <h2>Receitas</h2>
+                </div>
+                <div class="cards" id="compras" data-url="../raphael/listadeCompras.html">
+                    <i class="fa-solid fa-cart-shopping fa-3x"></i>
+                    <h2> Lista de Compras</h2>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>StockIT &copy; 2025 - Gerenciamento de Estoque de Alimentos</p>
+    </footer>
+    <script src="home.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+</body>
+
+</html>
