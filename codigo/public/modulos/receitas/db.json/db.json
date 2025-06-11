@@ -1,0 +1,61 @@
+{
+  "alimentos": [
+    {
+      "id": 1,
+      "nome": "maçã",
+      "tipo": "fuji",
+      "imagem": "maca-fuji.png",
+      "categoria": 1
+    },
+    {
+      "id": 2,
+      "nome": "cenoura",
+      "tipo": "orgânica",
+      "imagem": "cenoura-organica.png",
+      "categoria": 2
+    },
+    {
+      "id": 3,
+      "nome": "espinafre",
+      "tipo": "fresco",
+      "imagem": "espinafre-fresco.png",
+      "categoria": 3
+    }
+  ],
+  "ambientes": [
+    {
+      "id": 1,
+      "nome": "Geladeira",
+      "tipo": 1,
+      "imagem": "geladeira.png",
+      "itens": [
+        {
+          "alimentoId": 1,
+          "quantidade": 6,
+          "vencimento": "2025-06-07",
+          "cadastro": "2025-06-01"
+        },
+        {
+          "alimentoId": 2,
+          "quantidade": 4,
+          "vencimento": "2025-06-10",
+          "cadastro": "2025-06-02"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nome": "Despensa",
+      "tipo": 2,
+      "imagem": "despensa.png",
+      "itens": [
+        {
+          "alimentoId": 3,
+          "quantidade": 2,
+          "vencimento": "2025-06-09",
+          "cadastro": "2025-06-03"
+        }
+      ]
+    }
+  ]
+}
