@@ -1,5 +1,56 @@
 const apiUrl = 'https://json-server-stockit.onrender.com'
 
+//barra de pesquisa 
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const barraPes = document.getElementById("texto-pesquisa");
+    const botaoPes = document.getElementById("pesquisar");
+    const dropdown = document.getElementById("dropdown-resultados");
+
+    botaoPes.addEventListener("click", async () => {
+        const query = barraPes.value.toLowerCase().trim();
+        if (!query) return;
+        
+        dropdown.style.display = "block";
+
+        dropdown.innerHTML = "<p>Buscando...</p>";
+
+        try {
+            const response = await fetch(`${apiUrl}/alimentos`)
+            if (!response.ok) throw new Error ("Erro ao buscar alimento.");
+
+            const data = await response.json(); 
+            dropdown.innerHTML = ""; 
+
+            const dataFiltrada = data.filter(item => item.nome.toLowerCase().includes(query));
+
+            if (dataFiltrada.length === 0) {
+                dropdown.innerHTML = "<p> Nenhum alimento encontrado. </p>";
+                return;
+            }
+
+            dataFiltrada.forEach(item => {
+                const option = document.createElement("option");
+                option.textContent = `${item.nome} - ${item.categoria}`;
+                option.value = item.id; 
+                dropdown.appendChild(option)
+            });
+        } catch (error) {
+            console.error(error);
+            dropdown.innerText= "<p> Erro ao buscar dados. </p>";
+        }
+    });
+
+    dropdown.addEventListener("change", () => {
+        const selectedValue = dropdown.value; 
+        if (selectedValue) {
+            window.location.href = `` //sem direcionamento temporariamente
+        }
+    })
+
+});
+
 //criação dos blocos de cada ambiente
 
 document.addEventListener('DOMContentLoaded', async () => {
