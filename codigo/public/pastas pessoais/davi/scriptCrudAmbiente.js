@@ -208,3 +208,13 @@ btnBuscarAmbiente.addEventListener('click', async () => {
     }
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const btnHome = document.getElementById("btn-home");
+    if (btnHome) {
+        btnHome.addEventListener("click", () => {
+            window.location.href = "../diego/home.html";
+        });
+    }
+});
+

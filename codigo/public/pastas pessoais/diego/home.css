@@ -255,6 +255,42 @@ i {
 
 }
 
+#crudAmbiente {
+  margin-top: 20px;
+  margin-bottom: 20px; 
+  display: flex;
+  justify-content: center;
+}
+
+  #btn-crudAmbiente {
+  width: 280px;         
+  padding: 15px; 
+  background-color:#eaeef3;      
+  color: #4e4e4e;               
+  font-size: 18px;            
+  font-weight: bold;          
+  text-align: center;
+  border: none;
+  border-radius: 2px;         
+  cursor: pointer;            
+  transition: background-color 0.3s ease, transform 0.2s ease; 
+}
+
+/* Efeito ao passar o mouse por cima (hover) */
+#btn-crudAmbiente:hover {
+  background-color: #0abb83;  /* Escurece a cor de fundo para dar feedback visual */
+  color: white;
+  border: none;
+  transform: scale(1.05);     /* Aumenta levemente o botão para destacá-lo */
+}
+
+/* Efeito ao clicar no botão (active) */
+#btn-crudAmbiente:active {
+  background-color:  #09af7b;  /* Escurece ainda mais ao ser pressionado */
+  transform: scale(0.98);     /* Diminui levemente para simular o clique */
+}
+
+
 /*footer*/
 
 footer {

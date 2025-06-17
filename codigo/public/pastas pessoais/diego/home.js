@@ -218,3 +218,12 @@ document.addEventListener("DOMContentLoaded", () => {
     carregarNotificacoes();
     setInterval(carregarNotificacoes, 30000);
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const btnCrudAmbiente = document.getElementById("btn-crudAmbiente");
+    if (btnCrudAmbiente) {
+        btnCrudAmbiente.addEventListener("click", () => {
+            window.location.href = "../davi/CrudAmbiente.html";
+        });
+    }
+});
