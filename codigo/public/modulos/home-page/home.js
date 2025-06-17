@@ -11,43 +11,92 @@ document.addEventListener("DOMContentLoaded", () => {
     botaoPes.addEventListener("click", async () => {
         const query = barraPes.value.toLowerCase().trim();
         if (!query) return;
-        
+
         dropdown.style.display = "block";
 
         dropdown.innerHTML = "<p>Buscando...</p>";
 
         try {
-            const response = await fetch(`${apiUrl}/alimentos`)
-            if (!response.ok) throw new Error ("Erro ao buscar alimento.");
 
-            const data = await response.json(); 
-            dropdown.innerHTML = ""; 
+            const [resAmb, resAli] = await Promise.all([
+                fetch(`${apiUrl}/ambientes`),
+                fetch(`${apiUrl}/alimentos`)
+            ]);
+            if (!resAmb.ok || !resAli.ok) throw new Error("Erro ao buscar dados.");
 
-            const dataFiltrada = data.filter(item => item.nome.toLowerCase().includes(query));
+            const [ambientes, alimentos] = await Promise.all([
+                resAmb.json(),
+                resAli.json()
+            ]);
 
-            if (dataFiltrada.length === 0) {
-                dropdown.innerHTML = "<p> Nenhum alimento encontrado. </p>";
+            const resultados = [];
+
+            ambientes.forEach(env => {
+                if (env.nome.toLowerCase().includes(query)) {
+                    resultados.push({
+                        type: "ambiente",
+                        id: env.id,
+                        nome: env.nome
+                    });
+                }
+
+                if (Array.isArray(env.itens)) {
+                    env.itens.forEach(item => {
+                        const ali = alimentos.find(a => a.id == item.alimentoId);
+                        if (ali && ali.nome.toLowerCase().includes(query)) {
+                            resultados.push({
+                                type: "alimento",
+                                id: ali.id,
+                                nome: ali.nome,
+                                ambienteId: env.id,
+                                ambienteNome: env.nome
+                            })
+                        }
+                    });
+                }
+            });
+
+            dropdown.innerHTML = "";
+
+            if (resultados.length === 0) {
+                dropdown.innerHTML = "<p> Nenhum resultado encontrado. </p>";
                 return;
             }
 
-            dataFiltrada.forEach(item => {
+            resultados.slice(0, 10).forEach(item => {
                 const option = document.createElement("option");
-                option.textContent = `${item.nome} - ${item.categoria}`;
-                option.value = item.id; 
-                dropdown.appendChild(option)
+                option.textContent =
+                    item.type === "ambiente"
+                        ? `${item.nome}`
+                        : `${item.nome} (${item.ambienteNome})`;
+                option.value = item.id;
+                option.dataset.type = item.type;
+                if (item.ambienteId) option.dataset.ambiente = item.ambienteId;
+                dropdown.appendChild(option);
             });
         } catch (error) {
             console.error(error);
-            dropdown.innerText= "<p> Erro ao buscar dados. </p>";
+            dropdown.innerHTML = "<p> Erro ao buscar dados. </p>";
         }
+
     });
 
     dropdown.addEventListener("change", () => {
-        const selectedValue = dropdown.value; 
-        if (selectedValue) {
-            window.location.href = `` //sem direcionamento temporariamente
+        const selected = dropdown.selectedOptions[0];
+        const type = selected.dataset.type;
+        const id = selected.value;
+        const env = selected.dataset.ambiente;
+
+        if (type === "ambiente") {
+            // vai pra página de detalhe daquele ambiente
+            window.location.href = `../ambientes/ambiente.html?id=${id}`;
+        } else {
+            // vai pra mesma página, mas com foco naquele alimento
+            window.location.href =
+                `../ambientes/ambiente.html?id=${env}&focus=${id}`;
         }
-    })
+    });
+
 
 });
 
