@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--Icone da página -->
-    <link rel="icon" href="../../assets/images/logo_stockit.ico" type="image/x-icon" >
+    <link rel="icon" href="../../assets/images/logo_stockit.ico" type="image/x-icon">
     <link rel="stylesheet" href="listadeCompras.css">
     <title>Lista de Compras</title>
 </head>
+
 <body>
     <header class="cabecalho">
         <div class="cabecalho-conteudo">
             <div class="logo-container">
-                <a href="../home-page/home.html"><span class="logo-icone"><img src="../../assets/images/logo_stockit.ico" alt=""></span></a>
+                <a href="../home-page/home.html"><span class="logo-icone"><img
+                            src="../../assets/images/logo_stockit.ico" alt=""></span></a>
                 <h1>StockIT</h1>
             </div>
             <div class="caixa-pesquisa">
@@ -20,12 +23,90 @@
             </div>
         </div>
     </header>
+
+    <div class="container-botoes-gerais">
+        <button class="botao botao-salvar" onclick="abrirModal('modal-cadastro')">
+            ➕ Adicionar Item
+        </button>
+    </div>
+
+    <!-- MODAIS -->
+    <div id="modal-cadastro" class="modal">
+        <div class="modal-conteudo">
+            <div class="modal-header">
+                <h2>Cadastrar Item</h2>
+                <button class="btn-fechar" onclick="fecharModal('modal-cadastro')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <label>Nome do Produto</label>
+                <input type="text" id="cadastro-nome" placeholder="Ex: Arroz">
+
+                <label>Tipo</label>
+                <input type="text" id="cadastro-tipo" placeholder="Ex: Integral">
+
+                <label>Quantidade</label>
+                <input type="number" id="cadastro-quantidade" min="1" value="1">
+
+                <label>Imagem</label>
+                <input type="file" id="cadastro-imagem" accept="image/*">
+
+                <label>Lista</label>
+                <select id="cadastro-lista">
+                    <option disabled selected>Selecione uma Lista</option>
+                </select>
+
+                <label for="nova-lista">Ou criar nova lista:</label>
+                <input type="text" id="nova-lista" placeholder="Nome da nova lista (opcional)">
+            </div>
+            <div class="modal-footer">
+                <button class="botao botao-cancelar" onclick="fecharModal('modal-cadastro')">Cancelar</button>
+                <button class="botao botao-salvar" onclick="adicionarItem()">Adicionar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MODAL EDITAR ===== -->
+    <div id="modal-editar" class="modal">
+        <div class="modal-conteudo">
+            <div class="modal-header">
+                <h2>Editar Item</h2>
+                <button class="btn-fechar" onclick="fecharModal('modal-editar')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <label>Quantidade</label>
+                <input type="number" id="editar-quantidade" min="1" value="1">
+            </div>
+            <div class="modal-footer">
+                <button class="botao botao-cancelar" onclick="fecharModal('modal-editar')">Cancelar</button>
+                <button class="botao botao-salvar" onclick="salvarEdicao()">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MODAL EXCLUIR ===== -->
+    <div id="modal-excluir" class="modal">
+        <div class="modal-conteudo">
+            <div class="modal-header">
+                <h2>Excluir Item</h2>
+                <button class="btn-fechar" onclick="fecharModal('modal-excluir')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Deseja realmente excluir <strong id="excluir-nome"></strong>?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="botao botao-cancelar" onclick="fecharModal('modal-excluir')">Cancelar</button>
+                <button class="botao botao-excluir" onclick="confirmarExclusao()">Excluir</button>
+            </div>
+        </div>
+    </div>
+
     <div id="listadeCompras">
-        
+
     </div>
     <footer class="rodape">
         <p>StockIT &copy; 2025 - Gerenciamento de Estoque de Alimentos</p>
     </footer>
 </body>
 <script src="listadeCompras.js"></script>
+
 </html>
