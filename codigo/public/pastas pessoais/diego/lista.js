@@ -102,8 +102,11 @@ function configurarBotoes() {
     const nomeLista = nomeListaInput.value.trim();
 
     if (!nomeLista) {
-      alert("Digite o nome da lista!");
-      return;
+      return Swal.fire({
+        icon: 'warning',
+        title: 'Digite o nome da lista!',
+        text: 'Você precisa informar um nome antes de continuar.'
+      });
     }
 
     fetch(`${apiUrl}/listasDeCompra`)
@@ -112,8 +115,11 @@ function configurarBotoes() {
         const listaEncontrada = listas.find(lista => lista.nome.toLowerCase() === nomeLista.toLowerCase());
 
         if (!listaEncontrada) {
-          alert("Lista não encontrada!");
-          return;
+          return Swal.fire ({
+            icon: 'error', 
+            title: 'Lista não encontrada!',
+            text: 'Não existe nenhuma lista com esse nome.'
+          });
         }
 
         const novosItens = [];
