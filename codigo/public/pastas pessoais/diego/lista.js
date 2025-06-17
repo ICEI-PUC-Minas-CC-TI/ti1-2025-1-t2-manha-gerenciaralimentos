@@ -25,10 +25,10 @@ function carregarAlimentos() {
     .then(data => {
       alimentosDisponiveis = {};
       data.forEach(alimento => {
-        const nomeNormalizado = `${alimento.nome} ${alimento.tipo}`.toLowerCase().trim(); // Agora tudo fica minúsculo
+        const nomeNormalizado = `${alimento.nome} ${alimento.tipo}`.toLowerCase().trim(); 
         alimentosDisponiveis[nomeNormalizado] = alimento.id;
       });
-      console.log("Lista de alimentos carregada:", alimentosDisponiveis); // Confere se está correto
+      console.log("Lista de alimentos carregada:", alimentosDisponiveis); 
     })
     .catch(error => console.error("Erro ao carregar alimentos:", error));
 }
@@ -42,15 +42,10 @@ function limparModalAtualizar() {
         return;
     }
 
-    nomeListaInput.value = ""; // Limpa o nome da lista
+    nomeListaInput.value = "";
 
-    // Remove APENAS os inputs de alimentos, sem apagar os botões
     alimentosContainer.querySelectorAll("div").forEach(div => div.remove());
 }
-
-
-
-
 
 function configurarBotoes() {
   const btnAdicionarAlimentos = document.getElementById("adicinar_alimentos"); //Adicionar alimentos na lista
@@ -246,75 +241,6 @@ function abrirPopupAlimentos() {
   document.body.appendChild(popup);
 }
 
-//Testes com o botão de "cadastrar alimentos"
-
-/*document.getElementById("cadastrar_alimentos").addEventListener("click", abrirPopupCadastro);
-
-function abrirPopupCadastro() {
-  const popup = document.createElement("div");
-  popup.classList.add("popup");
-
-  const titulo = document.createElement("h2");
-  titulo.textContent = "Cadastrar Novo Alimento";
-  popup.appendChild(titulo);
-
-  // Input para nome do alimento
-  const inputNome = document.createElement("input");
-  inputNome.type = "text";
-  inputNome.placeholder = "Nome do alimento";
-  popup.appendChild(inputNome);
-
-  // Input para tipo do alimento
-  const inputTipo = document.createElement("input");
-  inputTipo.type = "text";
-  inputTipo.placeholder = "Tipo do alimento (fruta, vegetal, proteína...)";
-  popup.appendChild(inputTipo);
-
-  // Botão para salvar
-  const botaoSalvar = document.createElement("button");
-  botaoSalvar.textContent = "Salvar";
-  botaoSalvar.classList.add("btn-adicionar");
-  botaoSalvar.addEventListener("click", () => {
-    const nome = inputNome.value.trim();
-    const tipo = inputTipo.value.trim();
-
-    if (nome === "" || tipo === "") {
-      alert("Preencha todos os campos!");
-      return;
-    }
-
-    const novoAlimento = { nome, tipo };
-
-    // Enviar para API
-    fetch(`${apiUrl}/alimentos`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(novoAlimento)
-    })
-      .then(response => {
-        if (response.ok) {
-          alert("Alimento cadastrado com sucesso!");
-          document.body.removeChild(popup);
-        } else {
-          alert("Erro ao cadastrar alimento.");
-        }
-      })
-      .catch(error => console.error("Erro:", error));
-  });
-  popup.appendChild(botaoSalvar);
-
-  // Botão para fechar
-  const botaoFechar = document.createElement("button");
-  botaoFechar.textContent = "Fechar";
-  botaoFechar.classList.add("btn-fechar");
-  botaoFechar.addEventListener("click", () => document.body.removeChild(popup));
-  popup.appendChild(botaoFechar);
-
-  document.body.appendChild(popup);
-}*/
-
-
-
 function criarLista() {
   const nomeInput = document.getElementById("nome_lista");
   const nomeLista = nomeInput.value.trim();
@@ -369,9 +295,6 @@ function criarLista() {
 document.addEventListener('DOMContentLoaded', async () => {
   await carregarDados();
 })
-
-
-//Funcionalidades pendentes
 
 //atualizar lista
 function atualizarListaPorNome(nomeLista, novosItens) {
