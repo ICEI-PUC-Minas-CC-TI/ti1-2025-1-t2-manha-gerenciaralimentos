@@ -1,27 +1,29 @@
 const apiUrl = 'https://json-server-stockit.onrender.com'
 
-//barra de pesquisa 
-
+// Barra de pesquisa 
 document.addEventListener("DOMContentLoaded", () => {
-
     const barraPes = document.getElementById("texto-pesquisa");
-    const botaoPes = document.getElementById("pesquisar");
     const dropdown = document.getElementById("dropdown-resultados");
 
-    botaoPes.addEventListener("click", async () => {
+    if (!barraPes || !dropdown) return;
+
+    // Função de pesquisa
+    const realizarPesquisa = async () => {
         const query = barraPes.value.toLowerCase().trim();
-        if (!query) return;
+        if (!query) {
+            dropdown.style.display = "none";
+            return;
+        }
 
         dropdown.style.display = "block";
-
-        dropdown.innerHTML = "<p>Buscando...</p>";
+        dropdown.innerHTML = "<option>Buscando...</option>";
 
         try {
-
             const [resAmb, resAli] = await Promise.all([
                 fetch(`${apiUrl}/ambientes`),
                 fetch(`${apiUrl}/alimentos`)
             ]);
+
             if (!resAmb.ok || !resAli.ok) throw new Error("Erro ao buscar dados.");
 
             const [ambientes, alimentos] = await Promise.all([
@@ -50,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 nome: ali.nome,
                                 ambienteId: env.id,
                                 ambienteNome: env.nome
-                            })
+                            });
                         }
                     });
                 }
@@ -59,16 +61,15 @@ document.addEventListener("DOMContentLoaded", () => {
             dropdown.innerHTML = "";
 
             if (resultados.length === 0) {
-                dropdown.innerHTML = "<p> Nenhum resultado encontrado. </p>";
+                dropdown.innerHTML = "<option>Nenhum resultado encontrado.</option>";
                 return;
             }
 
             resultados.slice(0, 10).forEach(item => {
                 const option = document.createElement("option");
-                option.textContent =
-                    item.type === "ambiente"
-                        ? `${item.nome}`
-                        : `${item.nome} (${item.ambienteNome})`;
+                option.textContent = item.type === "ambiente"
+                    ? `${item.nome}`
+                    : `${item.nome} (${item.ambienteNome})`;
                 option.value = item.id;
                 option.dataset.type = item.type;
                 if (item.ambienteId) option.dataset.ambiente = item.ambienteId;
@@ -76,87 +77,355 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         } catch (error) {
             console.error(error);
-            dropdown.innerHTML = "<p> Erro ao buscar dados. </p>";
+            dropdown.innerHTML = "<option>Erro ao buscar dados.</option>";
         }
+    };
 
-    });
+    // Event listeners para pesquisa
+    barraPes.addEventListener("input", realizarPesquisa);
+    barraPes.addEventListener("focus", realizarPesquisa);
 
     dropdown.addEventListener("change", () => {
         const selected = dropdown.selectedOptions[0];
+        if (!selected) return;
+
         const type = selected.dataset.type;
         const id = selected.value;
         const env = selected.dataset.ambiente;
 
         if (type === "ambiente") {
-            // vai pra página de detalhe daquele ambiente
             window.location.href = `../ambientes/ambiente.html?id=${id}`;
         } else {
-            // vai pra mesma página, mas com foco naquele alimento
-            window.location.href =
-                `../ambientes/ambiente.html?id=${env}&focus=${id}`;
+            window.location.href = `../ambientes/ambiente.html?id=${env}&focus=${id}`;
         }
     });
 
-
+    // Fechar dropdown ao clicar fora
+    document.addEventListener("click", (e) => {
+        if (!e.target.closest('.search-container')) {
+            dropdown.style.display = "none";
+        }
+    });
 });
 
-//criação dos blocos de cada ambiente
+// Gerenciador de Carrossel
+class CarouselManager {
+    constructor() {
+        this.carousel = document.getElementById('ambientes-container');
+        this.prevBtn = document.getElementById('carousel-prev');
+        this.nextBtn = document.getElementById('carousel-next');
+        this.currentIndex = 0;
+        this.cardWidth = 300; // largura do card + gap
+        this.visibleCards = 0;
+        const firstCard = this.carousel.querySelector('.ambiente-card');
+        const style = getComputedStyle(this.carousel);
+        this.cardW = firstCard.offsetWidth;
+        this.gap = parseFloat(style.gap); 
+        this.step = this.cardW + this.gap; 
 
-document.addEventListener('DOMContentLoaded', async () => {
-    const carousel = document.getElementById('carousel');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
+        this.init();
+    }
 
-    try {
-        const resposta = await fetch('https://json-server-stockit.onrender.com/ambientes');
+    init() {
+        if (!this.carousel || !this.prevBtn || !this.nextBtn) return;
+
+        this.setupEventListeners();
+
+        this.visibleCards = this.getVisibleCards();
+        this.updateCarousel();
+
+        // Atualizar no resize
+        window.addEventListener('resize', () => {
+            this.visibleCards = this.getVisibleCards();
+            this.carousel.parentElement.style.width = `${this.visibleCards * this.cardWidth}px`;
+            this.updateCarousel();
+        });
+    }
+
+    getTotalCards() {
+        return this.carousel.children.length;
+    }
+
+    getVisibleCards() {
+        const containerWidth = this.carousel.parentElement.offsetWidth;
+        const fitCount = Math.floor(containerWidth / this.cardWidth);
+        const total = this.getTotalCards(); 
+
+        return Math.min(fitCount, 3, total); 
+    }
+
+    setupEventListeners() {
+        this.prevBtn.addEventListener('click', () => this.prev());
+        this.nextBtn.addEventListener('click', () => this.next());
+    }
+
+    prev() {
+        if (this.currentIndex > 0) {
+            this.currentIndex--;
+            this.updateCarousel();
+        }
+    }
+
+    next() {
+        const maxIndex = Math.max(0, this.getTotalCards() - this.visibleCards);
+        if (this.currentIndex < maxIndex) {
+            this.currentIndex++;
+            this.updateCarousel();
+        }
+    }
+
+    updateCarousel() {
+  const tx = - this.currentIndex * this.step;
+  this.carousel.style.transform = `translateX(${tx}px)`;
+
+  // botão prev só ativo se index > 0
+  this.prevBtn.disabled = this.currentIndex === 0;
+  // next só até o último grupo de 3 aparecer
+  this.nextBtn.disabled =
+    this.currentIndex >= this.getTotalCards() - this.visibleCards;
+}
+
+
+    reset() {
+        this.currentIndex = 0;
+        this.visibleCards = this.getVisibleCards();
+        this.updateCarousel();
+    }
+}
+
+// Gerenciador de Ambientes
+class AmbientesManager {
+    constructor() {
+        this.container = document.getElementById('ambientes-container');
+        this.ambientes = [];
+        this.carousel = null;
+        this.init();
+    }
+
+    async init() {
+        if (!this.container) return;
+
+        try {
+            await this.loadAmbientes();
+            this.setupEventListeners();
+
+            // Inicializar carrossel após carregar ambientes
+            this.carousel = new CarouselManager();
+        } catch (error) {
+            console.error('Erro ao inicializar ambientes:', error);
+            this.showError();
+        }
+    }
+
+    async loadAmbientes() {
+        const resposta = await fetch(`${apiUrl}/ambientes`);
         if (!resposta.ok) throw new Error('Erro ao buscar os ambientes');
 
-        const ambientes = await resposta.json();
-
-        ambientes.forEach(ambiente => {
-            const link = document.createElement('a');
-            link.href = `../ambientes/ambiente.html?id=${ambiente.id}`;
-            link.style.textDecoration = 'none';
-            link.style.color = 'inherit';
-
-            const item = document.createElement('div');
-            item.classList.add('carousel-item');
-            item.textContent = ambiente.nome;
-
-            link.appendChild(item);
-            carousel.appendChild(link);
-
-        });
-
-        //botões para o carrosel
-
-        let scrollAmount = 0;
-        const itemWidth = document.querySelector('.carousel-item').offsetWidth + 20;
-
-        nextBtn.addEventListener('click', () => {
-            if (scrollAmount < (itemWidth * ambientes.length) - (itemWidth * 3)) {
-                scrollAmount += itemWidth;
-                carousel.style.transform = `translateX(-${scrollAmount}px)`;
-            }
-        });
-
-        prevBtn.addEventListener('click', () => {
-            if (scrollAmount > 0) {
-                scrollAmount -= itemWidth;
-                carousel.style.transform = `translateX(-${scrollAmount}px)`;
-            }
-        });
-
-    } catch (erro) {
-        console.error(erro);
-        listaAmbientes.innerHTML += '<h1>JSON Server ERROR!!!<br><br>Se estiver fazendo a avaliação por pares e o server cair,<br>   utilize o db.json na pasta db e hospede em seu replit. Troque o link no fetch! <br><br>Caso necessário: Contato: (31)999623317</h1>';
+        this.ambientes = await resposta.json();
+        this.renderAmbientes();
     }
+
+    renderAmbientes() {
+        this.container.innerHTML = '';
+
+        this.ambientes.forEach(ambiente => {
+            const card = this.createAmbienteCard(ambiente);
+            this.container.appendChild(card);
+        });
+
+        // Resetar carrossel após renderizar
+        if (this.carousel) {
+            this.carousel.reset();
+        }
+    }
+
+    createAmbienteCard(ambiente) {
+        const card = document.createElement('div');
+        card.className = 'ambiente-card';
+        card.innerHTML = `
+            <div class="ambiente-header">
+                <h3 class="ambiente-nome">${ambiente.nome}</h3>
+                <div class="ambiente-actions">
+                    <button class="ambiente-menu-btn" data-id="${ambiente.id}">
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </button>
+                    <div class="ambiente-dropdown hidden" id="dropdown-${ambiente.id}">
+                        <div class="ambiente-dropdown-item editar-ambiente" data-id="${ambiente.id}">
+                            Editar
+                        </div>
+                        <div class="ambiente-dropdown-item excluir-ambiente" data-id="${ambiente.id}">
+                            Excluir
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ambiente-image-placeholder">
+                Imagem
+            </div>
+        `;
+
+        // Adicionar evento de clique no card (exceto no menu)
+        card.addEventListener('click', (e) => {
+            if (!e.target.closest('.ambiente-actions')) {
+                window.location.href = `../ambientes/ambiente.html?id=${ambiente.id}`;
+            }
+        });
+
+        return card;
+    }
+
+    setupEventListeners() {
+        // Event delegation para botões de menu
+        this.container.addEventListener('click', (e) => {
+            if (e.target.closest('.ambiente-menu-btn')) {
+                e.stopPropagation();
+                const btn = e.target.closest('.ambiente-menu-btn');
+                const id = btn.dataset.id;
+                const dropdown = document.getElementById(`dropdown-${id}`);
+
+                // Fechar outros dropdowns
+                document.querySelectorAll('.ambiente-dropdown').forEach(d => {
+                    if (d !== dropdown) d.classList.add('hidden');
+                });
+
+                dropdown.classList.toggle('hidden');
+            }
+
+            if (e.target.classList.contains('editar-ambiente')) {
+                e.stopPropagation();
+                this.editarAmbiente(e.target.dataset.id);
+            }
+
+            if (e.target.classList.contains('excluir-ambiente')) {
+                e.stopPropagation();
+                this.excluirAmbiente(e.target.dataset.id);
+            }
+        });
+
+        // Fechar dropdowns ao clicar fora
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.ambiente-actions')) {
+                document.querySelectorAll('.ambiente-dropdown').forEach(d => {
+                    d.classList.add('hidden');
+                });
+            }
+        });
+    }
+
+    async editarAmbiente(id) {
+        try {
+            const ambiente = await (await fetch(`${apiUrl}/ambientes/${id}`)).json();
+
+            const { value: novoNome } = await Swal.fire({
+                title: 'Editar Ambiente',
+                input: 'text',
+                inputLabel: 'Nome do ambiente',
+                inputValue: ambiente.nome,
+                inputPlaceholder: 'Digite o novo nome...',
+                showCancelButton: true,
+                confirmButtonText: 'Salvar',
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#059669',
+                cancelButtonColor: '#6b7280',
+                inputValidator: (value) => {
+                    if (!value || !value.trim()) {
+                        return 'Por favor, digite um nome válido!';
+                    }
+                }
+            });
+
+            if (novoNome && novoNome.trim()) {
+                const response = await fetch(`${apiUrl}/ambientes/${id}`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nome: novoNome.trim() })
+                });
+
+                if (response.ok) {
+                    await Swal.fire({
+                        title: 'Sucesso!',
+                        text: 'Ambiente atualizado com sucesso!',
+                        icon: 'success',
+                        confirmButtonColor: '#059669'
+                    });
+                    await this.loadAmbientes();
+                } else {
+                    throw new Error('Erro na resposta do servidor');
+                }
+            }
+        } catch (error) {
+            console.error('Erro ao editar ambiente:', error);
+            await Swal.fire({
+                title: 'Erro!',
+                text: 'Erro ao editar ambiente. Tente novamente.',
+                icon: 'error',
+                confirmButtonColor: '#dc2626'
+            });
+        }
+    }
+
+    async excluirAmbiente(id) {
+        const result = await Swal.fire({
+            title: 'Tem certeza?',
+            text: 'Esta ação não pode ser desfeita!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#dc2626',
+            cancelButtonColor: '#6b7280',
+            confirmButtonText: 'Sim, excluir!',
+            cancelButtonText: 'Cancelar'
+        });
+
+        if (result.isConfirmed) {
+            try {
+                const response = await fetch(`${apiUrl}/ambientes/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    await Swal.fire({
+                        title: 'Excluído!',
+                        text: 'Ambiente removido com sucesso!',
+                        icon: 'success',
+                        confirmButtonColor: '#059669'
+                    });
+                    await this.loadAmbientes();
+                } else {
+                    throw new Error('Erro na resposta do servidor');
+                }
+            } catch (error) {
+                console.error('Erro ao excluir ambiente:', error);
+                await Swal.fire({
+                    title: 'Erro!',
+                    text: 'Erro ao excluir ambiente. Tente novamente.',
+                    icon: 'error',
+                    confirmButtonColor: '#dc2626'
+                });
+            }
+        }
+    }
+
+    showError() {
+        if (this.container) {
+            this.container.innerHTML = `
+                <div style="text-align: center; padding: 2rem; color: #dc2626; grid-column: 1 / -1;">
+                    <h3>Erro ao carregar ambientes</h3>
+                    <p>Verifique sua conexão e tente novamente.</p>
+                </div>
+            `;
+        }
+    }
+}
+
+// Inicializar gerenciador de ambientes
+let ambientesManager;
+document.addEventListener('DOMContentLoaded', () => {
+    ambientesManager = new AmbientesManager();
 });
 
-//link para as outras partes do site 
-
+// Links para outras partes do site 
 document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll(".cards").forEach(card => {
+    document.querySelectorAll(".funcionalidade-card").forEach(card => {
         card.addEventListener("click", () => {
             const url = card.getAttribute("data-url");
             if (url) window.location.href = url;
@@ -164,12 +433,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-//Funcionamento das Notificações, feito por Raphael Lucas
-
+// Funcionamento das Notificações
 document.addEventListener("DOMContentLoaded", () => {
     const btnNotificacao = document.getElementById("btnNotificacao");
     const dropdown = document.getElementById("dropdownNotificacao");
     const badge = document.getElementById("badgeNotificacao");
+
+    if (!btnNotificacao || !dropdown || !badge) return;
 
     const diasLimite = 3;
 
@@ -186,7 +456,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const hoje = new Date();
             const alimentosVencendo = [];
 
-            // Verifica se o item está vencido
             ambientes.forEach(amb => {
                 amb.itens?.forEach(item => {
                     const vencimento = new Date(item.vencimento);
@@ -205,24 +474,55 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             badge.textContent = alimentosVencendo.length;
-            badge.style.display = alimentosVencendo.length > 0 ? "inline" : "none";
+            badge.style.display = alimentosVencendo.length > 0 ? "flex" : "none";
 
-            //Cria a div de cada item
-            dropdown.innerHTML = alimentosVencendo.length
-                ? alimentosVencendo.map(({ texto, ambienteId, alimentoId }) => `
-                    <div class="dropdown-item">
-                        ${texto}
-                        <button class="btn-excluir" data-ambiente="${ambienteId}" data-alimento="${alimentoId}">🗑️</button>
-                        <button class="btn-ver" data-ambiente="${ambienteId}">🔍</button>
+            if (alimentosVencendo.length === 0) {
+                dropdown.innerHTML = `
+                    <div class="notification-item">
+                        <strong>Notificações</strong>
+                        <p style="margin: 0.5rem 0 0 0; color: #6b7280;">Nenhum alimento vencendo nos próximos ${diasLimite} dias.</p>
                     </div>
-                `).join("")
-                : `<div class="dropdown-item">Nenhum alimento vencendo nos próximos ${diasLimite} dias.</div>`;
+                `;
+            } else {
+                dropdown.innerHTML = `
+                    <div style="margin-bottom: 1rem;">
+                        <strong style="color: #374151;">Alimentos Vencendo</strong>
+                    </div>
+                    ${alimentosVencendo.map(({ texto, ambienteId, alimentoId }) => `
+                        <div class="notification-item">
+                            <div style="margin-bottom: 0.5rem; color: #374151; font-size: 14px;">
+                                ${texto}
+                            </div>
+                            <div class="notification-actions">
+                                <button class="btn-excluir" data-ambiente="${ambienteId}" data-alimento="${alimentoId}">
+                                    🗑️ Excluir
+                                </button>
+                                <button class="btn-ver" data-ambiente="${ambienteId}">
+                                    👁️ Ver
+                                </button>
+                            </div>
+                        </div>
+                    `).join("")}
+                `;
+            }
 
-            // Botão de excluir item
+            // Event listeners para botões
             dropdown.querySelectorAll(".btn-excluir").forEach(btn => {
-                btn.addEventListener("click", async () => {
-                    const confirmar = window.confirm("Tem certeza que deseja excluir este item?");
-                    if (!confirmar) return;
+                btn.addEventListener("click", async (e) => {
+                    e.stopPropagation();
+
+                    const result = await Swal.fire({
+                        title: 'Excluir Item',
+                        text: 'Tem certeza que deseja excluir este item?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#dc2626',
+                        cancelButtonColor: '#6b7280',
+                        confirmButtonText: 'Sim, excluir!',
+                        cancelButtonText: 'Cancelar'
+                    });
+
+                    if (!result.isConfirmed) return;
 
                     const ambienteId = btn.dataset.ambiente;
                     const alimentoId = parseInt(btn.dataset.alimento);
@@ -239,16 +539,32 @@ document.addEventListener("DOMContentLoaded", () => {
                             body: JSON.stringify({ itens: novosItens })
                         });
 
+                        await Swal.fire({
+                            title: 'Excluído!',
+                            text: 'Item removido com sucesso!',
+                            icon: 'success',
+                            confirmButtonColor: '#059669'
+                        });
+
                         await carregarNotificacoes();
+                        if (ambientesManager) {
+                            ambientesManager.loadAmbientes();
+                        }
                     } catch (error) {
                         console.error("Erro ao excluir item:", error);
+                        await Swal.fire({
+                            title: 'Erro!',
+                            text: 'Erro ao excluir item. Tente novamente.',
+                            icon: 'error',
+                            confirmButtonColor: '#dc2626'
+                        });
                     }
                 });
             });
 
-            // Botão para ver o ambiente
             dropdown.querySelectorAll(".btn-ver").forEach(btn => {
-                btn.addEventListener("click", () => {
+                btn.addEventListener("click", (e) => {
+                    e.stopPropagation();
                     const ambienteId = btn.dataset.ambiente;
                     window.location.href = `../ambientes/ambiente.html?id=${ambienteId}`;
                 });
@@ -256,14 +572,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
         } catch (error) {
             console.error("Erro ao carregar notificações:", error);
+            dropdown.innerHTML = `
+                <div class="notification-item">
+                    <strong>Erro</strong>
+                    <p style="margin: 0.5rem 0 0 0; color: #dc2626;">Erro ao carregar notificações. Tente novamente.</p>
+                </div>
+            `;
         }
     }
 
-    btnNotificacao.addEventListener("click", () => {
+    btnNotificacao.addEventListener("click", (e) => {
+        e.stopPropagation();
         dropdown.classList.toggle("hidden");
     });
 
-    // Inicializa notificações
+    // Fechar dropdown ao clicar fora
+    document.addEventListener("click", (e) => {
+        if (!e.target.closest('.notification-container')) {
+            dropdown.classList.add("hidden");
+        }
+    });
+
     carregarNotificacoes();
     setInterval(carregarNotificacoes, 30000);
+});
+
+// Botão CRUD Ambiente
+document.addEventListener("DOMContentLoaded", () => {
+    const btnCrudAmbiente = document.getElementById("btn-crudAmbiente");
+    if (btnCrudAmbiente) {
+        btnCrudAmbiente.addEventListener("click", () => {
+            window.location.href = "../../pastas pessoais/davi/CrudAmbiente.html"; //deve ser alterado futuramente
+        });
+    }
 });

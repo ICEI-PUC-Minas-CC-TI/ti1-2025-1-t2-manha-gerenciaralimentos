@@ -5,86 +5,135 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StockIt</title>
+    <!--bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
     <!--link para conseguir os ícones-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+    <!---->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!--CSS-->
     <link rel="stylesheet" href="home.css">
+
+    <link rel="icon" href="../../assets/images/logo_stockit.ico">
 
 </head>
 
 <body>
 
-    <div class="content">
-        <!--Cabeçalho da home-->
-        <header class="cabecalho">
-            <div class="logo-container">
-                <span class="logo-icone"><img src="/codigo/public/pastas pessoais/raphael/assets/images/logo.ico"
-                        alt=""></span>
-                <h1>StockIT</h1>
-            </div>
-            <div class="caixa-pesquisa-usuario">
-                <div class="pesquisa">
-                    <input type="text" id="texto-pesquisa" placeholder="  Pesquisar...">
-                    <button id="pesquisar"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    <select name="" id="dropdown-resultados" size="5"></select>
-                </div>
-                <div class="notificacao-container">
-                    <button id="btnNotificacao">
-                        <i class="fa-solid fa-bell"></i>
-                        <span id="badgeNotificacao" class="badge">0</span>
-                    </button>
-                    <div id="dropdownNotificacao" class="dropdown hidden">
-                        <!-- Conteúdo dinâmico será inserido aqui -->
+    <div class="container-fluid">
+        <!-- Header Verde -->
+        <header class="header-section">
+            <div class="row align-items-center py-3">
+                <div class="col-2">
+                    <div class="logo-container">
+                        <h1 class="logo-text">StockIT</h1>
                     </div>
                 </div>
-                <i class="fa-solid fa-circle-user fa-3x"></i>
+
+                <div class="col-8">
+                    <div class="search-container">
+                        <div class="search-wrapper">
+                            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                            <input type="text" id="texto-pesquisa" class="search-input"
+                                placeholder="Pesquise produtos, ambientes e receitas..." />
+                            <button class="mic-button">
+                                <i class="fa-solid fa-microphone"></i>
+                            </button>
+                        </div>
+                        <select name="" id="dropdown-resultados" class="search-dropdown" size="5"></select>
+                    </div>
+                </div>
+
+                <div class="col-2">
+                    <div class="user-section">
+                        <div class="notification-container">
+                            <button id="btnNotificacao" class="notification-btn">
+                                <i class="fa-solid fa-bell"></i>
+                                <span id="badgeNotificacao" class="notification-badge">0</span>
+                            </button>
+                            <div id="dropdownNotificacao" class="notification-dropdown hidden"></div>
+                        </div>
+                        <div class="user-avatar">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </header>
 
-        <h2>Meus Ambientes</h2>
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Meus Ambientes Section -->
+            <section class="ambientes-section">
+                <h1 class="section-title">MEUS AMBIENTES</h1>
 
-        <!--local para os ambientes criados-->
-        <nav>
-            <div class="carousel-container">
-                <button id="prevBtn"><i class="fa-solid fa-chevron-left"></i></button>
-                <div class="carousel" id="carousel">
-                    <!-- Os itens serão adicionados pelo JavaScript -->
+                <!-- Carousel Container -->
+                <div class="carousel-container">
+                    <button class="carousel-btn carousel-btn-prev" id="carousel-prev">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+
+                    <div class="carousel-wrapper">
+                        <div class="ambientes-carousel" id="ambientes-container">
+                            <!-- Os ambientes serão carregados dinamicamente aqui -->
+                        </div>
+                    </div>
+
+                    <button class="carousel-btn carousel-btn-next" id="carousel-next">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
                 </div>
-                <button id="nextBtn"><i class="fa-solid fa-chevron-right"></i></button>
-                
-            </div>
-            
-        </nav>
-        <div id="crudAmbiente">
-            <button id="btn-crudAmbiente">  Adicionar Ambientes </button>
-        </div>
 
-        <section>
-
-            <!--Outras funcionalidades (páginas)-->
-            <div class="info">
-                <div class="cards" id="vencimento" data-url="../gabriel/alimentos vencendo/alimentosVencendo.html">
-                    <i class="fa-solid fa-circle-exclamation fa-3x"></i>
-                    <h2>Alimentos Vencendo</h2>
+                <div class="add-ambiente-container">
+                    <button id="btn-crudAmbiente" class="add-ambiente-btn">
+                        <i class="fa-solid fa-plus"></i>
+                        Adicionar Ambientes
+                    </button>
                 </div>
-                <div class="cards" id="receitas" data-url="../gabriel/receitas/receitas.html">
-                    <i class="fa-solid fa-book-open fa-3x"></i>
-                    <h2>Receitas</h2>
-                </div>
-                <div class="cards" id="compras" data-url="../raphael/listadeCompras.html">
-                    <i class="fa-solid fa-cart-shopping fa-3x"></i>
-                    <h2> Lista de Compras</h2>
-                </div>
-            </div>
-        </section>
+            </section>
 
-    </div>
+            <!-- Funcionalidades Section -->
+            <section class="funcionalidades-section">
+                <div class="funcionalidades-grid">
+                    <div class="funcionalidade-card" id="vencimento"
+                        data-url="../gabriel/alimentos vencendo/alimentosVencendo.html">
+                        <div class="funcionalidade-icon alimentos-icon">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                        </div>
+                        <div class="funcionalidade-text">
+                            <h3>ALIMENTOS</h3>
+                            <h3>VENCENDO</h3>
+                        </div>
+                    </div>
 
-    <footer>
-        <p>StockIT &copy; 2025 - Gerenciamento de Estoque de Alimentos</p>
-    </footer>
-    <script src="home.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+                    <div class="funcionalidade-card" id="receitas" data-url="../gabriel/receitas/receitas.html">
+                        <div class="funcionalidade-icon receitas-icon">
+                            <i class="fa-solid fa-book"></i>
+                        </div>
+                        <div class="funcionalidade-text">
+                            <h3>RECEITAS</h3>
+                        </div>
+                    </div>
+
+                    <div class="funcionalidade-card" id="compras" data-url="../raphael/listadeCompras.html">
+                        <div class="funcionalidade-icon compras-icon">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </div>
+                        <div class="funcionalidade-text">
+                            <h3>LISTA DE</h3>
+                            <h3>COMPRA</h3>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!--footer-->
+        <footer>
+            <p>StockIT &copy; 2025 - Gerenciamento de Estoque de Alimentos</p>
+        </footer>
+        <script src="home.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 
 </body>
 
