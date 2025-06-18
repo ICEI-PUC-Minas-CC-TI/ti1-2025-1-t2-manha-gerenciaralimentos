@@ -9,15 +9,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 async function carregarDados() {
-  try {
-    await fetch(`${apiUrl}/alimentos`).then(response => response.json()).then(data => dados = data);
-    console.log("Dados carregados:", dados);
-    configurarBotoes(dados);
 
+  try {
+    const res = await fetch(`${apiUrl}/alimentos`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    dados = await res.json();
+    console.log("Dados carregados:", dados);
   } catch (error) {
-    console.log("Erro ao carregar json");
+    console.error("Erro ao carregar JSON:", error);
+    return;
   }
+  configurarBotoes(dados);
 }
+
 
 function carregarAlimentos() {
   fetch(`${apiUrl}/alimentos`)
@@ -25,26 +29,26 @@ function carregarAlimentos() {
     .then(data => {
       alimentosDisponiveis = {};
       data.forEach(alimento => {
-        const nomeNormalizado = `${alimento.nome} ${alimento.tipo}`.toLowerCase().trim(); 
+        const nomeNormalizado = `${alimento.nome} ${alimento.tipo}`.toLowerCase().trim();
         alimentosDisponiveis[nomeNormalizado] = alimento.id;
       });
-      console.log("Lista de alimentos carregada:", alimentosDisponiveis); 
+      console.log("Lista de alimentos carregada:", alimentosDisponiveis);
     })
     .catch(error => console.error("Erro ao carregar alimentos:", error));
 }
 
 function limparModalAtualizar() {
-    const nomeListaInput = document.getElementById("nome-lista-atualizar");
-    const alimentosContainer = document.getElementById("alimentos-container"); 
+  const nomeListaInput = document.getElementById("nome-lista-atualizar");
+  const alimentosContainer = document.getElementById("alimentos-container");
 
-    if (!nomeListaInput || !alimentosContainer) { 
-        console.error("Erro: elementos do modal não encontrados!");
-        return;
-    }
+  if (!nomeListaInput || !alimentosContainer) {
+    console.error("Erro: elementos do modal não encontrados!");
+    return;
+  }
 
-    nomeListaInput.value = "";
+  nomeListaInput.value = "";
 
-    alimentosContainer.querySelectorAll("div").forEach(div => div.remove());
+  alimentosContainer.querySelectorAll("div").forEach(div => div.remove());
 }
 
 function configurarBotoes() {
@@ -61,14 +65,12 @@ function configurarBotoes() {
   const alimentosContainer = document.getElementById("alimentos-container"); //div com os botões do pop up de atualizar
 
   //botão para atualizar lista
- btnAtualizarLista.addEventListener("click", () => {
+  btnAtualizarLista.addEventListener("click", () => {
     modalAtualizar.style.display = "block"; // Primeiro exibe o modal
     setTimeout(() => {
-        limparModalAtualizar(); // Agora limpa corretamente sem erro
+      limparModalAtualizar(); // Agora limpa corretamente sem erro
     }, 50);
-});
-
-
+  });
 
   btnFecharModal.addEventListener("click", () => {
     modalAtualizar.style.display = "none";
@@ -115,8 +117,8 @@ function configurarBotoes() {
         const listaEncontrada = listas.find(lista => lista.nome.toLowerCase() === nomeLista.toLowerCase());
 
         if (!listaEncontrada) {
-          return Swal.fire ({
-            icon: 'error', 
+          return Swal.fire({
+            icon: 'error',
             title: 'Lista não encontrada!',
             text: 'Não existe nenhuma lista com esse nome.'
           });
@@ -124,56 +126,86 @@ function configurarBotoes() {
 
         const novosItens = [];
         alimentosContainer.querySelectorAll("div").forEach(div => {
-          const inputs = div.querySelectorAll("input");
-          const nomeAlimento = inputs[0].value.trim().toLowerCase();
-          console.log("Nome digitado:", nomeAlimento);
-          console.log("Alimentos disponíveis:", alimentosDisponiveis);
-
+          const [inpNome, inpQtd] = div.querySelectorAll("input");
+          const nomeAlimento = inpNome.value.trim().toLowerCase();
           const alimentoId = alimentosDisponiveis[nomeAlimento];
 
           if (!alimentoId) {
-            alert(`Alimento "${nomeAlimento}" não encontrado! Digite o nome completo (ex: Batata Inglesa).`);
-            return;
+            throw { notFound: true, nome: nomeAlimento };
           }
-
-          const quantidade = Number(inputs[1].value);
-          novosItens.push({ alimentoId, quantidade });
+          novosItens.push({ alimentoId, quantidade: Number(inpQtd.value) });
         });
 
         const listaAtualizada = { ...listaEncontrada, itens: novosItens };
 
-        return fetch(`${apiUrl}/listasDeCompra/${listaEncontrada.id}`, {
+        return fetch(
+        `${apiUrl}/listasDeCompra/${listaEncontrada.id}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(listaAtualizada)
-        });
-      })
-      .then(response => {
-        if (response && !response.ok) {
-          throw new Error(`Erro ${response.status}: ${response.statusText}`);
+          body: JSON.stringify({ ...listaEncontrada, itens: novosItens })
         }
-        alert("Lista atualizada com sucesso!");
-        modalAtualizar.style.display = "none"; // Fecha o modal
-      })
-      .catch(error => console.error("Erro ao atualizar lista:", error));
-  });
+      );
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Erro ${response.status}: ${response.statusText}`);
+      }
+      // fecha o modal só depois do sucesso
+      modalAtualizar.style.display = "none";
+      return Swal.fire({
+        icon: 'success',
+        title: 'Pronto!',
+        text: 'Lista atualizada com sucesso.'
+      });
+    })
+    .catch(err => {
+      // esse catch agora pega erros do fetch, throws internos etc.
+      if (err.notFound) {
+        return Swal.fire({
+          icon: 'warning',
+          title: 'Alimento não encontrado',
+          text: `"${err.nome}" não existe. Digite o nome completo.`
+        });
+      }
+      console.error(err);
+      return Swal.fire({
+        icon: 'error',
+        title: 'Oops…',
+        text: 'Erro ao atualizar lista. Tente novamente mais tarde.'
+      });
+    });
+});
 
-  btnAdicionarAlimentos.addEventListener("click", abrirPopupAlimentos); //botão adicionar alimentos
-  btnCriarLista.addEventListener("click", criarLista); //botão para criar lista
-  //botão para limpar lista
-  btnLimparLista.addEventListener("click", () => {
-    listaTemporaria = [];
-    alert("Sua lista foi limpada!");
-  });
 
-  //botão excluir uma lista
-  btnExcluirLista.addEventListener("click", () => {
-    const nomeLista = prompt("Digite o nome da lista que deseja excluir:");
-    if (nomeLista) {
-      deletarListaPorNome(nomeLista);
+btnAdicionarAlimentos.addEventListener("click", abrirPopupAlimentos); //botão adicionar alimentos
+btnCriarLista.addEventListener("click", criarLista); //botão para criar lista
+//botão para limpar lista
+btnLimparLista.addEventListener("click", () => {
+  listaTemporaria = [];
+  Swal.fire({
+    icon: 'info',
+    title: 'Limpo!',
+    text: 'Sua lista foi limpada.'
+  });
+});
+
+//botão excluir uma lista
+btnExcluirLista.addEventListener("click", () => {
+  Swal.fire({
+    title: 'Excluir lista',
+    text: 'Digite o nome da lista que deseja excluir:',
+    input: 'text',
+    inputPlaceholder: 'Nome da lista',
+    showCancelButton: true
+  }).then(result => {
+    if (result.isConfirmed && result.value.trim()) {
+      deletarListaPorNome(result.value.trim());
     }
   });
-}
+});
+
+};
+
 
 function abrirPopupAlimentos() {
   const popup = document.createElement("div");
@@ -229,7 +261,12 @@ function abrirPopupAlimentos() {
       }
     });
 
-    alert("Alimentos adicionados com sucesso!");
+    Swal.fire({
+      icon: 'success',
+      title: 'Adicionado!',
+      text: 'Alimentos adicionados com sucesso.'
+    });
+
 
     document.body.removeChild(popup);
 
@@ -251,52 +288,51 @@ function criarLista() {
   const nomeInput = document.getElementById("nome_lista");
   const nomeLista = nomeInput.value.trim();
 
-  if (nomeLista === "") {
-    alert("Digite o nome da lista");
-    return;
+  if (!nomeLista) {
+    return Swal.fire({ icon: 'warning', title: 'Digite o nome da lista' });
   }
 
   if (listaTemporaria.length === 0) {
-    alert("Adicione pelo menos um alimento à lista");
-    return;
+    return Swal.fire({ icon: 'warning', title: 'Adicione pelo menos um alimento' });
   }
 
-  listaTemporaria = listaTemporaria.map(item => ({
-    alimentoId: Number(item.alimentoId),
-    quantidade: item.quantidade
-  }));
+listaTemporaria = listaTemporaria.map(item => ({
+  alimentoId: Number(item.alimentoId),
+  quantidade: item.quantidade
+}));
 
-  const novaLista = {
+const novaLista = {
 
-    nome: nomeLista,
-    itens: listaTemporaria
-  };
+  nome: nomeLista,
+  itens: listaTemporaria
+};
 
-  console.log("Estrutura antes do envio:", JSON.stringify(novaLista));
+console.log("Estrutura antes do envio:", JSON.stringify(novaLista));
 
-  //Parte do código para adicionar a lista diretamente ao json 
+//Parte do código para adicionar a lista diretamente ao json 
 
-  fetch(`${apiUrl}/listasDeCompra`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(novaLista)
+fetch(`${apiUrl}/listasDeCompra`, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(novaLista)
+})
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`Erro ${response.status}: ${response.statusText}`);
+    }
+    return response.json();
   })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`Erro ${response.status}: ${response.statusText}`);
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log("Lista criada com sucesso:", data);
-      alert("Lista criada com sucesso!");
-    })
-    .catch(error => console.error("Erro ao salvar lista:", error));
+  .then(data => {
+    Swal.fire({ icon:'success', title:'Lista criada!', text:'Tudo certo.' });
+  })
+  .catch(error => console.error("Erro ao salvar lista:", error));
 
 
-  nomeInput.value = "";
-  listaTemporaria = [];
+nomeInput.value = "";
+listaTemporaria = [];
+
 }
+
 
 document.addEventListener('DOMContentLoaded', async () => {
   await carregarDados();
@@ -311,8 +347,7 @@ function atualizarListaPorNome(nomeLista, novosItens) {
       const listaEncontrada = listas.find(lista => lista.nome.toLowerCase() === nomeLista.toLowerCase());
 
       if (!listaEncontrada) {
-        alert("Lista não encontrada!");
-        return;
+        return Swal.fire ({ icon: 'error', title: 'Erro!', text: 'Lista não encontrada'});
       }
 
 
@@ -332,8 +367,7 @@ function atualizarListaPorNome(nomeLista, novosItens) {
       return response.json();
     })
     .then(data => {
-      console.log("Lista atualizada com sucesso:", data);
-      alert("Lista foi atualizada!");
+      Swal.fire({icon: 'success', title: 'Sucesso!', text: 'Lista atualizada com sucesso!'});
     })
     .catch(error => console.error("Erro ao atualizar lista:", error));
 }
@@ -349,8 +383,7 @@ function deletarListaPorNome(nomeLista) {
       const listaEncontrada = listas.find(lista => lista.nome.toLowerCase() === nomeLista.toLowerCase());
 
       if (!listaEncontrada) {
-        alert("Lista não encontrada!");
-        return;
+        return Swal.fire ({ icon: 'error', title: 'Erro!', text: 'Lista não encontrada'});
       }
 
 
@@ -362,7 +395,7 @@ function deletarListaPorNome(nomeLista) {
       if (response && !response.ok) {
         throw new Error(`Erro ${response.status}: ${response.statusText}`);
       }
-      alert("Lista excluída com sucesso!");
+      Swal.fire({icon: 'success', title: 'Sucesso!', text: 'Lista excluída com sucesso!'});
       console.log(`Lista "${nomeLista}" foi excluída`);
     })
     .catch(error => console.error("Erro ao excluir lista:", error));
