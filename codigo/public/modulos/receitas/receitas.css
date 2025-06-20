@@ -4,7 +4,7 @@
     --cor-caixas: white;
     --cor-texto: #333;
     --cor-logo: white;
-    --fonte-principal: 'Roboto', sans-serif;
+    --fonte-principal: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --tamanho-fonte: 30px;
     --tamanho-titulo: 60px;
 }

@@ -18,6 +18,7 @@
     --spacing-md: 24px;
     --spacing-lg: 32px;
     --spacing-xl: 48px;
+    --tamanho-fonte: 30px;
 }
 
 * {
@@ -42,6 +43,8 @@ header {
     position: sticky;
     top: 0;
     z-index: 1000;
+    font-family: var(--fonte-principal);
+    font-size: var(--tamanho-fonte);
 }
 
 .header-content {
