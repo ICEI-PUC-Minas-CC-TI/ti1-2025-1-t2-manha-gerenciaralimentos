@@ -84,10 +84,13 @@
                 </div>
 
                 <div class="add-ambiente-container">
-                    <button id="btn-crudAmbiente" class="add-ambiente-btn">
+                    <button id="btn-crudAmbiente" class="add-ambiente-btn" data-bs-toggle="modal"
+                        data-bs-target="#modalCadastroAmbiente">
                         <i class="fa-solid fa-plus"></i>
                         Adicionar Ambientes
                     </button>
+
+
                 </div>
             </section>
 
@@ -126,6 +129,51 @@
                 </div>
             </section>
         </main>
+        <!-- Sessão modais -->
+        <section>
+
+            <!-- Modal Bootstrap -->
+            <div class="modal fade" id="modalCadastroAmbiente" tabindex="-1" aria-labelledby="tituloCadastro"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form id="formCadastrarAmbiente">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="tituloCadastro">Cadastrar Ambiente</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Fechar"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="nomeAmbienteModal" class="form-label">Nome</label>
+                                    <input type="text" class="form-control" id="nomeAmbienteModal" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="tipoAmbienteModal" class="form-label">Tipo</label>
+                                    <select class="form-select" id="tipoAmbienteModal" required>
+                                        <option selected disabled value="">Selecione</option>
+                                        <option value="Refrigerador">Refrigerador</option>
+                                        <option value="Freezer">Freezer</option>
+                                        <option value="Seco">Seco</option>
+                                        <option value="Outros">Outros</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="imagemAmbienteModal" class="form-label">Imagem</label>
+                                    <input type="file" class="form-control" id="imagemAmbienteModal" accept="image/*">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success">Cadastrar</button>
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
         <!--footer-->
         <footer>
             <p>StockIT &copy; 2025 - Gerenciamento de Estoque de Alimentos</p>

@@ -598,11 +598,60 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Botão CRUD Ambiente
-document.addEventListener("DOMContentLoaded", () => {
-    const btnCrudAmbiente = document.getElementById("btn-crudAmbiente");
-    if (btnCrudAmbiente) {
-        btnCrudAmbiente.addEventListener("click", () => {
-            window.location.href = "../../pastas pessoais/davi/CrudAmbiente.html"; //deve ser alterado futuramente
-        });
+//CADASTRAR AMBIENTE
+document.getElementById("formCadastrarAmbiente").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const nome = document.getElementById("nomeAmbienteModal").value.trim();
+    const tipo = document.getElementById("tipoAmbienteModal").value;
+    const imagem = document.getElementById("imagemAmbienteModal").files[0]?.name || "";
+
+    if (!nome || !tipo) {
+      Swal.fire({
+        icon: "warning",
+        title: "Preencha todos os campos obrigatórios",
+        confirmButtonColor: "#dc3545"
+      });
+      return;
     }
-});
+
+    const novoAmbiente = {
+      nome,
+      tipo,
+      imagem,
+      itens: []
+    };
+
+    try {
+    const res = await fetch(`${apiUrl}/ambientes`, { 
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(novoAmbiente)
+    });
+
+  if (res.ok) {
+    Swal.fire({
+      icon: "success",
+      title: "Ambiente cadastrado com sucesso!",
+      confirmButtonColor: "#28a745"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        document.getElementById("formCadastrarAmbiente").reset();
+        const modal = bootstrap.Modal.getInstance(document.getElementById("modalCadastroAmbiente"));
+        modal.hide();
+        location.reload();
+      }
+    });
+  } else {
+    throw new Error();
+  }
+} catch {
+  Swal.fire({
+    icon: "error",
+    title: "Erro ao cadastrar ambiente",
+    text: "Tente novamente.",
+    confirmButtonColor: "#dc3545"
+  });
+}
+
+  });
