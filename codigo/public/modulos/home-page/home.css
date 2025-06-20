@@ -703,3 +703,8 @@ footer {
     right: -15px;
   }
 }
+
+#logo-header{
+    width: 60px;
+    margin: 10px;
+}

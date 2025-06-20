@@ -27,6 +27,7 @@
         <div class="cabecalho-conteudo">
             <div class="logo-container">
                 <a id="nome-projeto" href="../home-page/home.html">
+
                     <h1>StockIT</h1>
                 </a>
             </div>
@@ -229,8 +230,8 @@
                     </div>
                     <div class="modal-footer border-0">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button id="btn-confirmar-exclusao-vencidos" onclick="moverAlimentos()" type="button" class="btn btn-success"
-                            data-bs-dismiss="modal">Mover</button>
+                        <button id="btn-confirmar-exclusao-vencidos" onclick="moverAlimentos()" type="button"
+                            class="btn btn-success" data-bs-dismiss="modal">Mover</button>
                     </div>
                 </div>
             </div>
@@ -247,7 +248,7 @@
     <script>
 
         //Parte das notificações da HOME, feita por Raphael Lucas
-        
+
         document.addEventListener("DOMContentLoaded", () => {
             const params = new URLSearchParams(window.location.search);
             const ambienteId = params.get("id");
