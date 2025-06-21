@@ -16,7 +16,6 @@ header {
     font-family: var(--fonte-principal);
     font-size: var(--tamanho-fonte);
     padding: 20px;
-    text-align: center;
 }
 
 header h1 {
@@ -25,7 +24,10 @@ header h1 {
 }
 
 /* 2-CSS Main */
-
+#tit1{
+  color: var(--cor-logo);
+  font-size: 24px;
+}
 .grade-receitas {
   display: flex;
   flex-wrap: wrap;
