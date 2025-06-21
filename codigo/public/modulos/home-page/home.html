@@ -148,21 +148,25 @@
                                     <label for="nomeAmbienteModal" class="form-label">Nome</label>
                                     <input type="text" class="form-control" id="nomeAmbienteModal" required>
                                 </div>
+
                                 <div class="mb-3">
                                     <label for="tipoAmbienteModal" class="form-label">Tipo</label>
                                     <select class="form-select" id="tipoAmbienteModal" required>
                                         <option selected disabled value="">Selecione</option>
-                                        <option value="Refrigerador">Refrigerador</option>
-                                        <option value="Freezer">Freezer</option>
-                                        <option value="Seco">Seco</option>
-                                        <option value="Outros">Outros</option>
+                                        <option value="tipo0">Refrigerador</option>
+                                        <option value="tipo1">Freezer</option>
+                                        <option value="tipo2">Seco</option>
+                                        <option value="tipo3">Outros</option>
                                     </select>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="imagemAmbienteModal" class="form-label">Imagem</label>
-                                    <input type="file" class="form-control" id="imagemAmbienteModal" accept="image/*">
+
+                                <!-- Preview da imagem -->
+                                <div class="text-center mb-3">
+                                    <img id="previewImagemAmbiente" src="" alt="Preview" class="img-fluid"
+                                        style="max-height: 150px; display: none;">
                                 </div>
                             </div>
+
                             <div class="modal-footer">
                                 <button type="submit" class="btn btn-success">Cadastrar</button>
                                 <button type="button" class="btn btn-secondary"

@@ -120,8 +120,8 @@ class CarouselManager {
         const firstCard = this.carousel.querySelector('.ambiente-card');
         const style = getComputedStyle(this.carousel);
         this.cardW = firstCard.offsetWidth;
-        this.gap = parseFloat(style.gap); 
-        this.step = this.cardW + this.gap; 
+        this.gap = parseFloat(style.gap);
+        this.step = this.cardW + this.gap;
 
         this.init();
     }
@@ -149,9 +149,9 @@ class CarouselManager {
     getVisibleCards() {
         const containerWidth = this.carousel.parentElement.offsetWidth;
         const fitCount = Math.floor(containerWidth / this.cardWidth);
-        const total = this.getTotalCards(); 
+        const total = this.getTotalCards();
 
-        return Math.min(fitCount, 3, total); 
+        return Math.min(fitCount, 3, total);
     }
 
     setupEventListeners() {
@@ -175,15 +175,15 @@ class CarouselManager {
     }
 
     updateCarousel() {
-  const tx = - this.currentIndex * this.step;
-  this.carousel.style.transform = `translateX(${tx}px)`;
+        const tx = - this.currentIndex * this.step;
+        this.carousel.style.transform = `translateX(${tx}px)`;
 
-  // botão prev só ativo se index > 0
-  this.prevBtn.disabled = this.currentIndex === 0;
-  // next só até o último grupo de 3 aparecer
-  this.nextBtn.disabled =
-    this.currentIndex >= this.getTotalCards() - this.visibleCards;
-}
+        // botão prev só ativo se index > 0
+        this.prevBtn.disabled = this.currentIndex === 0;
+        // next só até o último grupo de 3 aparecer
+        this.nextBtn.disabled =
+            this.currentIndex >= this.getTotalCards() - this.visibleCards;
+    }
 
 
     reset() {
@@ -243,28 +243,25 @@ class AmbientesManager {
         const card = document.createElement('div');
         card.className = 'ambiente-card';
         card.innerHTML = `
-            <div class="ambiente-header">
-                <h3 class="ambiente-nome">${ambiente.nome}</h3>
-                <div class="ambiente-actions">
-                    <button class="ambiente-menu-btn" data-id="${ambiente.id}">
-                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                    </button>
-                    <div class="ambiente-dropdown hidden" id="dropdown-${ambiente.id}">
-                        <div class="ambiente-dropdown-item editar-ambiente" data-id="${ambiente.id}">
-                            Editar
-                        </div>
-                        <div class="ambiente-dropdown-item excluir-ambiente" data-id="${ambiente.id}">
-                            Excluir
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="ambiente-image-placeholder">
-                Imagem
-            </div>
-        `;
+  <div class="ambiente-header">
+    <h3 class="ambiente-nome">${ambiente.nome}</h3>
+    <div class="ambiente-actions">
+      <button class="ambiente-menu-btn" data-id="${ambiente.id}">
+        <i class="fa-solid fa-ellipsis-vertical"></i>
+      </button>
+      <div class="ambiente-dropdown hidden" id="dropdown-${ambiente.id}">
+        <div class="ambiente-dropdown-item editar-ambiente" data-id="${ambiente.id}">Editar</div>
+        <div class="ambiente-dropdown-item excluir-ambiente" data-id="${ambiente.id}">Excluir</div>
+      </div>
+    </div>
+  </div>
+  <div class="ambiente-image-placeholder">
+    <img src="${ambiente.imagem}" alt="${ambiente.nome}" class="img-fluid" />
+</div>
+`;
 
-        // Adicionar evento de clique no card (exceto no menu)
+
+        // Evento para redirecionar ao ambiente
         card.addEventListener('click', (e) => {
             if (!e.target.closest('.ambiente-actions')) {
                 window.location.href = `../ambientes/ambiente.html?id=${ambiente.id}`;
@@ -273,6 +270,7 @@ class AmbientesManager {
 
         return card;
     }
+
 
     setupEventListeners() {
         // Event delegation para botões de menu
@@ -604,54 +602,83 @@ document.getElementById("formCadastrarAmbiente").addEventListener("submit", asyn
 
     const nome = document.getElementById("nomeAmbienteModal").value.trim();
     const tipo = document.getElementById("tipoAmbienteModal").value;
-    const imagem = document.getElementById("imagemAmbienteModal").files[0]?.name || "";
 
     if (!nome || !tipo) {
-      Swal.fire({
-        icon: "warning",
-        title: "Preencha todos os campos obrigatórios",
-        confirmButtonColor: "#dc3545"
-      });
-      return;
+        Swal.fire({
+            icon: "warning",
+            title: "Preencha todos os campos obrigatórios",
+            confirmButtonColor: "#dc3545"
+        });
+        return;
     }
 
+    // 🧭 Mapeamento das imagens pelos tipos
+    const imagensPorTipo = {
+        tipo0: "tipo0.png",
+        tipo1: "tipo1.png",
+        tipo2: "tipo2.png",
+        tipo3: "tipo3.png"
+    };
+
+    // Caminho final da imagem baseada no tipo
+    const imagemFinal = `../../assets/images/ambientes-images/${imagensPorTipo[tipo]}`;
+
+
     const novoAmbiente = {
-      nome,
-      tipo,
-      imagem,
-      itens: []
+        nome,
+        tipo,
+        imagem: imagemFinal,
+        itens: []
     };
 
     try {
-    const res = await fetch(`${apiUrl}/ambientes`, { 
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(novoAmbiente)
-    });
+        const res = await fetch(`${apiUrl}/ambientes`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(novoAmbiente)
+        });
 
-  if (res.ok) {
-    Swal.fire({
-      icon: "success",
-      title: "Ambiente cadastrado com sucesso!",
-      confirmButtonColor: "#28a745"
-    }).then((result) => {
-      if (result.isConfirmed) {
-        document.getElementById("formCadastrarAmbiente").reset();
-        const modal = bootstrap.Modal.getInstance(document.getElementById("modalCadastroAmbiente"));
-        modal.hide();
-        location.reload();
-      }
-    });
-  } else {
-    throw new Error();
-  }
-} catch {
-  Swal.fire({
-    icon: "error",
-    title: "Erro ao cadastrar ambiente",
-    text: "Tente novamente.",
-    confirmButtonColor: "#dc3545"
-  });
-}
+        if (res.ok) {
+            Swal.fire({
+                icon: "success",
+                title: "Ambiente cadastrado com sucesso!",
+                confirmButtonColor: "#28a745"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById("formCadastrarAmbiente").reset();
+                    const modal = bootstrap.Modal.getInstance(document.getElementById("modalCadastroAmbiente"));
+                    modal.hide();
+                    location.reload();
+                }
+            });
+        } else {
+            throw new Error();
+        }
+    } catch {
+        Swal.fire({
+            icon: "error",
+            title: "Erro ao cadastrar ambiente",
+            text: "Tente novamente.",
+            confirmButtonColor: "#dc3545"
+        });
+    }
+});
+document.getElementById("tipoAmbienteModal").addEventListener("change", function () {
+    const tipo = this.value;
+    const preview = document.getElementById("previewImagemAmbiente");
 
-  });
+    const imagensPorTipo = {
+        tipo0: "tipo0.png",
+        tipo1: "tipo1.png",
+        tipo2: "tipo2.png",
+        tipo3: "tipo3.png"
+    };
+
+    if (imagensPorTipo[tipo]) {
+        preview.src = `assets/images/ambientes-images/${imagensPorTipo[tipo]}`;
+        preview.style.display = "block";
+    } else {
+        preview.style.display = "none";
+    }
+});
+

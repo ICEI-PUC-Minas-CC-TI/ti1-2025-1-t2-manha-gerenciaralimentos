@@ -708,3 +708,58 @@ footer {
     width: 60px;
     margin: 10px;
 }
+
+
+/* 1. O "visualizador" do carrossel */
+.carousel-wrapper {
+    overflow-x: auto; /* Permite rolar o conteúdo horizontalmente */
+    scroll-behavior: smooth; /* Anima a rolagem quando usamos o JS */
+    scrollbar-width: none; /* Opcional: Esconde a barra de rolagem no Firefox */
+}
+
+/* Opcional: Esconde a barra de rolagem no Chrome/Safari */
+.carousel-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+/* 2. O contêiner que segura e alinha todos os cards */
+#ambientes-container {
+    display: flex; /* ESSENCIAL: Alinha os cards lado a lado */
+    gap: 20px; /* Cria um espaço de 20px entre cada card */
+    padding: 10px 0;
+}
+
+/* 3. O estilo de cada card do ambiente */
+.ambiente-card {
+    width: 240px; /* ESSENCIAL: Define uma largura fixa para o card */
+    flex-shrink: 0; /* Impede que os cards sejam "espremidos" */
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+/* 4. Onde a imagem fica (o mais importante para o tamanho!) */
+.ambiente-image-placeholder {
+    height: 160px; /* ESSENCIAL: Define uma altura fixa para a área da imagem */
+    width: 100%;
+    overflow: hidden; /* Garante que a imagem não vaze para fora */
+}
+
+/* 5. A imagem em si */
+.ambiente-image-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* MÁGICA: Redimensiona a imagem para cobrir a área sem distorcer */
+}
+
+/* Pequeno ajuste no header do card */
+.ambiente-header {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #eee;
+}
