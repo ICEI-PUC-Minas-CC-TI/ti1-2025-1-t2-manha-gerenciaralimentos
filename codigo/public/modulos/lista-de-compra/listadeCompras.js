@@ -4,7 +4,7 @@ const container = document.getElementById('listadeCompras');
 let listaSelecionada = null;
 let itemSelecionado = null;
 
-// ================= Funções de Modal =================
+// Funções de Modal
 function abrirModal(id) {
     document.getElementById(id).classList.add('ativo');
 }
@@ -13,7 +13,7 @@ function fecharModal(id) {
     document.getElementById(id).classList.remove('ativo');
 }
 
-// ================= Carregar Dados =================
+// Carregar Dados
 async function carregarDados() {
     container.innerHTML = '';
     try {
@@ -100,7 +100,7 @@ async function carregarDados() {
     }
 }
 
-// ================= Carregar Listas no Select =================
+// Carregar Listas no Select
 async function carregarListasNoSelect() {
     const listas = await (await fetch(`${apiUrl}/listasDeCompra`)).json();
     const select = document.getElementById('cadastro-lista');
@@ -113,7 +113,7 @@ async function carregarListasNoSelect() {
     });
 }
 
-// ================= Adicionar Item =================
+// Adicionar Item
 async function adicionarItem() {
     const nome = document.getElementById('cadastro-nome').value.trim();
     const tipo = document.getElementById('cadastro-tipo').value.trim();
@@ -177,7 +177,7 @@ async function adicionarItem() {
     document.getElementById('nova-lista').value = '';
 }
 
-// ================= Salvar Edição =================
+// Salvar Edição
 async function salvarEdicao() {
     const novaQuantidade = parseInt(document.getElementById('editar-quantidade').value);
     if (!novaQuantidade || novaQuantidade <= 0) {
@@ -197,7 +197,7 @@ async function salvarEdicao() {
     fecharModal('modal-editar');
 }
 
-// ================= Confirmar Exclusão =================
+// Confirmar Exclusão
 async function confirmarExclusao() {
     const index = listaSelecionada.itens.indexOf(itemSelecionado);
     if (index > -1) {
@@ -221,7 +221,36 @@ async function confirmarExclusao() {
     }
 }
 
-// ================= Inicialização =================
+// Filtro de Pesquisa
+document.getElementById('texto-pesquisa').addEventListener('input', function () {
+    const termo = this.value.trim().toLowerCase();
+
+    const listas = document.querySelectorAll('.lista-compra');
+
+    listas.forEach(lista => {
+        const tituloLista = lista.querySelector('h2').textContent.toLowerCase();
+        const itens = lista.querySelectorAll('.item-lista');
+
+        let listaVisivel = false;
+
+        itens.forEach(item => {
+            const nomeProduto = item.querySelector('.item-info h3')?.textContent.toLowerCase() || '';
+
+            const corresponde = nomeProduto.includes(termo) || tituloLista.includes(termo);
+
+            if (corresponde) {
+                item.style.display = 'flex';
+                listaVisivel = true;
+            } else {
+                item.style.display = 'none';
+            }
+        });
+
+        lista.style.display = listaVisivel ? 'block' : 'none';
+    });
+});
+
+// Inicialização
 window.onload = () => {
     carregarDados();
     carregarListasNoSelect();
