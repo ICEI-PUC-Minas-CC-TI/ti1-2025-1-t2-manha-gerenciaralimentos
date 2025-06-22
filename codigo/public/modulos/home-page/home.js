@@ -256,7 +256,7 @@ class AmbientesManager {
     </div>
   </div>
   <div class="ambiente-image-placeholder">
-    <img src="${ambiente.imagem}" alt="${ambiente.nome}" class="img-fluid" />
+    <img src="../../assets/images/ambientes-images/tipo${ambiente.tipo}.png" alt="${ambiente.nome}" class="img-fluid" />
 </div>
 `;
 
