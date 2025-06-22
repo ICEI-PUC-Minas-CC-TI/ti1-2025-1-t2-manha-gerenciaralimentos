@@ -52,9 +52,11 @@
                             </button>
                             <div id="dropdownNotificacao" class="notification-dropdown hidden"></div>
                         </div>
-                        <div class="user-avatar">
-                            <i class="fa-solid fa-user"></i>
+                        <div class="d-flex align-items-center gap-2">
+                            <span id="userLogado" class="fw-semibold text-white small"></span>
+                            <button id="btnLogout" class="btn btn-outline-light btn-sm">Sair</button>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -180,5 +182,33 @@
         <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 
 </body>
+<script>
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  const nomeSpan = document.getElementById("userLogado");
+  const btnLogout = document.getElementById("btnLogout");
+
+  if (!user) {
+    // Usuário não logado → redireciona
+    window.location.href = "../login/login.html";
+  } else {
+    nomeSpan.textContent = `Usuário: ${user.email}`;
+  }
+
+  btnLogout.addEventListener("click", () => {
+    Swal.fire({
+      title: 'Deseja sair?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, sair',
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#dc3545'
+    }).then(result => {
+      if (result.isConfirmed) {
+        sessionStorage.removeItem("user");
+        window.location.href = "../login/login.html";
+      }
+    });
+  });
+</script>
 
 </html>
