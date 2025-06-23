@@ -250,19 +250,6 @@ Click na imagem para ser redirecionado para o vídeo.
 
 Esta seção apresenta as funcionalidades do site StockIt.
 
-##### Funcionalidade 0 - Cadastro de Contatos ⚠️ EXEMPLO ⚠️
-
-Permite a inclusão, leitura, alteração e exclusão de contatos para o sistema
-
-* **Estrutura de dados:** [Contatos](#ti_ed_contatos)
-* **Instruções de acesso:**
-  * Abra o site e efetue o login
-  * Acesse o menu principal e escolha a opção Cadastros
-  * Em seguida, escolha a opção Contatos
-* **Tela da funcionalidade**:
-
-![Tela de Funcionalidade](images/exemplo-funcionalidade.png)
-
 ##### Funcionalidade 1 - Adicionar Ambientes 
 
 Permite a criação de um novo ambiente onde será armazenado os alimentos. 
@@ -304,20 +291,6 @@ Notifica quando um alimento está vencendo.
 * **Tela da funcionalidade**:
 
 ![Notificação de vencimento](image-3.png)
-
-##### Funcionalidade 3 - Notificação de alimentos vencendo 
-
-Notifica quando um alimento está vencendo.  
-
-* **Estrutura de dados:** Alimentos e ambientes
-* **Instruções de acesso:**
-  * Abra o site e efetue o login
-  * Acesse o menu principal e clique no sino no canto superior direito.
-  * Em seguida, veja se deseja ver em qual ambiente o alimento em vencimento está ou se deseja exclui-lo.
-
-* **Tela da funcionalidade**:
-
-![alt text](<Captura de tela 2025-06-22 193505.png>)
 
 ##### Funcionalidade 4 - Exclusão de alimentos vencendo 
 
@@ -361,7 +334,7 @@ Permite ver, pesquisar, editar a quantidade e excluir alimentos nas listas de co
 
 ![Lista de Compra](image-6.png)
 
-##### Funcionalidade 6 - Ambientes
+##### Funcionalidade 7 - Ambientes
 
 Permite ver, pesquisar, editar a quantidade e validade, excluir e mover um alimentos nos ambientes criados.    
 
@@ -375,6 +348,19 @@ Permite ver, pesquisar, editar a quantidade e validade, excluir e mover um alime
 
 ![Ambientes](image-7.png)
 
+##### Funcionalidade 8 - Criar lista de compra
+
+Permite criar, atualizar e excluir uma lista de compra.    
+
+* **Estrutura de dados:** alimentos
+* **Instruções de acesso:**
+  * Abra o site e efetue o login
+  * Acesse o menu principal e clique em "listas de Compra".
+  * Em seguida, clique no botão "criar lista".
+  * Dê nome, adicione os alimentos que deseja na lista e crie a lista. Poderá também exclui-la ou atualiza-la.  
+
+* **Tela da funcionalidade**:
+![Criar lista de compra](<Captura de tela 2025-06-22 210841.png>)
 
 > ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
 >
