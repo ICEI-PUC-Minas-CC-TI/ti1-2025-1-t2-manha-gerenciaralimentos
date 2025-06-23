@@ -123,16 +123,11 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 | RF-03  | O sistema deve emitir notificações quando o produto estiver quase vencendo e quando tiver pouco no estoque.         | ALTA       |
 | RF-04  | O sistema deve permitir a busca de produtos específicos do estoque pelo usuário.                                    | ALTA       |
 | RF-05  | Deve haver uma opção para criar uma lista de compras com os produtos necessários.                                   | ALTA       |
-| RF-06  | O sistema deve mostrar receitas com os alimentos perto da data de validade.                                         | MÉDIA      |
-| RF-07  | O sistema deve demonstrar as maneiras corretas de armazenar os produtos seguindo padrões sanitários.                | MÉDIA      |
-| RF-08  | O sistema deve mostrar um tutorial simples (vídeo) sobre como operar o aplicativo.                                  | BAIXA      |
-| RF-09  | Permitir múltiplos usuários com acesso a um mesmo ambiente.                                                         | ALTA       |
-| RF-10  | Permitir o usuário criar uma conta com user e senha.                                                                | ALTA       |
-| RF-11  | O sistema deve autenticar o login do usuário conforme o cadastro.                                                   | ALTA       |
-| RF-12  | Definir permissões para administradores, editores e visualizadores nos ambientes.                                   | ALTA       |
-| RF-13  | O sistema deve permitir que o contato com os fornecedores seja facilitado ou automático, conforme o estoque.        | MÉDIA      |
-| RF-14  | Deve ser possível cadastrar um produto por meio da leitura do código de barras.                                     | ALTA       |
-| RF-15  | O sistema deverá permitir o uso offline com funções sincronizadas no último período de internet.                    | MÉDIA      |
+| RF-06  | O sistema deve mostrar receitas com os alimentos perto da data de validade.                                         | MÉDIA      |                                                         | ALTA       |
+| RF-07  | Permitir o usuário criar uma conta com user e senha.                                                                | ALTA       |
+| RF-08  | O sistema deve autenticar o login do usuário conforme o cadastro.                                                   | ALTA       |
+| RF-09  | O sistema deve permitir excluir todos alimentos vencidos de um ambiente                                   | ALTA       |
+| RF-10  | O sistema deve permitir mover alimentode de ambientes       | MÉDIA      |
 
 
 ### Requisitos não Funcionais
@@ -142,10 +137,10 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 | RNF-01  | O sistema deve funcionar corretamente em diferentes navegadores (Chrome, Firefox, Opera, etc).                      | ALTA       |
 | RNF-02  | O sistema deve estar de acordo com a regulamentação de órgãos de fiscalização sanitária.                            | ALTA       |
 | RNF-03  | Toda pesquisa e alteração no banco de dados deve retornar e atualizar em menos de 1 segundo.                        | ALTA       |
-| RNF-04  | O programa deve operar em conjunto com uma API para leitura de produtos por código de barras.                       | MÉDIA      |
+| RNF-04  | O programa deve operar em conjunto com uma API Restful no RENDER.                       | MÉDIA      |
 | RNF-05  | O sistema deve ter interface intuitiva e ser de fácil acesso, com aprendizado em até 30 minutos.                    | ALTA       |
 | RNF-06  | O sistema deve estar disponível 97% do tempo na semana.                                                             | MÉDIA      |
-| RNF-07  | O programa deve operar em conjunto com a OpenAI para dar sugestões de receitas.                                     | BAIXA      |
+| RNF-07  | O programa deve operar em conjunto com o Tudo Gostoso para dar sugestões de receitas.                                     | BAIXA      |
 | RNF-08  | O desenvolvimento deve ser feito na linguagem HTML.                                                                 | MÉDIA      |
 | RNF-09  | O sistema deve ser responsivo e funcionar corretamente em celulares.                                                | ALTA       |
 | RNF-10  | O sistema deve ter harmonização de cores e formas para melhorar a experiência do usuário.                           | MÉDIA      |
@@ -250,7 +245,7 @@ Click na imagem para ser redirecionado para o vídeo.
 
 ## Funcionalidades
 
-##### Tela Inicial  
+##### Tela Inicial  RNF-10 RNF-01 RNF-05
 Permite acesso a todos outras páginas
 
 ![HOME-PAGE](image-8.png)
@@ -258,7 +253,7 @@ Permite acesso a todos outras páginas
 
 Esta seção apresenta as funcionalidades do site StockIt.
 
-##### Funcionalidade 1 - Adicionar Ambientes 
+##### Funcionalidade 1 - Adicionar Ambientes - RF 01
 
 Permite a criação de um novo ambiente onde será armazenado os alimentos. 
 
@@ -272,7 +267,7 @@ Permite a criação de um novo ambiente onde será armazenado os alimentos.
 
   ![Adicionar Ambientes](<Captura de tela 2025-06-22 192524.png>)
 
-  ##### Funcionalidade 2 - Pesquisar ambientes e alimentos 
+  ##### Funcionalidade 2 - Pesquisar ambientes e alimentos RF-04 
 
 Permite encontrar um ambiente ou um alimentos a partir da barra de pesquisa. 
 
@@ -286,7 +281,7 @@ Permite encontrar um ambiente ou um alimentos a partir da barra de pesquisa.
 
 ![Barra de pesquisa da home](image-2.png)
 
-##### Funcionalidade 3 - Notificação de alimentos vencendo 
+##### Funcionalidade 3 - Notificação de alimentos vencendo RF-03
 
 Notifica quando um alimento está vencendo.  
 
@@ -300,7 +295,7 @@ Notifica quando um alimento está vencendo.
 
 ![Notificação de vencimento](image-3.png)
 
-##### Funcionalidade 4 - Exclusão de alimentos vencendo 
+##### Funcionalidade 4 - Exclusão de alimentos vencendo RF-02
 
 Permite excluir alimentos que estão vencendo.  
 
@@ -314,7 +309,7 @@ Permite excluir alimentos que estão vencendo.
 
 ![Excluir alimento vencendo](image-4.png)
 
-##### Funcionalidade 5 - Receitas com alimentos próximos da data de validade
+##### Funcionalidade 5 - Receitas com alimentos próximos da data de validade RF-06
 
 Permite descobrir diferentes receitas com alimentos que estão próximos do vencimento.   
 
@@ -328,7 +323,7 @@ Permite descobrir diferentes receitas com alimentos que estão próximos do venc
 
 ![Receitas](image-5.png)
 
-##### Funcionalidade 6 - Lista de Compras
+##### Funcionalidade 6 - Lista de Compras RF-05 RNF-07
 
 Permite ver, pesquisar, editar a quantidade e excluir alimentos nas listas de compras.    
 
@@ -342,7 +337,7 @@ Permite ver, pesquisar, editar a quantidade e excluir alimentos nas listas de co
 
 ![Lista de Compra](image-6.png)
 
-##### Funcionalidade 7 - Ambientes
+##### Funcionalidade 7 - Ambientes RF-01 RF-06 RF-03 RF-09 RF-10
 
 Permite ver, pesquisar, editar a quantidade e validade, excluir e mover um alimentos nos ambientes criados.    
 
@@ -356,7 +351,7 @@ Permite ver, pesquisar, editar a quantidade e validade, excluir e mover um alime
 
 ![Ambientes](image-7.png)
 
-##### Funcionalidade 8 - Criar lista de compra
+##### Funcionalidade 8 - Criar lista de compra - RF-05
 
 Permite criar, atualizar e excluir uma lista de compra.    
 
@@ -369,6 +364,23 @@ Permite criar, atualizar e excluir uma lista de compra.
 
 * **Tela da funcionalidade**:
 ![Criar lista de compra](<Captura de tela 2025-06-22 210841.png>)
+
+##### Funcionalidade 9 - Pesquisar Alimento no Ambiente - RF-02 RNF-03 RNF-05
+
+Permite criar, atualizar e excluir uma lista de compra.    
+
+* **Estrutura de dados:** alimentos
+* **Instruções de acesso:**
+  * Abra o site e efetue o login
+  * Acesse o menu principal e clique em "listas de Compra".
+  * Em seguida, clique no botão "criar lista".
+  * Dê nome, adicione os alimentos que deseja na lista e crie a lista. Poderá também exclui-la ou atualiza-la.  
+
+* **Tela da funcionalidade**:
+![Criar lista de compra](<Captura de tela 2025-06-22 210841.png>)
+
+![alt text](image-9.png)
+
 
 ## Estruturas de Dados
 
