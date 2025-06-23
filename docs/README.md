@@ -367,19 +367,18 @@ Permite criar, atualizar e excluir uma lista de compra.
 
 ##### Funcionalidade 9 - Pesquisar Alimento no Ambiente - RF-02 RNF-03 RNF-05
 
-Permite criar, atualizar e excluir uma lista de compra.    
+Permite pesquisar o alimento no ambiente.    
 
-* **Estrutura de dados:** alimentos
+* **Estrutura de dados:** alimentos, ambientes
 * **Instruções de acesso:**
   * Abra o site e efetue o login
-  * Acesse o menu principal e clique em "listas de Compra".
-  * Em seguida, clique no botão "criar lista".
-  * Dê nome, adicione os alimentos que deseja na lista e crie a lista. Poderá também exclui-la ou atualiza-la.  
+  * Acesse o menu principal e clique em um Ambiente.
+  * Em seguida, clique na barra de pesquisa.
+  * Pesquise o alimento desejado e ele aparecerá na tabela, caso ele não esteja cadastrado terá uma mensagem de não ter o alimento.  
 
-* **Tela da funcionalidade**:
-![Criar lista de compra](<Captura de tela 2025-06-22 210841.png>)
+* **Tela da funcionalidade**
 
-![alt text](image-9.png)
+![Pesquisar ALimento](image-9.png)
 
 
 ## Estruturas de Dados
