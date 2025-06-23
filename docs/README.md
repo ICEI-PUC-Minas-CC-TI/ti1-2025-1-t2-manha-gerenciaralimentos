@@ -248,6 +248,12 @@ Click na imagem para ser redirecionado para o vídeo.
 
 ## Funcionalidades
 
+##### Tela Inicial  
+Permite acesso a todos outras páginas
+
+![HOME-PAGE](image-8.png)
+
+
 Esta seção apresenta as funcionalidades do site StockIt.
 
 ##### Funcionalidade 1 - Adicionar Ambientes 
@@ -362,12 +368,6 @@ Permite criar, atualizar e excluir uma lista de compra.
 * **Tela da funcionalidade**:
 ![Criar lista de compra](<Captura de tela 2025-06-22 210841.png>)
 
-> ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
->
-> Apresente cada uma das funcionalidades que a aplicação fornece tanto para os usuários quanto aos administradores da solução.
->
-> Inclua, para cada funcionalidade, itens como: (1) titulos e descrição da funcionalidade; (2) Estrutura de dados associada; (3) o detalhe sobre as instruções de acesso e uso.
-
 ## Estruturas de Dados
 
 ##### Estrutura de Dados - Ambientes
@@ -447,6 +447,38 @@ Representa os Tipos de Ambiente
     {"id": "1","tipo": "Refrigeração"},
     {"id": "2","tipo": "Seco"},
     {"id": "3","tipo": "Congelado"} 
+```
+##### Estrutura de Dados - Usuários
+
+Guarda a autenticaçao dos usuários
+
+```json
+
+  {
+    "id": 1,
+    "email": "ana@stockit.com",
+    "senha": "1234"
+  },
+  {
+    "id": 2,
+    "email": "lucas@stockit.com",
+    "senha": "senha123"
+  },
+  {
+    "id": 3,
+    "email": "maria@stockit.com",
+    "senha": "abc123"
+  },
+  {
+    "email": "teste@gmail.com",
+    "senha": "12345",
+    "id": 4
+  },
+  {
+    "email": "Diego@gmail.com",
+    "senha": "123",
+    "id": 5
+  }
 ```
 
 ## Módulos e APIs
