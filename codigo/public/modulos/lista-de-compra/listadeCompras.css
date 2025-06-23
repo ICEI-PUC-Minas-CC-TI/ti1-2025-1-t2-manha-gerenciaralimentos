@@ -296,6 +296,16 @@ body {
     background-color: var(--cor-primaria-hover);
 }
 
+.criarLista {
+    background-color: var(--cor-primaria);
+    color: var(--cor-branco);
+    border: none; 
+    border-radius: 8px;
+    margin-left: 5px;
+    padding: 5px;
+    cursor: pointer;
+}
+
 .botao-cancelar {
     background-color: #ccc;
     color: #333;

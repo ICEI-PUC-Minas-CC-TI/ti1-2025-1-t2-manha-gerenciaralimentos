@@ -14,26 +14,31 @@
 
 <body>
     <header class="header-section">
-    <div class="header-content">
-        <div class="logo-container">
-            <a href="../home-page/home.html">
-                <img src="../../assets/images/logo_stockit.ico" alt="Logo">
-            </a>
-            <a href="../home-page/home.html" class="logo-text">StockIT</a>
-        </div>
+        <div class="header-content">
+            <div class="logo-container">
+                <a href="../home-page/home.html">
+                    <img src="../../assets/images/logo_stockit.ico" alt="Logo">
+                </a>
+                <a href="../home-page/home.html" class="logo-text">StockIT</a>
+            </div>
 
-        <div class="search-container">
-            <div class="search-wrapper">    
-                <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                <input type="text" id="texto-pesquisa" class="search-input" placeholder="Pesquise produtos da lista...">
+            <div class="search-container">
+                <div class="search-wrapper">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" id="texto-pesquisa" class="search-input"
+                        placeholder="Pesquise produtos da lista...">
+                </div>
             </div>
         </div>
-    </div>
-</header>
+    </header>
 
     <div class="container-botoes-gerais">
         <button class="botao botao-salvar" onclick="abrirModal('modal-cadastro')">
             ➕ Adicionar Item
+        </button>
+
+        <button class="criarLista" onclick="window.location='../criar-lista/lista.html'">
+            Criar Lista
         </button>
     </div>
 

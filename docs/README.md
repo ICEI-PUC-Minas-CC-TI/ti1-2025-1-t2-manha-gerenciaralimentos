@@ -248,9 +248,9 @@ Click na imagem para ser redirecionado para o vídeo.
 
 ## Funcionalidades
 
-Esta seção apresenta as funcionalidades da solução.Info
+Esta seção apresenta as funcionalidades do site StockIt.
 
-##### Funcionalidade 1 - Cadastro de Contatos ⚠️ EXEMPLO ⚠️
+##### Funcionalidade 0 - Cadastro de Contatos ⚠️ EXEMPLO ⚠️
 
 Permite a inclusão, leitura, alteração e exclusão de contatos para o sistema
 
@@ -262,6 +262,119 @@ Permite a inclusão, leitura, alteração e exclusão de contatos para o sistema
 * **Tela da funcionalidade**:
 
 ![Tela de Funcionalidade](images/exemplo-funcionalidade.png)
+
+##### Funcionalidade 1 - Adicionar Ambientes 
+
+Permite a criação de um novo ambiente onde será armazenado os alimentos. 
+
+* **Estrutura de dados:** Ambientes
+* **Instruções de acesso:**
+  * Abra o site e efetue o login
+  * Acesse o menu principal e escolha a opção Adicionar Ambientes.
+  * Em seguida, dê um nome ao ambiente e escolha o seu tipo.
+
+  **Tela da funcionalidade**:
+
+  ![Adicionar Ambientes](<Captura de tela 2025-06-22 192524.png>)
+
+  ##### Funcionalidade 2 - Pesquisar ambientes e alimentos 
+
+Permite encontrar um ambiente ou um alimentos a partir da barra de pesquisa. 
+
+* **Estrutura de dados:** Ambientes e Alimentos
+* **Instruções de acesso:**
+  * Abra o site e efetue o login
+  * Acesse o menu principal e pesquise um ambiente ou alimento na barra de pesquisa.
+  * Em seguida, clique no ambiente/alimento pesquisado
+
+* **Tela da funcionalidade**:
+
+![Barra de pesquisa da home](image-2.png)
+
+##### Funcionalidade 3 - Notificação de alimentos vencendo 
+
+Notifica quando um alimento está vencendo.  
+
+* **Estrutura de dados:** Alimentos e ambientes
+* **Instruções de acesso:**
+  * Abra o site e efetue o login
+  * Acesse o menu principal e clique no sino no canto superior direito.
+  * Em seguida, veja se deseja ver em qual ambiente o alimento em vencimento está ou se deseja exclui-lo.
+
+* **Tela da funcionalidade**:
+
+![Notificação de vencimento](image-3.png)
+
+##### Funcionalidade 3 - Notificação de alimentos vencendo 
+
+Notifica quando um alimento está vencendo.  
+
+* **Estrutura de dados:** Alimentos e ambientes
+* **Instruções de acesso:**
+  * Abra o site e efetue o login
+  * Acesse o menu principal e clique no sino no canto superior direito.
+  * Em seguida, veja se deseja ver em qual ambiente o alimento em vencimento está ou se deseja exclui-lo.
+
+* **Tela da funcionalidade**:
+
+![alt text](<Captura de tela 2025-06-22 193505.png>)
+
+##### Funcionalidade 4 - Exclusão de alimentos vencendo 
+
+Permite excluir alimentos que estão vencendo.  
+
+* **Estrutura de dados:** Alimentos
+* **Instruções de acesso:**
+  * Abra o site e efetue o login
+  * Acesse o menu principal e clique no botão "Alimentos Vencendo".
+  * Em seguida, exclua o alimento que quiser excluir. 
+
+* **Tela da funcionalidade**:
+
+![Excluir alimento vencendo](image-4.png)
+
+##### Funcionalidade 5 - Receitas com alimentos próximos da data de validade
+
+Permite descobrir diferentes receitas com alimentos que estão próximos do vencimento.   
+
+* **Estrutura de dados:** Alimentos
+* **Instruções de acesso:**
+  * Abra o site e efetue o login
+  * Acesse o menu principal e clique no botão "Receitas".
+  * Em seguida, veja no google ou no Tudo Gostoso receitas com o alimento escolhido. 
+
+* **Tela da funcionalidade**:
+
+![Receitas](image-5.png)
+
+##### Funcionalidade 6 - Lista de Compras
+
+Permite ver, pesquisar, editar a quantidade e excluir alimentos nas listas de compras.    
+
+* **Estrutura de dados:** Lista de compras, alimentos
+* **Instruções de acesso:**
+  * Abra o site e efetue o login
+  * Acesse o menu principal e clique no botão "Lista de Compras".
+  * Em seguida, adicione, pesquise, mude a quantidade ou exclua um alimento na lista de compra. 
+
+* **Tela da funcionalidade**:
+
+![Lista de Compra](image-6.png)
+
+##### Funcionalidade 6 - Ambientes
+
+Permite ver, pesquisar, editar a quantidade e validade, excluir e mover um alimentos nos ambientes criados.    
+
+* **Estrutura de dados:** ambientes
+* **Instruções de acesso:**
+  * Abra o site e efetue o login
+  * Acesse o menu principal e clique em um dos ambientes do carrosel.
+  * Em seguida, adicione, pesquise, mude a quantidade ou validade, mova para outro ambiente ou exclua um alimento pelos ambientes cadastrados. 
+
+* **Tela da funcionalidade**:
+
+![Ambientes](image-7.png)
+
 
 > ⚠️ **APAGUE ESSA PARTE ANTES DE ENTREGAR SEU TRABALHO**
 >
