@@ -127,7 +127,7 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 | RF-07  | Permitir o usuário criar uma conta com user e senha.                                                                | ALTA       |
 | RF-08  | O sistema deve autenticar o login do usuário conforme o cadastro.                                                   | ALTA       |
 | RF-09  | O sistema deve permitir excluir todos alimentos vencidos de um ambiente                                   | ALTA       |
-| RF-10  | O sistema deve permitir mover alimentode de ambientes       | MÉDIA      |
+| RF-10  | O sistema deve permitir mover alimento de de ambientes       | MÉDIA      |
 
 
 ### Requisitos não Funcionais
