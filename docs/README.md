@@ -94,7 +94,9 @@ Com base em entrevistas qualitativas com usuários reais e análise de ferrament
 
 ✳️[Cliente empresa](files/cliente-empresa.pdf)
 
-✳️[Cliente empresa](files/cliente-pessoa.pdf)
+✳️[Cliente pessoa](files/cliente-pessoa.pdf)
+
+✳️[Cliente pessoa gastronomia](files/cliente-pessoa.pdf)
 
 # Product Design
 
