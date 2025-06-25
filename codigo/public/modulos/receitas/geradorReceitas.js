@@ -122,7 +122,7 @@ function exibirReceita(info) {
     const alimento = alimentos.find(a => a.nome === ingredienteNome);
 
     // Usa a imagem do alimento ou um placeholder
-    const imgSrc = alimento && alimento.imagem ? alimento.imagem : '${alimento.nome}.png';
+    const imgSrc = `default.png`;
 
     const card = document.createElement('div');
     card.className = 'card m-2 p-4 text-center';

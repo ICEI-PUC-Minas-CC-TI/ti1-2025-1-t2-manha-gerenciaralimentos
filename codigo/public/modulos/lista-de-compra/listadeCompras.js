@@ -36,7 +36,7 @@ async function carregarDados() {
                 itemDiv.classList.add('item-lista');
 
                 const img = document.createElement('img');
-                img.src = `../../assets/images/alimentos-images/${alimento.imagem}`;
+                img.src = `../../assets/images/alimentos-images/default.png`;
                 img.alt = alimento.nome;
                 img.classList.add('item-imagem');
 
