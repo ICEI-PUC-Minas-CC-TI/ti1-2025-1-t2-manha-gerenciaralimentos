@@ -316,7 +316,7 @@ async function verificarOuCriarAlimento({ nome, tipo, categoria, imagem }) {
             console.log("Existe")
             return alimentoExistente.id; // Retorna o ID se já existir
         } else {
-            return await criarAlimento(nome, tipo, imagem, categoria);
+            return await criarAlimento(nome, tipo, categoria, imagem);
         }
 
     } catch (error) {
